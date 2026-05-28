@@ -4079,6 +4079,54 @@
       color: #1d4ed8;
     }
 
+    body.dark .template-b-panel {
+      background:
+        radial-gradient(circle at 16% 10%, rgba(56,189,248,.14), transparent 28%),
+        linear-gradient(135deg, rgba(15,23,42,.96), rgba(8,18,32,.96));
+      border-color: rgba(56,189,248,.18);
+      box-shadow: 0 30px 90px rgba(0,0,0,.38);
+    }
+
+    body.dark .template-b-card {
+      background: rgba(15,23,42,.9);
+      border-color: rgba(56,189,248,.22);
+      box-shadow: 0 26px 70px rgba(0,0,0,.36);
+    }
+
+    body.dark .template-b-copy h1,
+    body.dark .template-b-card h2 {
+      color: #e2e8f0;
+    }
+
+    body.dark .template-b-copy h2,
+    body.dark .template-b-copy p,
+    body.dark .template-b-register,
+    body.dark .template-b-check {
+      color: #94a3b8;
+    }
+
+    body.dark .template-b-field input {
+      background: rgba(15,23,42,.86) !important;
+      border-color: rgba(56,189,248,.22) !important;
+      color: #e2e8f0 !important;
+    }
+
+    body.dark .template-b-field input::placeholder {
+      color: #64748b;
+    }
+
+    body.dark .template-b-field span,
+    body.dark .template-b-eye,
+    body.dark .template-b-link,
+    body.dark .template-b-register button {
+      color: #38bdf8;
+    }
+
+    body.dark .template-b-eye {
+      background: transparent;
+      border-color: transparent;
+    }
+
     @media (max-width: 980px) {
       .template-b-panel {
         grid-template-columns: 1fr;
@@ -11168,6 +11216,18 @@
     }
     body.dark .settings-info-table div,
     body.dark .settings-preference-list div { border-color: rgba(56,189,248,.14); }
+    body.dark .settings-theme-options button {
+      background: rgba(15,23,42,.72) !important;
+      border-color: rgba(56,189,248,.16) !important;
+    }
+    body.dark .settings-theme-options button:hover,
+    body.dark .settings-theme-options button.active {
+      background: rgba(14,165,233,.14) !important;
+      border-color: rgba(56,189,248,.36) !important;
+    }
+    body.dark .settings-theme-options small {
+      color: #94a3b8 !important;
+    }
     @media (max-width: 1180px) {
       .settings-status-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
       .settings-status-item { border-right: 0; border: 1px solid #e5eef8; border-radius: 18px; padding: 14px; }
