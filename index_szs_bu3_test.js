@@ -1,4 +1,4 @@
-﻿    let currentLang = "zh";
+    let currentLang = "zh";
     let selectedDatabaseId = null;
     let currentDocumentTypeFilter = "ALL";
     let databaseHomeView = "cards";
@@ -3577,6 +3577,15 @@ function showPage(pageId) {
       renderSettingsDashboard();
     }
 
+    function toggleSettingsThemeCard(event) {
+      const button = event.currentTarget;
+      const card = button.closest(".settings-feature-card");
+      if (!card) return;
+      const isCollapsed = card.classList.toggle("collapsed");
+      button.classList.toggle("open", !isCollapsed);
+      button.title = isCollapsed ? "Expand" : "Collapse";
+      button.setAttribute("aria-expanded", String(!isCollapsed));
+    }
 
     function showToast(message, type = "success") {
       const container = document.getElementById("toastContainer");
