@@ -2228,20 +2228,38 @@ function showPage(pageId) {
       return dates[0] || "—";
     }
 
-    function getSettingsThemeMode() {
-      return localStorage.getItem("szs_profile_theme_mode") || localStorage.getItem("szs_profile_theme") || "light";
+    function normalizeThemeMode(mode) {
+      return mode === "dark" || mode === "system" ? mode : "light";
     }
 
-    function applySettingsTheme(mode) {
-      const normalized = mode === "dark" || mode === "system" ? mode : "light";
-      localStorage.setItem("szs_profile_theme_mode", normalized);
+    function getSettingsThemeMode() {
+      return normalizeThemeMode(localStorage.getItem("szs_profile_theme_mode") || localStorage.getItem("szs_profile_theme") || "light");
+    }
+
+    function resolveThemeMode(mode) {
+      const normalized = normalizeThemeMode(mode);
       const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-      const shouldDark = normalized === "dark" || (normalized === "system" && prefersDark);
-      document.body.classList.toggle("dark", shouldDark);
-      localStorage.setItem("szs_profile_theme", shouldDark ? "dark" : "light");
+      return {
+        mode: normalized,
+        isDark: normalized === "dark" || (normalized === "system" && prefersDark)
+      };
+    }
+
+    function applySettingsTheme(mode, options = {}) {
+      const theme = resolveThemeMode(mode);
+      localStorage.setItem("szs_profile_theme_mode", theme.mode);
+      localStorage.setItem("szs_profile_theme", theme.isDark ? "dark" : "light");
+      document.body.classList.toggle("dark", theme.isDark);
+      document.documentElement.style.colorScheme = theme.isDark ? "dark" : "light";
+
       const themeBtn = document.getElementById("themeBtn");
-      if (themeBtn) themeBtn.textContent = shouldDark ? "☀️" : "🌙";
-      renderSettingsDashboard();
+      if (themeBtn) {
+        themeBtn.textContent = theme.isDark ? "☀️" : "🌙";
+        themeBtn.setAttribute("aria-label", theme.isDark ? "切換為白天模式" : "切換為夜間模式");
+        themeBtn.title = theme.isDark ? "切換為白天模式" : "切換為夜間模式";
+      }
+
+      if (!options.skipRender) renderSettingsDashboard();
     }
 
     function selectSettingsTheme(mode) {
@@ -3569,12 +3587,8 @@ function showPage(pageId) {
     }
 
     function toggleTheme() {
-      document.body.classList.toggle("dark");
-      const isDark = document.body.classList.contains("dark");
-      localStorage.setItem("szs_profile_theme", isDark ? "dark" : "light");
-      localStorage.setItem("szs_profile_theme_mode", isDark ? "dark" : "light");
-      document.getElementById("themeBtn").textContent = isDark ? "☀️" : "🌙";
-      renderSettingsDashboard();
+      const nextMode = document.body.classList.contains("dark") ? "light" : "dark";
+      applySettingsTheme(nextMode);
     }
 
     function toggleSettingsThemeCard(event) {
@@ -4166,10 +4180,7 @@ function showPage(pageId) {
         currentLang = prefs.language;
       }
 
-      const shouldDark = prefs.theme === "dark";
-      document.body.classList.toggle("dark", shouldDark);
-      const themeBtn = document.getElementById("themeBtn");
-      if (themeBtn) themeBtn.textContent = shouldDark ? "☀️" : "🌙";
+      applySettingsTheme(getSettingsThemeMode(), { skipRender: true });
 
       if (prefs.assistantMode && ["all", "docs", "website"].includes(prefs.assistantMode)) {
         assistantMode = prefs.assistantMode;
@@ -4221,6 +4232,7 @@ function showPage(pageId) {
       const nextAssistantMode = document.getElementById("profileSettingAssistantMode")?.value || "all";
       const notifications = document.getElementById("profileSettingNotifications")?.checked ? "on" : "off";
 
+      applySettingsTheme(theme, { skipRender: true });
       saveProfilePreferenceValue("theme", theme);
       saveProfilePreferenceValue("language", language);
       saveProfilePreferenceValue("default_page", defaultPage);
