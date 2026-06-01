@@ -11902,3 +11902,14 @@
       }
     }
 
+
+    /* === SZS_FIX_DARK_HOME_HERO_NO_CENTER_GLOW_20260601 === */
+    body.dark #homePage {
+      background: #07111f !important;
+    }
+
+    body.dark #homePage .hero {
+      background: linear-gradient(135deg, #07111f 0%, #091827 56%, #07111f 100%) !important;
+      box-shadow: none !important;
+    }
+
