@@ -11880,3 +11880,25 @@
       color: #94a3b8 !important;
     }
 
+
+    /* === SZS_FIX_DARK_HOME_HERO_FULL_WIDTH_20260601 === */
+    body.dark #homePage .hero {
+      width: auto !important;
+      max-width: none !important;
+      margin-left: -40px !important;
+      margin-right: -40px !important;
+      border-radius: 0 !important;
+    }
+
+    body.dark.sidebar-collapsed #homePage .hero,
+    body.dark:not(.sidebar-collapsed) #homePage .hero {
+      max-width: none !important;
+    }
+
+    @media (max-width: 900px) {
+      body.dark #homePage .hero {
+        margin-left: -18px !important;
+        margin-right: -18px !important;
+      }
+    }
+
