@@ -11633,3 +11633,132 @@
       color: #94a3b8 !important;
     }
 
+
+    /* === SZS_FIX_DARK_MODE_WHITE_SURFACES_STRONGER_20260601 === */
+    body.dark .home-productivity-panels,
+    body.dark .home-secondary-grid,
+    body.dark .recent-doc-list,
+    body.dark .favorite-db-list,
+    body.dark .smart-list,
+    body.dark .assistant-full-layout {
+      background: transparent !important;
+      box-shadow: none !important;
+    }
+
+    body.dark .home-panel,
+    body.dark .recent-doc-item,
+    body.dark .favorite-db-item,
+    body.dark .smart-list-item,
+    body.dark .search-demo-card,
+    body.dark .confirm-demo-card,
+    body.dark .optimization-item,
+    body.dark .assistant-scenario-btn,
+    body.dark .assistant-full-panel,
+    body.dark .szs-assistant-panel,
+    body.dark .chat-box,
+    body.dark #chatBox {
+      background: rgba(15, 23, 42, .92) !important;
+      border-color: rgba(56, 189, 248, .22) !important;
+      box-shadow: 0 22px 58px rgba(0, 0, 0, .30) !important;
+      color: #e2e8f0 !important;
+    }
+
+    body.dark .home-panel::before,
+    body.dark .home-panel::after {
+      background: linear-gradient(135deg, rgba(56, 189, 248, .08), rgba(15, 23, 42, .10)) !important;
+    }
+
+    body.dark .recent-doc-item,
+    body.dark .favorite-db-item,
+    body.dark .smart-list-item {
+      box-shadow: none !important;
+    }
+
+    body.dark .recent-doc-meta,
+    body.dark .favorite-db-meta,
+    body.dark .smart-list-meta,
+    body.dark .recent-doc-item > span:last-child,
+    body.dark .favorite-db-item > span:last-child,
+    body.dark .smart-list-item > span:last-child {
+      background: transparent !important;
+      border-color: transparent !important;
+      box-shadow: none !important;
+      color: inherit !important;
+    }
+
+    body.dark .home-panel-title,
+    body.dark .recent-doc-meta strong,
+    body.dark .favorite-db-meta strong,
+    body.dark .smart-list-meta strong,
+    body.dark .optimization-item strong,
+    body.dark .assistant-scenario-btn,
+    body.dark .chat-title,
+    body.dark .message.bot,
+    body.dark .chat-result-card {
+      color: #e2e8f0 !important;
+    }
+
+    body.dark .recent-doc-meta small,
+    body.dark .favorite-db-meta small,
+    body.dark .smart-list-meta small,
+    body.dark .optimization-item small,
+    body.dark .assistant-scenario-btn small,
+    body.dark .note {
+      color: #94a3b8 !important;
+    }
+
+    body.dark .latest-pill,
+    body.dark .recent-view-btn,
+    body.dark .favorite-star-btn,
+    body.dark .home-panel-action,
+    body.dark .assistant-mode-btn,
+    body.dark .suggestion-chip,
+    body.dark .quick-question,
+    body.dark .related-question-btn {
+      background: rgba(14, 165, 233, .14) !important;
+      border-color: rgba(56, 189, 248, .26) !important;
+      color: #38bdf8 !important;
+      box-shadow: none !important;
+    }
+
+    body.dark .chat-header,
+    body.dark .chat-body,
+    body.dark .chat-footer,
+    body.dark .assistant-tools,
+    body.dark .assistant-full-header,
+    body.dark .assistant-full-body,
+    body.dark .assistant-full-footer,
+    body.dark .szs-assistant-header,
+    body.dark .szs-assistant-body,
+    body.dark .szs-assistant-footer,
+    body.dark .assistant-quick-question-row,
+    body.dark .assistant-quick-collapse-bar,
+    body.dark .assistant-input-guide,
+    body.dark .assistant-database-summary,
+    body.dark .assistant-welcome-card,
+    body.dark .assistant-rich-card,
+    body.dark .assistant-context-strip {
+      background: rgba(8, 18, 32, .94) !important;
+      border-color: rgba(56, 189, 248, .20) !important;
+      color: #e2e8f0 !important;
+    }
+
+    body.dark .chat-body,
+    body.dark .assistant-full-body,
+    body.dark .szs-assistant-body {
+      background:
+        radial-gradient(circle at 18% 0%, rgba(56, 189, 248, .09), transparent 30%),
+        rgba(8, 18, 32, .96) !important;
+    }
+
+    body.dark .message.bot,
+    body.dark .chat-result-card,
+    body.dark .assistant-quick-question-row button,
+    body.dark .assistant-quick-toggle,
+    body.dark .assistant-attach-btn,
+    body.dark .chat-input {
+      background: rgba(15, 23, 42, .88) !important;
+      border-color: rgba(56, 189, 248, .22) !important;
+      color: #e2e8f0 !important;
+    }
+
