@@ -11433,3 +11433,203 @@
       color: #94a3b8 !important;
     }
 
+
+    /* === SZS_FIX_DARK_MODE_FINAL_SURFACE_OVERRIDES_20260601 === */
+    body.dark {
+      background:
+        radial-gradient(circle at 72% 12%, rgba(56, 189, 248, 0.12), transparent 30%),
+        linear-gradient(135deg, #07111f 0%, #0d1b2a 54%, #07111f 100%) !important;
+    }
+
+    body.dark header,
+    body.dark .top-search,
+    body.dark .top-presence-control,
+    body.dark .profile-btn,
+    body.dark .notification-panel,
+    body.dark .profile-menu {
+      background: rgba(15, 23, 42, .94) !important;
+      border-color: rgba(56, 189, 248, .20) !important;
+      color: #e2e8f0 !important;
+    }
+
+    body.dark .top-search input,
+    body.dark .top-search kbd,
+    body.dark input,
+    body.dark select,
+    body.dark textarea {
+      background: rgba(15, 23, 42, .86) !important;
+      border-color: rgba(56, 189, 248, .22) !important;
+      color: #e2e8f0 !important;
+    }
+
+    body.dark input::placeholder,
+    body.dark textarea::placeholder {
+      color: #64748b !important;
+    }
+
+    body.dark #homePage .hero,
+    body.dark #homePage .dashboard-overview,
+    body.dark #homePage .home-main-layout,
+    body.dark #homePage .home-main-column {
+      background: transparent !important;
+      box-shadow: none !important;
+    }
+
+    body.dark #homePage .hero {
+      background:
+        radial-gradient(circle at 12% 18%, rgba(56,189,248,.14), transparent 30%),
+        linear-gradient(135deg, rgba(15,23,42,.90), rgba(8,18,32,.86)) !important;
+      border-color: rgba(56,189,248,.18) !important;
+    }
+
+    body.dark #homePage .dash-stat,
+    body.dark #homePage .home-panel,
+    body.dark #homePage .recent-doc-item,
+    body.dark #homePage .favorite-db-item,
+    body.dark #homePage .smart-list-item,
+    body.dark #homePage .confirm-demo-card,
+    body.dark #homePage .optimization-item,
+    body.dark #homePage .search-demo-card .mock-search-input,
+    body.dark #homePage .section-head,
+    body.dark #homePage .database-grid,
+    body.dark #homePage .database-pagination,
+    body.dark #homePage .database-pagination-shell,
+    body.dark #homePage .database-list-panel,
+    body.dark #homePage .database-card,
+    body.dark #homePage .db-list-header,
+    body.dark #homePage .db-list-row,
+    body.dark #homePage .show-more-db,
+    body.dark .home-empty-data-callout {
+      background: rgba(15, 23, 42, .90) !important;
+      border-color: rgba(56, 189, 248, .20) !important;
+      box-shadow: 0 18px 46px rgba(0, 0, 0, .22) !important;
+    }
+
+    body.dark #homePage .home-panel::before {
+      background: linear-gradient(135deg, rgba(56,189,248,.08), transparent) !important;
+    }
+
+    body.dark #homePage .latest-pill,
+    body.dark #homePage .favorite-star-btn,
+    body.dark #homePage .home-panel-action,
+    body.dark #homePage .recent-view-btn,
+    body.dark #homePage .query-link,
+    body.dark #homePage .database-page-btn,
+    body.dark #homePage .database-page-info,
+    body.dark #databaseViewToggle {
+      background: rgba(14, 165, 233, .14) !important;
+      border-color: rgba(56, 189, 248, .26) !important;
+      color: #38bdf8 !important;
+    }
+
+    body.dark #homePage .hero h1,
+    body.dark #homePage .dash-value,
+    body.dark #homePage .home-panel-title,
+    body.dark #homePage .recent-doc-meta strong,
+    body.dark #homePage .favorite-db-meta strong,
+    body.dark #homePage .smart-list-meta strong,
+    body.dark #homePage .database-card h3,
+    body.dark #homePage .db-list-name strong,
+    body.dark #homePage .section-title h2,
+    body.dark .home-empty-data-callout strong {
+      color: #e2e8f0 !important;
+    }
+
+    body.dark #homePage .hero p,
+    body.dark #homePage .dash-label,
+    body.dark #homePage .dash-value small,
+    body.dark #homePage .recent-doc-meta small,
+    body.dark #homePage .favorite-db-meta small,
+    body.dark #homePage .smart-list-meta small,
+    body.dark #homePage .database-card p,
+    body.dark #homePage .db-list-name p,
+    body.dark #homePage .db-list-count,
+    body.dark #homePage .db-list-date,
+    body.dark #homePage .section-hint,
+    body.dark .home-empty-data-callout p {
+      color: #94a3b8 !important;
+    }
+
+    body.dark .chat-box,
+    body.dark #chatBox,
+    body.dark #assistantPage .assistant-full-panel,
+    body.dark #assistantPage .szs-assistant-panel,
+    body.dark #assistantPage .assistant-database-summary {
+      background: rgba(15, 23, 42, .94) !important;
+      border-color: rgba(56, 189, 248, .22) !important;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, .34) !important;
+      color: #e2e8f0 !important;
+    }
+
+    body.dark .chat-header,
+    body.dark .chat-footer,
+    body.dark .assistant-tools,
+    body.dark .note,
+    body.dark #assistantPage .assistant-full-header,
+    body.dark #assistantPage .szs-assistant-header,
+    body.dark #assistantPage .assistant-full-footer,
+    body.dark #assistantPage .szs-assistant-footer,
+    body.dark #assistantPage .assistant-quick-question-row,
+    body.dark #assistantPage .assistant-quick-collapse-bar,
+    body.dark #assistantPage .assistant-input-guide {
+      background: rgba(15, 23, 42, .92) !important;
+      border-color: rgba(56, 189, 248, .20) !important;
+      color: #94a3b8 !important;
+    }
+
+    body.dark .chat-body,
+    body.dark #assistantPage .assistant-full-body,
+    body.dark #assistantPage .szs-assistant-body {
+      background:
+        radial-gradient(circle at 18% 0%, rgba(56,189,248,.08), transparent 28%),
+        rgba(8, 18, 32, .94) !important;
+    }
+
+    body.dark .message.bot,
+    body.dark .chat-result-card,
+    body.dark #assistantPage .assistant-welcome-card,
+    body.dark #assistantPage .assistant-rich-card,
+    body.dark #assistantPage .assistant-context-strip,
+    body.dark #assistantPage .assistant-quick-question-row button,
+    body.dark #assistantPage .assistant-quick-toggle,
+    body.dark .suggestion-chip,
+    body.dark .assistant-mode-btn {
+      background: rgba(15, 23, 42, .88) !important;
+      border-color: rgba(56, 189, 248, .22) !important;
+      color: #e2e8f0 !important;
+    }
+
+    body.dark #assistantPage .assistant-quick-question-row button .assistant-quick-icon,
+    body.dark .assistant-quick-icon {
+      background: rgba(14, 165, 233, .16) !important;
+      color: #38bdf8 !important;
+    }
+
+    body.dark .assistant-mode-btn.active,
+    body.dark .message.user,
+    body.dark #assistantPage .assistant-send-btn {
+      background: linear-gradient(135deg, #0284c7, #22d3ee) !important;
+      color: #ffffff !important;
+      border-color: transparent !important;
+    }
+
+    body.dark .chat-title,
+    body.dark #assistantPage .assistant-welcome-card h3,
+    body.dark #assistantPage .assistant-rich-card h3,
+    body.dark #assistantPage .summary-section-title,
+    body.dark #assistantPage .summary-metric-grid strong,
+    body.dark #assistantPage .summary-type-name,
+    body.dark #assistantPage .summary-recent-title {
+      color: #e2e8f0 !important;
+    }
+
+    body.dark .chat-status,
+    body.dark .assistant-mode-label,
+    body.dark .assistant-mode-hint,
+    body.dark #assistantPage .assistant-quick-question-row button .assistant-quick-text small,
+    body.dark #assistantPage .assistant-quick-toggle small,
+    body.dark #assistantPage .summary-type-item span,
+    body.dark #assistantPage .summary-recent-item span {
+      color: #94a3b8 !important;
+    }
+
