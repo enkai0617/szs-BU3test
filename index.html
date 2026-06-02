@@ -22,7 +22,7 @@
   <title>SZS PE知識庫</title>
   <link rel="icon" type="image/png" href="logo.png" />
   <link rel="shortcut icon" type="image/png" href="logo.png" />
-  <link rel='stylesheet' href='index_szs_bu3_test.css' />
+  <link rel='stylesheet' href='index_szs_bu3_test.css?v=20260602-darkfix2' />
 </head>
 <body class="sidebar-collapsed">
   <header>
@@ -780,11 +780,13 @@
               <div class="two-col">
                 <div>
                   <label data-zh="中文名稱" data-en="Chinese Name">中文名稱</label>
-                  <input id="dbTitleZh" placeholder="例如：設備資料庫" />
+                  <input id="dbTitleZh" placeholder="例如：設備資料庫" oninput="clearAdminDatabaseValidation()" />
+                  <div class="error-message" id="dbTitleZhError"></div>
                 </div>
                 <div>
                   <label data-zh="英文名稱" data-en="English Name">英文名稱</label>
-                  <input id="dbTitleEn" placeholder="Example: Equipment Database" />
+                  <input id="dbTitleEn" placeholder="Example: Equipment Database" oninput="clearAdminDatabaseValidation()" />
+                  <div class="error-message" id="dbTitleEnError"></div>
                 </div>
               </div>
             </div>
@@ -981,11 +983,13 @@
           <div class="database-action-two-col">
             <label>
               <span data-zh="中文分類名稱" data-en="Chinese Category Name">中文分類名稱</span>
-              <input id="databaseActionCategoryTitleZh" placeholder="例如：設備資料庫" />
+              <input id="databaseActionCategoryTitleZh" placeholder="例如：設備資料庫" oninput="clearDatabaseActionValidation()" />
+              <small id="databaseActionCategoryTitleZhError" class="database-action-field-error"></small>
             </label>
             <label>
               <span data-zh="英文分類名稱" data-en="English Category Name">英文分類名稱</span>
-              <input id="databaseActionCategoryTitleEn" placeholder="Example: Equipment Database" />
+              <input id="databaseActionCategoryTitleEn" placeholder="Example: Equipment Database" oninput="clearDatabaseActionValidation()" />
+              <small id="databaseActionCategoryTitleEnError" class="database-action-field-error"></small>
             </label>
           </div>
           <div class="database-action-two-col">
@@ -1405,6 +1409,9 @@
           <div class="error-message" id="registerPasswordError"></div>
         </div>
         <button class="primary" onclick="register()" data-zh="註冊" data-en="Sign Up">註冊</button>
-  <script src='index_szs_bu3_test.js'></script>
+      </div>
+    </div>
+  </div>
+  <script src="index_szs_bu3_test.js"></script>
 </body>
 </html>
