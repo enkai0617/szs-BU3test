@@ -5213,6 +5213,134 @@
       display: block;
     }
 
+    .document-preview-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 165;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      background: rgba(15, 23, 42, .56);
+      backdrop-filter: blur(12px);
+    }
+
+    .document-preview-backdrop.open {
+      display: flex;
+    }
+
+    .document-preview-card {
+      width: min(760px, 100%);
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      color: var(--text);
+      background: var(--panel-solid);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      box-shadow: 0 34px 100px rgba(15, 23, 42, .34);
+    }
+
+    .document-preview-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 24px 18px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(135deg, var(--soft), transparent), var(--panel-solid);
+    }
+
+    .document-preview-head h2 {
+      margin: 12px 0 6px;
+      font-size: 24px;
+      font-weight: 950;
+      line-height: 1.25;
+    }
+
+    .document-preview-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.6;
+    }
+
+    .document-preview-head button {
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border-radius: 14px;
+      font-size: 22px;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    .document-preview-body {
+      padding: 22px 24px;
+      overflow: auto;
+      display: grid;
+      gap: 16px;
+      background: color-mix(in srgb, var(--panel-solid) 94%, var(--soft));
+    }
+
+    .document-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .document-preview-field,
+    .document-preview-note {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--panel-solid);
+    }
+
+    .document-preview-field span,
+    .document-preview-note span {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .document-preview-field strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .document-preview-note p {
+      margin: 0;
+      color: var(--text);
+      font-weight: 750;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
+    }
+
+    .document-preview-prototype {
+      border-color: rgba(14, 165, 233, .26);
+      background: color-mix(in srgb, var(--soft) 48%, var(--panel-solid));
+    }
+
+    .document-preview-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      padding: 16px 24px 22px;
+      border-top: 1px solid var(--line);
+      background: var(--panel-solid);
+    }
+
+    .document-preview-actions button {
+      min-width: 96px;
+    }
+
 
     /* === Assistant launcher Y-axis drag: keep X fixed on the right === */
     .assistant-launcher {
@@ -5252,6 +5380,21 @@
 
       .media-preview-backdrop {
         padding: 12px;
+      }
+
+      .document-preview-backdrop {
+        padding: 12px;
+      }
+
+      .document-preview-head,
+      .document-preview-body,
+      .document-preview-actions {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .document-preview-grid {
+        grid-template-columns: 1fr;
       }
     }
 
