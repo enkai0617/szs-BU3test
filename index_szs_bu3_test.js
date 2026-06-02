@@ -57,6 +57,22 @@
 
     function t(zh, en) { return currentLang === "zh" ? zh : en; }
     function safeJsonParse(value, fallback) { try { return value ? JSON.parse(value) : fallback; } catch { return fallback; } }
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>'"]/g, ch => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "'": "&#39;",
+        '"': "&quot;"
+      }[ch]));
+    }
+    function escapeJsAttr(value) {
+      return escapeAttr(String(value ?? "")
+        .replace(/\\/g, "\\\\")
+        .replace(/'/g, "\\'")
+        .replace(/\r/g, "\\r")
+        .replace(/\n/g, "\\n"));
+    }
 
     function saveDatabases() { localStorage.setItem("szs_databases", JSON.stringify(databases)); }
     function loadDatabases() { databases = safeJsonParse(localStorage.getItem("szs_databases"), null) || [...defaultDatabases]; }
@@ -147,11 +163,11 @@
         const typeClass = getLogTypeClass(actionText);
         return `
           <div class="log-row">
-            <div class="log-time">${log.time}<br>${log.user}</div>
-            <div><span class="log-type-pill ${typeClass}">${actionText.split(" ")[0]}</span></div>
+            <div class="log-time">${escapeHtml(log.time)}<br>${escapeHtml(log.user)}</div>
+            <div><span class="log-type-pill ${typeClass}">${escapeHtml(actionText.split(" ")[0])}</span></div>
             <div>
-              <div class="log-action">${actionText} · ${log.target || "-"}</div>
-              <div class="log-detail">${log.detail || "-"}</div>
+              <div class="log-action">${escapeHtml(actionText)} · ${escapeHtml(log.target || "-")}</div>
+              <div class="log-detail">${escapeHtml(log.detail || "-")}</div>
             </div>
           </div>
         `;
@@ -1303,7 +1319,7 @@ function init() {
 
 
     function homeEscapeHtml(value) {
-      return String(value ?? "").replace(/[&<>'"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" }[ch]));
+      return escapeHtml(value);
     }
 
     function getHomeFileIconClass(type) {
@@ -1536,35 +1552,40 @@ function init() {
         const count = getDocumentsByDatabase(db.id).length;
         const lastUpdated = getDatabaseLastUpdated(db.id);
         const displayDate = lastUpdated === "-" ? t("尚未更新", "Not updated") : lastUpdated;
+        const dbDomId = escapeAttr(db.id);
+        const dbActionId = escapeJsAttr(db.id);
+        const dbTitle = escapeHtml(t(db.titleZh, db.titleEn));
+        const dbDescription = escapeHtml(t(db.descriptionZh, db.descriptionEn));
+        const safeDisplayDate = escapeHtml(displayDate);
         return `
-          <article class="database-overview-card database-overview-clickable" role="button" tabindex="0" onclick="showDetail('${db.id}')" onkeydown="handleDatabaseOverviewCardKey(event, '${db.id}')">
+          <article class="database-overview-card database-overview-clickable" role="button" tabindex="0" onclick="showDetail('${dbActionId}')" onkeydown="handleDatabaseOverviewCardKey(event, '${dbActionId}')">
             <div>
               <div class="database-overview-card-head">
                 <span class="database-overview-entry-label">DATABASE ENTRY</span>
                 <div class="database-overview-card-tools" onclick="event.stopPropagation()">
-                  <span class="doc-count">${count} ${t("份文件", "docs")}</span>
-                  <button class="database-overview-quick-btn" type="button" title="${t("快速操作", "Quick actions")}" onclick="toggleDatabaseQuickMenu(event, '${db.id}')">⋯</button>
-                  <div class="database-overview-quick-menu" id="databaseQuickMenu-${db.id}">
-                    <button type="button" onclick="showDetail('${db.id}')">${t("查看所有文件", "View all files")}</button>
-                    <button type="button" onclick="openDatabaseActionModal('document', '${db.id}')">${t("新增文件", "Add document")}</button>
-                    <button type="button" onclick="openDatabaseOverviewEditCategory('${db.id}')">${t("編輯分類", "Edit category")}</button>
-                    <button type="button" onclick="copyDatabaseName('${db.id}')">${t("複製分類名稱", "Copy category name")}</button>
+                  <span class="doc-count">${count} ${escapeHtml(t("份文件", "docs"))}</span>
+                  <button class="database-overview-quick-btn" type="button" title="${escapeAttr(t("快速操作", "Quick actions"))}" onclick="toggleDatabaseQuickMenu(event, '${dbActionId}')">⋯</button>
+                  <div class="database-overview-quick-menu" id="databaseQuickMenu-${dbDomId}">
+                    <button type="button" onclick="showDetail('${dbActionId}')">${escapeHtml(t("查看所有文件", "View all files"))}</button>
+                    <button type="button" onclick="openDatabaseActionModal('document', '${dbActionId}')">${escapeHtml(t("新增文件", "Add document"))}</button>
+                    <button type="button" onclick="openDatabaseOverviewEditCategory('${dbActionId}')">${escapeHtml(t("編輯分類", "Edit category"))}</button>
+                    <button type="button" onclick="copyDatabaseName('${dbActionId}')">${escapeHtml(t("複製分類名稱", "Copy category name"))}</button>
                   </div>
                 </div>
               </div>
-              <h3>${t(db.titleZh, db.titleEn)}</h3>
-              <p>${t(db.descriptionZh, db.descriptionEn)}</p>
+              <h3>${dbTitle}</h3>
+              <p>${dbDescription}</p>
             </div>
             <div class="database-overview-empty-hint ${count ? "is-hidden" : ""}">
-              <span>${t("尚未新增文件", "No documents yet")}</span>
-              <button class="database-overview-first-doc-btn" type="button" onclick="event.stopPropagation(); openDatabaseActionModal('document', '${db.id}')">${t("＋ 新增第一份文件", "+ Add First Document")}</button>
+              <span>${escapeHtml(t("尚未新增文件", "No documents yet"))}</span>
+              <button class="database-overview-first-doc-btn" type="button" onclick="event.stopPropagation(); openDatabaseActionModal('document', '${dbActionId}')">${escapeHtml(t("＋ 新增第一份文件", "+ Add First Document"))}</button>
             </div>
             <div class="database-overview-meta-row">
               <div class="database-overview-last">
-                ${t("最近更新", "Latest update")}
-                <strong>${displayDate}</strong>
+                ${escapeHtml(t("最近更新", "Latest update"))}
+                <strong>${safeDisplayDate}</strong>
               </div>
-              <button class="database-overview-action" type="button" onclick="event.stopPropagation(); showDetail('${db.id}')">${t("查看所有文件", "View All Files")}</button>
+              <button class="database-overview-action" type="button" onclick="event.stopPropagation(); showDetail('${dbActionId}')">${escapeHtml(t("查看所有文件", "View All Files"))}</button>
             </div>
           </article>`;
       }).join("");
@@ -1581,23 +1602,26 @@ function init() {
           const count = getDocumentsByDatabase(db.id).length;
           const lastUpdated = getDatabaseLastUpdated(db.id);
           const displayDate = lastUpdated === "-" ? t("尚未更新", "Not updated") : lastUpdated;
+          const dbActionId = escapeJsAttr(db.id);
+          const dbTitle = escapeHtml(t(db.titleZh, db.titleEn));
+          const dbDescription = escapeHtml(t(db.descriptionZh, db.descriptionEn));
           return `
             <div class="db-list-row database-overview-admin-row">
               <div class="db-list-name">
                 <span class="db-folder" aria-hidden="true">📁</span>
                 <div>
-                  <strong>${t(db.titleZh, db.titleEn)}</strong>
-                  <p>${t(db.descriptionZh, db.descriptionEn)}</p>
+                  <strong>${dbTitle}</strong>
+                  <p>${dbDescription}</p>
                 </div>
               </div>
-              <div class="db-list-count ${count ? "" : "is-empty"}">${count} ${t("份文件", "docs")}</div>
-              <div class="db-list-date">${displayDate}</div>
+              <div class="db-list-count ${count ? "" : "is-empty"}">${count} ${escapeHtml(t("份文件", "docs"))}</div>
+              <div class="db-list-date">${escapeHtml(displayDate)}</div>
               <div class="db-list-owner">SZS</div>
               <div class="database-overview-list-actions">
-                <button class="db-list-btn" type="button" onclick="showDetail('${db.id}')">👁 ${t("查看", "View")}</button>
-                <button class="db-list-btn" type="button" onclick="openDatabaseActionModal('document', '${db.id}')">＋ ${t("新增", "Add")}</button>
-                <button class="db-list-btn" type="button" onclick="openDatabaseOverviewEditCategory('${db.id}')">✎ ${t("編輯", "Edit")}</button>
-                <button class="db-list-btn" type="button" onclick="copyDatabaseName('${db.id}')">⋯</button>
+                <button class="db-list-btn" type="button" onclick="showDetail('${dbActionId}')">👁 ${escapeHtml(t("查看", "View"))}</button>
+                <button class="db-list-btn" type="button" onclick="openDatabaseActionModal('document', '${dbActionId}')">＋ ${escapeHtml(t("新增", "Add"))}</button>
+                <button class="db-list-btn" type="button" onclick="openDatabaseOverviewEditCategory('${dbActionId}')">✎ ${escapeHtml(t("編輯", "Edit"))}</button>
+                <button class="db-list-btn" type="button" onclick="copyDatabaseName('${dbActionId}')">⋯</button>
               </div>
             </div>`;
         }).join("")}
@@ -2658,6 +2682,7 @@ function showPage(pageId) {
       document.getElementById("dbTitleEn").value = "";
       document.getElementById("dbDescZh").value = "";
       document.getElementById("dbDescEn").value = "";
+      clearAdminDatabaseValidation();
 
       const title = document.getElementById("dbFormTitle");
       const hint = document.getElementById("dbFormHint");
@@ -2696,9 +2721,53 @@ function showPage(pageId) {
       resetDatabaseForm();
     }
 
+    function clearAdminDatabaseValidation() {
+      [
+        ["dbTitleZh", "dbTitleZhError"],
+        ["dbTitleEn", "dbTitleEnError"]
+      ].forEach(([fieldId, errorId]) => {
+        const field = document.getElementById(fieldId);
+        const error = document.getElementById(errorId);
+        if (field) field.classList.remove("invalid");
+        if (error) error.textContent = "";
+      });
+    }
+
+    function setAdminDatabaseFieldError(fieldId, errorId, message) {
+      const field = document.getElementById(fieldId);
+      const error = document.getElementById(errorId);
+      if (field) field.classList.add("invalid");
+      if (error) error.textContent = message;
+    }
+
+    function validateAdminDatabaseTitles(titleZh, titleEn) {
+      clearAdminDatabaseValidation();
+      if (titleZh && titleEn) return true;
+
+      if (!titleZh) {
+        setAdminDatabaseFieldError(
+          "dbTitleZh",
+          "dbTitleZhError",
+          t("請輸入中文名稱。", "Please enter the Chinese name.")
+        );
+      }
+
+      if (!titleEn) {
+        setAdminDatabaseFieldError(
+          "dbTitleEn",
+          "dbTitleEnError",
+          t("請輸入英文名稱。", "Please enter the English name.")
+        );
+      }
+
+      document.getElementById(!titleZh ? "dbTitleZh" : "dbTitleEn")?.focus();
+      return false;
+    }
+
     function editDatabaseCategory(id) {
       const db = databases.find(item => item.id === id);
       if (!db) return;
+      clearAdminDatabaseValidation();
       const editingInput = document.getElementById("editingDatabaseId");
       if (editingInput) editingInput.value = id;
       document.getElementById("dbTitleZh").value = db.titleZh || "";
@@ -2748,8 +2817,7 @@ function showPage(pageId) {
       const descriptionZh = document.getElementById("dbDescZh").value.trim();
       const descriptionEn = document.getElementById("dbDescEn").value.trim();
 
-      if (!titleZh || !titleEn) {
-        showToast(t("請輸入資料庫分類中文與英文名稱。", "Please enter both Chinese and English category names."), "error");
+      if (!validateAdminDatabaseTitles(titleZh, titleEn)) {
         return;
       }
 
@@ -2854,18 +2922,21 @@ function showPage(pageId) {
             <tbody>`;
 
       const body = rows.map(db => {
-        const editButton = `<button class="small" onclick="editDatabaseCategory('${db.id}')">${t("修改", "Edit")}</button>`;
-        const deleteButton = `<button class="small danger" onclick="deleteDatabaseCategory('${db.id}')">${t("刪除", "Delete")}</button>`;
+        const dbActionId = escapeJsAttr(db.id);
+        const dbTitle = escapeHtml(t(db.titleZh, db.titleEn));
+        const dbDescription = escapeHtml(t(db.descriptionZh, db.descriptionEn));
+        const editButton = `<button class="small" onclick="editDatabaseCategory('${dbActionId}')">${escapeHtml(t("修改", "Edit"))}</button>`;
+        const deleteButton = `<button class="small danger" onclick="deleteDatabaseCategory('${dbActionId}')">${escapeHtml(t("刪除", "Delete"))}</button>`;
         return `
           <tr>
             <td>
               <div>
-                <div class="database-row-title">${t(db.titleZh, db.titleEn)}</div>
-                <div class="database-row-sub">${t(db.descriptionZh, db.descriptionEn)}</div>
+                <div class="database-row-title">${dbTitle}</div>
+                <div class="database-row-sub">${dbDescription}</div>
               </div>
             </td>
-            <td><strong>${db.docCount}</strong> ${t("份", "docs")}</td>
-            <td><span class="status-pill published">${t("可管理", "Editable")}</span></td>
+            <td><strong>${db.docCount}</strong> ${escapeHtml(t("份", "docs"))}</td>
+            <td><span class="status-pill published">${escapeHtml(t("可管理", "Editable"))}</span></td>
             <td><div class="document-action-row">${editButton}${deleteButton}</div></td>
           </tr>`;
       }).join("");
