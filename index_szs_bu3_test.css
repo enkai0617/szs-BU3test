@@ -11995,3 +11995,60 @@
       color: #cbd5e1 !important;
     }
 
+
+    /* === SZS_FORCE_DARK_SURFACE_CACHE_BUSTER_20260602 === */
+    .dark #onlineMembersPanel .member-status-toolbar,
+    html[style*="dark"] #onlineMembersPanel .member-status-toolbar {
+      background: #0f172a !important;
+      border-color: rgba(56, 189, 248, .28) !important;
+      box-shadow: none !important;
+    }
+
+    .dark #onlineMembersPanel .member-status-search,
+    html[style*="dark"] #onlineMembersPanel .member-status-search {
+      background: #081220 !important;
+      border-color: rgba(56, 189, 248, .30) !important;
+    }
+
+    .dark #onlineMembersPanel .member-status-search input,
+    .dark #onlineMembersPanel .member-status-search span,
+    html[style*="dark"] #onlineMembersPanel .member-status-search input,
+    html[style*="dark"] #onlineMembersPanel .member-status-search span {
+      background: transparent !important;
+      color: #94a3b8 !important;
+    }
+
+    .dark #onlineMembersPanel .member-filter-btn,
+    .dark #onlineMembersPanel .member-group-action-btn,
+    html[style*="dark"] #onlineMembersPanel .member-filter-btn,
+    html[style*="dark"] #onlineMembersPanel .member-group-action-btn {
+      background: rgba(14, 165, 233, .14) !important;
+      border-color: rgba(56, 189, 248, .28) !important;
+      color: #38bdf8 !important;
+    }
+
+    .dark #assistantPage .assistant-tools-upgraded,
+    .dark #assistantPage .assistant-tools,
+    html[style*="dark"] #assistantPage .assistant-tools-upgraded,
+    html[style*="dark"] #assistantPage .assistant-tools {
+      background: #0f172a !important;
+      border-top-color: rgba(56, 189, 248, .18) !important;
+      border-bottom-color: rgba(56, 189, 248, .28) !important;
+      color: #94a3b8 !important;
+      box-shadow: none !important;
+    }
+
+    .dark #assistantPage .assistant-mode-btn,
+    html[style*="dark"] #assistantPage .assistant-mode-btn {
+      background: rgba(14, 165, 233, .14) !important;
+      border-color: rgba(56, 189, 248, .28) !important;
+      color: #38bdf8 !important;
+    }
+
+    .dark #assistantPage .assistant-mode-btn.active,
+    html[style*="dark"] #assistantPage .assistant-mode-btn.active {
+      background: linear-gradient(135deg, #0284c7, #22d3ee) !important;
+      border-color: transparent !important;
+      color: #fff !important;
+    }
+
