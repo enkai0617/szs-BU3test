@@ -1250,36 +1250,44 @@ function init() {
       }
 
       const dbHtml = matchedDatabases.length ? `
-        <div class="search-section-title">${t("符合的資料庫分類", "Matched Database Categories")}</div>
+        <div class="search-section-title">${escapeHtml(t("符合的資料庫分類", "Matched Database Categories"))}</div>
         ${matchedDatabases.map(db => {
           const docCount = getDocumentsByDatabase(db.id).length;
           const lastUpdated = getDatabaseLastUpdated(db.id);
+          const dbActionId = escapeJsAttr(db.id);
+          const dbTitle = escapeHtml(t(db.titleZh, db.titleEn));
+          const dbDescription = escapeHtml(t(db.descriptionZh, db.descriptionEn));
           return `
             <div class="search-row database-result">
               <div>
-                <div class="doc-title">${t(db.titleZh, db.titleEn)}</div>
-                <div class="doc-desc">${t(db.descriptionZh, db.descriptionEn)}</div>
+                <div class="doc-title">${dbTitle}</div>
+                <div class="doc-desc">${dbDescription}</div>
               </div>
-              <div class="doc-meta">${t("文件數", "Docs")}: ${docCount}<br>${t("最後更新", "Last updated")}: ${lastUpdated}</div>
-              <div><span class="doc-type">${t("分類", "Category")}</span></div>
-              <div><button class="primary" onclick="showDetail('${db.id}')">${t("查看", "View")}</button></div>
+              <div class="doc-meta">${escapeHtml(t("文件數", "Docs"))}: ${docCount}<br>${escapeHtml(t("最後更新", "Last updated"))}: ${escapeHtml(lastUpdated)}</div>
+              <div><span class="doc-type">${escapeHtml(t("分類", "Category"))}</span></div>
+              <div><button class="primary" onclick="showDetail('${dbActionId}')">${escapeHtml(t("查看", "View"))}</button></div>
             </div>`;
         }).join("")}
-      ` : `<div class="empty-state mini"><strong>${t("沒有符合的資料庫分類", "No matching categories")}</strong></div>`;
+      ` : `<div class="empty-state mini"><strong>${escapeHtml(t("沒有符合的資料庫分類", "No matching categories"))}</strong></div>`;
 
       const docHtml = docs.length ? `
-        <div class="search-section-title">${t("符合的文件", "Matched Documents")}</div>
+        <div class="search-section-title">${escapeHtml(t("符合的文件", "Matched Documents"))}</div>
         ${docs.map(doc => {
           const db = databases.find(item => item.id === doc.databaseId);
+          const docTitle = escapeHtml(t(doc.titleZh, doc.titleEn));
+          const docDescription = escapeHtml(t(doc.descriptionZh, doc.descriptionEn));
+          const dbName = escapeHtml(db ? t(db.titleZh, db.titleEn) : doc.databaseId);
+          const docType = escapeHtml(doc.type || "-");
+          const updatedAt = escapeHtml(doc.updatedAt || "-");
           return `
             <div class="doc-row">
-              <div><div class="doc-title">${t(doc.titleZh, doc.titleEn)}</div><div class="doc-desc">${t(doc.descriptionZh, doc.descriptionEn)}</div>${renderTagChips(doc.tags || [])}</div>
-              <div class="doc-meta">${t("分類", "Category")}: ${db ? t(db.titleZh, db.titleEn) : doc.databaseId}<br>${t("更新日期", "Updated")}: ${doc.updatedAt}</div>
-              <div><span class="doc-type">${doc.type}</span></div>
-              <div><button class="primary" onclick="viewFile()">${t("查看檔案", "View File")}</button></div>
+              <div><div class="doc-title">${docTitle}</div><div class="doc-desc">${docDescription}</div>${renderTagChips(doc.tags || [])}</div>
+              <div class="doc-meta">${escapeHtml(t("分類", "Category"))}: ${dbName}<br>${escapeHtml(t("更新日期", "Updated"))}: ${updatedAt}</div>
+              <div><span class="doc-type">${docType}</span></div>
+              <div><button class="primary" onclick="viewFile()">${escapeHtml(t("查看檔案", "View File"))}</button></div>
             </div>`;
         }).join("")}
-      ` : `<div class="empty-state mini"><strong>${t("沒有符合的文件", "No matching files")}</strong></div>`;
+      ` : `<div class="empty-state mini"><strong>${escapeHtml(t("沒有符合的文件", "No matching files"))}</strong></div>`;
 
       if (searchResultView === "files") {
         box.innerHTML = docHtml;
@@ -6368,7 +6376,10 @@ function showPage(pageId) {
 
       results.forEach(doc => {
         const db = databases.find(item => item.id === doc.databaseId);
-        resultHtml += `<div class="chat-result-card"><strong>${t(doc.titleZh, doc.titleEn)}</strong><br><span>${t("分類", "Category")}: ${db ? t(db.titleZh, db.titleEn) : doc.databaseId}</span><br><span>${t("更新日期", "Updated")}: ${doc.updatedAt}</span>${renderTagChips(doc.tags || [])}<br><button style="margin-top:10px;padding:8px 10px;font-size:12px;" onclick="viewFile()">${t("查看檔案", "View File")}</button></div>`;
+        const docTitle = escapeHtml(t(doc.titleZh, doc.titleEn));
+        const dbName = escapeHtml(db ? t(db.titleZh, db.titleEn) : doc.databaseId);
+        const updatedAt = escapeHtml(doc.updatedAt || "-");
+        resultHtml += `<div class="chat-result-card"><strong>${docTitle}</strong><br><span>${escapeHtml(t("分類", "Category"))}: ${dbName}</span><br><span>${escapeHtml(t("更新日期", "Updated"))}: ${updatedAt}</span>${renderTagChips(doc.tags || [])}<br><button style="margin-top:10px;padding:8px 10px;font-size:12px;" onclick="viewFile()">${escapeHtml(t("查看檔案", "View File"))}</button></div>`;
       });
 
       return resultHtml;
