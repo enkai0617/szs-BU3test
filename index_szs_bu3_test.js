@@ -1284,7 +1284,7 @@ function init() {
               <div><div class="doc-title">${docTitle}</div><div class="doc-desc">${docDescription}</div>${renderTagChips(doc.tags || [])}</div>
               <div class="doc-meta">${escapeHtml(t("分類", "Category"))}: ${dbName}<br>${escapeHtml(t("更新日期", "Updated"))}: ${updatedAt}</div>
               <div><span class="doc-type">${docType}</span></div>
-              <div><button class="primary" onclick="viewFile()">${escapeHtml(t("查看檔案", "View File"))}</button></div>
+              <div><button class="primary" onclick="viewFile('${escapeJsAttr(doc.id)}')">${escapeHtml(t("查看檔案", "View File"))}</button></div>
             </div>`;
         }).join("")}
       ` : `<div class="empty-state mini"><strong>${escapeHtml(t("沒有符合的文件", "No matching files"))}</strong></div>`;
@@ -1902,7 +1902,7 @@ function showPage(pageId) {
                 ${t("分類", "Category")}: <strong>${escapeAttr(db ? t(db.titleZh, db.titleEn) : doc.databaseId)}</strong><br>
                 ${t("更新日期", "Updated")}: <strong>${escapeAttr(doc.updatedAt || "-")}</strong>${uploadedLine}
               </div>
-              <button class="detail-doc-action" onclick="viewFile()">▣ ${t("查看檔案", "View File")}</button>
+              <button class="detail-doc-action" onclick="viewFile('${escapeJsAttr(doc.id)}')">▣ ${t("查看檔案", "View File")}</button>
             </div>
           </article>`;
       }).join("")}</div>`;
@@ -3642,8 +3642,78 @@ function showPage(pageId) {
         .replace(/>/g, "&gt;");
     }
 
-    function viewFile() {
-      appAlert(t("這是原型版，尚未連接正式檔案。正式版會從公司 Server 或內部檔案系統開啟文件。", "This is a prototype and is not connected to real files yet. The official version will open files from the company server or internal file system."), { title: t("原型版提示", "Prototype Notice"), tone: "info", icon: "i" });
+    function findDocumentById(id) {
+      return documents.find(doc => String(doc.id) === String(id)) || null;
+    }
+
+    function viewFile(docId = "") {
+      const doc = docId ? findDocumentById(docId) : null;
+      if (!doc) {
+        appAlert(t("這是原型版，尚未連接正式檔案。正式版會從公司 Server 或內部檔案系統開啟文件。", "This is a prototype and is not connected to real files yet. The official version will open files from the company server or internal file system."), { title: t("原型版提示", "Prototype Notice"), tone: "info", icon: "i" });
+        return;
+      }
+
+      const modal = document.getElementById("documentPreviewModal");
+      const title = document.getElementById("documentPreviewTitle");
+      const type = document.getElementById("documentPreviewType");
+      const meta = document.getElementById("documentPreviewMeta");
+      const body = document.getElementById("documentPreviewBody");
+      const db = databases.find(item => item.id === doc.databaseId);
+      const dbName = db ? t(db.titleZh, db.titleEn) : doc.databaseId;
+      const fileName = doc.uploadedFileName || t("尚未連接實體檔案", "No physical file connected yet");
+      const fileSize = doc.uploadedFileSizeLabel || "-";
+      const tags = renderTagChips(doc.tags || []);
+
+      if (title) title.textContent = t(doc.titleZh, doc.titleEn);
+      if (type) {
+        type.textContent = String(doc.type || "FILE").toUpperCase();
+        type.className = `doc-type ${getFileTypeClass(doc.type)}`;
+      }
+      if (meta) meta.textContent = `${t("分類", "Category")}: ${dbName} · ${t("更新日期", "Updated")}: ${doc.updatedAt || "-"}`;
+      if (body) {
+        body.innerHTML = `
+          <div class="document-preview-grid">
+            <div class="document-preview-field">
+              <span>${escapeHtml(t("所屬資料庫", "Database"))}</span>
+              <strong>${escapeHtml(dbName)}</strong>
+            </div>
+            <div class="document-preview-field">
+              <span>${escapeHtml(t("文件類型", "File Type"))}</span>
+              <strong>${escapeHtml(doc.type || "-")}</strong>
+            </div>
+            <div class="document-preview-field">
+              <span>${escapeHtml(t("更新日期", "Updated"))}</span>
+              <strong>${escapeHtml(doc.updatedAt || "-")}</strong>
+            </div>
+            <div class="document-preview-field">
+              <span>${escapeHtml(t("檔案", "File"))}</span>
+              <strong>${escapeHtml(fileName)}${fileSize !== "-" ? ` · ${escapeHtml(fileSize)}` : ""}</strong>
+            </div>
+          </div>
+          <div class="document-preview-note">
+            <span>${escapeHtml(t("文件說明", "Description"))}</span>
+            <p>${escapeHtml(t(doc.descriptionZh || "-", doc.descriptionEn || "-"))}</p>
+          </div>
+          <div class="document-preview-note">
+            <span>${escapeHtml(t("標籤", "Tags"))}</span>
+            ${tags || `<p>${escapeHtml(t("尚未設定標籤", "No tags yet"))}</p>`}
+          </div>
+          <div class="document-preview-note document-preview-prototype">
+            <span>${escapeHtml(t("原型版提示", "Prototype Notice"))}</span>
+            <p>${escapeHtml(t("目前顯示文件中繼資料預覽；正式版可在此嵌入 PDF、圖片或連接公司檔案系統。", "This preview shows document metadata for now. The official version can embed PDFs, images, or connect to the company file system here."))}</p>
+          </div>
+        `;
+      }
+
+      modal?.classList.add("open");
+      modal?.setAttribute("aria-hidden", "false");
+    }
+
+    function closeDocumentPreview(event) {
+      if (event && event.target !== event.currentTarget) return;
+      const modal = document.getElementById("documentPreviewModal");
+      modal?.classList.remove("open");
+      modal?.setAttribute("aria-hidden", "true");
     }
 
     function switchLanguage() {
@@ -3829,16 +3899,19 @@ function showPage(pageId) {
       }
 
       if (summaryRecent) {
-        summaryRecent.innerHTML = docs.slice(0, 2).map(doc => `
-          <div class="summary-recent-item">
-            <span class="summary-type-badge ${getTypeBadgeClass(doc.type)}">${doc.type || "FILE"}</span>
-            <div>
-              <div class="summary-recent-title">${t(doc.titleZh, doc.titleEn)}</div>
-              <div class="summary-recent-sub">${t("更新日期", "Updated")}: ${doc.updatedAt || "-"}</div>
+        summaryRecent.innerHTML = docs.slice(0, 2).map(doc => {
+          const docActionId = escapeJsAttr(doc.id);
+          return `
+            <div class="summary-recent-item">
+              <span class="summary-type-badge ${getTypeBadgeClass(doc.type)}">${escapeHtml(doc.type || "FILE")}</span>
+              <div>
+                <div class="summary-recent-title">${escapeHtml(t(doc.titleZh, doc.titleEn))}</div>
+                <div class="summary-recent-sub">${escapeHtml(t("更新日期", "Updated"))}: ${escapeHtml(doc.updatedAt || "-")}</div>
+              </div>
+              <button onclick="viewFile('${docActionId}')">↗</button>
             </div>
-            <button onclick="viewFile()">↗</button>
-          </div>
-        `).join("") || `<div class="summary-recent-item"><span class="summary-type-badge other">—</span><div><div class="summary-recent-title">${t("尚無最近文件", "No recent files")}</div><div class="summary-recent-sub">${t("可先新增第一份文件", "Add the first file")}</div></div></div>`;
+          `;
+        }).join("") || `<div class="summary-recent-item"><span class="summary-type-badge other">—</span><div><div class="summary-recent-title">${escapeHtml(t("尚無最近文件", "No recent files"))}</div><div class="summary-recent-sub">${escapeHtml(t("可先新增第一份文件", "Add the first file"))}</div></div></div>`;
       }
     }
 
@@ -6379,7 +6452,7 @@ function showPage(pageId) {
         const docTitle = escapeHtml(t(doc.titleZh, doc.titleEn));
         const dbName = escapeHtml(db ? t(db.titleZh, db.titleEn) : doc.databaseId);
         const updatedAt = escapeHtml(doc.updatedAt || "-");
-        resultHtml += `<div class="chat-result-card"><strong>${docTitle}</strong><br><span>${escapeHtml(t("分類", "Category"))}: ${dbName}</span><br><span>${escapeHtml(t("更新日期", "Updated"))}: ${updatedAt}</span>${renderTagChips(doc.tags || [])}<br><button style="margin-top:10px;padding:8px 10px;font-size:12px;" onclick="viewFile()">${escapeHtml(t("查看檔案", "View File"))}</button></div>`;
+        resultHtml += `<div class="chat-result-card"><strong>${docTitle}</strong><br><span>${escapeHtml(t("分類", "Category"))}: ${dbName}</span><br><span>${escapeHtml(t("更新日期", "Updated"))}: ${updatedAt}</span>${renderTagChips(doc.tags || [])}<br><button style="margin-top:10px;padding:8px 10px;font-size:12px;" onclick="viewFile('${escapeJsAttr(doc.id)}')">${escapeHtml(t("查看檔案", "View File"))}</button></div>`;
       });
 
       return resultHtml;
