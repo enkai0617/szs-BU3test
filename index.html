@@ -1303,6 +1303,23 @@
     </div>
   </div>
 
+  <div class="document-preview-backdrop" id="documentPreviewModal" onclick="closeDocumentPreview(event)" aria-hidden="true">
+    <div class="document-preview-card" onclick="event.stopPropagation()" role="dialog" aria-modal="true" aria-labelledby="documentPreviewTitle">
+      <div class="document-preview-head">
+        <div>
+          <span id="documentPreviewType" class="doc-type">FILE</span>
+          <h2 id="documentPreviewTitle">文件預覽</h2>
+          <p id="documentPreviewMeta">Prototype preview</p>
+        </div>
+        <button type="button" onclick="closeDocumentPreview()">×</button>
+      </div>
+      <div class="document-preview-body" id="documentPreviewBody"></div>
+      <div class="document-preview-actions">
+        <button type="button" onclick="closeDocumentPreview()" data-zh="關閉" data-en="Close">關閉</button>
+      </div>
+    </div>
+  </div>
+
   <div class="assistant-launcher" id="assistantLauncher" onclick="if(!window.__assistantLauncherDragged) toggleAssistant()">?</div>
 
   <div class="chat-box" id="chatBox">
