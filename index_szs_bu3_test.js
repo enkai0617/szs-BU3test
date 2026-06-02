@@ -1991,7 +1991,9 @@ function showPage(pageId) {
 
       [
         ["databaseActionDocumentTitleZh", "databaseActionDocumentTitleZhError"],
-        ["databaseActionDocumentTitleEn", "databaseActionDocumentTitleEnError"]
+        ["databaseActionDocumentTitleEn", "databaseActionDocumentTitleEnError"],
+        ["databaseActionCategoryTitleZh", "databaseActionCategoryTitleZhError"],
+        ["databaseActionCategoryTitleEn", "databaseActionCategoryTitleEnError"]
       ].forEach(([fieldId, errorId]) => {
         const field = document.getElementById(fieldId);
         const error = document.getElementById(errorId);
@@ -2041,6 +2043,37 @@ function showPage(pageId) {
       }
 
       document.getElementById(!titleZh ? "databaseActionDocumentTitleZh" : "databaseActionDocumentTitleEn")?.focus();
+      return false;
+    }
+
+    function validateDatabaseActionCategoryTitles(titleZh, titleEn) {
+      clearDatabaseActionValidation();
+
+      if (titleZh && titleEn) return true;
+
+      const errorBox = document.getElementById("databaseActionInlineError");
+      if (errorBox) {
+        errorBox.textContent = t("請補齊反紅欄位。只要輸入中文分類名稱與英文分類名稱即可新增。", "Please complete the highlighted fields. Only Chinese and English category names are required.");
+        errorBox.classList.add("show");
+      }
+
+      if (!titleZh) {
+        setDatabaseActionFieldError(
+          "databaseActionCategoryTitleZh",
+          "databaseActionCategoryTitleZhError",
+          t("請輸入中文分類名稱。", "Please enter the Chinese category name.")
+        );
+      }
+
+      if (!titleEn) {
+        setDatabaseActionFieldError(
+          "databaseActionCategoryTitleEn",
+          "databaseActionCategoryTitleEnError",
+          t("請輸入英文分類名稱。", "Please enter the English category name.")
+        );
+      }
+
+      document.getElementById(!titleZh ? "databaseActionCategoryTitleZh" : "databaseActionCategoryTitleEn")?.focus();
       return false;
     }
 
@@ -2124,12 +2157,7 @@ function showPage(pageId) {
         const descriptionZh = document.getElementById("databaseActionCategoryDescZh")?.value.trim() || "";
         const descriptionEn = document.getElementById("databaseActionCategoryDescEn")?.value.trim() || "";
 
-        if (!titleZh || !titleEn) {
-          appAlert(t("請輸入資料庫分類中文與英文名稱。", "Please enter both Chinese and English category names."), {
-            title: t("資料未完成", "Incomplete Data"),
-            tone: "warning",
-            icon: "!"
-          });
+        if (!validateDatabaseActionCategoryTitles(titleZh, titleEn)) {
           return;
         }
 
