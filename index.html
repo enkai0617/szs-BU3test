@@ -39,8 +39,9 @@
 
       <div class="top-search">
         <span>⌕</span>
-        <input id="topSearchInput" placeholder="搜尋文件、分類或標籤..." onkeydown="handleTopSearch(event)" />
+        <input id="topSearchInput" placeholder="搜尋文件、分類或標籤..." oninput="handleSearchSuggestInput('top')" onfocus="handleSearchSuggestInput('top')" onkeydown="handleTopSearch(event)" autocomplete="off" />
         <kbd>⌘ K</kbd>
+        <div id="topSearchSuggestions" class="search-suggestions" role="listbox" aria-label="搜尋建議"></div>
       </div>
 
       <div class="top-presence-control" id="topPresenceControl" aria-label="presence status">
@@ -439,8 +440,9 @@
     <section class="detail-toolbar">
       <div class="google-search-large">
         <span>⌕</span>
-        <input id="searchPageInput" placeholder="搜尋文件、分類或標籤..." onkeydown="handleSearchPageEnter(event)" />
+        <input id="searchPageInput" placeholder="搜尋文件、分類或標籤..." oninput="handleSearchSuggestInput('page')" onfocus="handleSearchSuggestInput('page')" onkeydown="handleSearchPageEnter(event)" autocomplete="off" />
         <button onclick="runSearchFromPage()" data-zh="搜尋" data-en="Search">搜尋</button>
+        <div id="searchPageSuggestions" class="search-suggestions search-suggestions-large" role="listbox" aria-label="搜尋建議"></div>
       </div>
       <span class="badge" id="searchResultCount">0 documents</span>
     </section>
