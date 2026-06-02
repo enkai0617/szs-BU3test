@@ -1171,23 +1171,165 @@ function init() {
     }
 
     function handleTopSearch(event) {
+      if (event.key === "Escape") {
+        hideSearchSuggestions();
+        return;
+      }
       if (event.key !== "Enter") return;
       const input = document.getElementById("topSearchInput");
       const value = input ? input.value.trim() : "";
       if (!value) return;
+      hideSearchSuggestions();
       showSearchResults(value);
     }
 
     function handleSearchPageEnter(event) {
-      if (event.key === "Enter") runSearchFromPage();
+      if (event.key === "Escape") {
+        hideSearchSuggestions();
+        return;
+      }
+      if (event.key === "Enter") {
+        hideSearchSuggestions();
+        runSearchFromPage();
+      }
     }
 
     function runSearchFromPage() {
       const input = document.getElementById("searchPageInput");
       const value = input ? input.value.trim() : "";
       if (!value) return;
+      hideSearchSuggestions();
       showSearchResults(value);
     }
+
+    function getSearchSuggestionTitle(item) {
+      return currentLang === "zh" ? (item.titleZh || item.titleEn || item.id || "") : (item.titleEn || item.titleZh || item.id || "");
+    }
+
+    function scoreSearchSuggestion(text, title, query) {
+      const normalizedText = normalizeSearchQuery(text);
+      const normalizedTitle = normalizeSearchQuery(title);
+      const normalizedQuery = normalizeSearchQuery(query);
+      if (!normalizedQuery) return 0;
+      if (normalizedTitle === normalizedQuery) return 120;
+      if (normalizedTitle.startsWith(normalizedQuery)) return 100;
+      if (normalizedTitle.includes(normalizedQuery)) return 80;
+      if (normalizedText.includes(normalizedQuery)) return 50;
+      const tokens = normalizedQuery.split(/\s+/).filter(Boolean);
+      if (tokens.length && tokens.every(token => normalizedText.includes(token))) return 35;
+      return 0;
+    }
+
+    function getSearchSuggestions(query, limit = 7) {
+      const normalizedQuery = normalizeSearchQuery(query);
+      if (!normalizedQuery) return [];
+
+      const docSuggestions = documents.map(doc => {
+        const db = databases.find(item => item.id === doc.databaseId);
+        const title = getSearchSuggestionTitle(doc);
+        const text = [
+          doc.titleZh,
+          doc.titleEn,
+          doc.descriptionZh,
+          doc.descriptionEn,
+          doc.keywords,
+          (doc.tags || []).join(" "),
+          doc.type,
+          db?.titleZh,
+          db?.titleEn
+        ].join(" ");
+        const score = scoreSearchSuggestion(text, title, query);
+        if (!score) return null;
+        return {
+          kind: "document",
+          id: doc.id,
+          title,
+          type: doc.type || "FILE",
+          meta: `${t("文件", "File")} · ${db ? getSearchSuggestionTitle(db) : doc.databaseId || "-"}`,
+          score
+        };
+      }).filter(Boolean);
+
+      const databaseSuggestions = databases.map(db => {
+        const title = getSearchSuggestionTitle(db);
+        const text = [db.titleZh, db.titleEn, db.descriptionZh, db.descriptionEn, db.id].join(" ");
+        const score = scoreSearchSuggestion(text, title, query);
+        if (!score) return null;
+        return {
+          kind: "database",
+          id: db.id,
+          title,
+          type: t("分類", "Category"),
+          meta: `${t("資料庫分類", "Database Category")} · ${getDocumentsByDatabase(db.id).length} ${t("份文件", "files")}`,
+          score: score - 5
+        };
+      }).filter(Boolean);
+
+      return [...docSuggestions, ...databaseSuggestions]
+        .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title))
+        .slice(0, limit);
+    }
+
+    function renderSearchSuggestions(inputId, boxId) {
+      const input = document.getElementById(inputId);
+      const box = document.getElementById(boxId);
+      if (!input || !box) return;
+      document.querySelectorAll(".search-suggestions").forEach(item => {
+        if (item.id !== boxId) item.classList.remove("open");
+      });
+
+      const query = input.value.trim();
+      if (!query) {
+        box.classList.remove("open");
+        box.innerHTML = "";
+        return;
+      }
+
+      const suggestions = getSearchSuggestions(query);
+      box.classList.add("open");
+      if (!suggestions.length) {
+        box.innerHTML = `<div class="search-suggestion-empty">${escapeHtml(t("沒有相似的文件或分類", "No similar files or categories"))}</div>`;
+        return;
+      }
+
+      box.innerHTML = suggestions.map(item => {
+        const icon = item.kind === "database" ? "DB" : "FILE";
+        const value = escapeJsAttr(item.title);
+        return `
+          <button type="button" class="search-suggestion-item" role="option" onclick="selectSearchSuggestion('${value}')">
+            <span class="search-suggestion-icon">${escapeHtml(icon)}</span>
+            <span class="search-suggestion-main">
+              <span class="search-suggestion-title">${escapeHtml(item.title)}</span>
+              <span class="search-suggestion-meta">${escapeHtml(item.meta)}</span>
+            </span>
+            <span class="search-suggestion-type">${escapeHtml(item.type)}</span>
+          </button>`;
+      }).join("");
+    }
+
+    function handleSearchSuggestInput(source) {
+      const isTop = source === "top";
+      renderSearchSuggestions(isTop ? "topSearchInput" : "searchPageInput", isTop ? "topSearchSuggestions" : "searchPageSuggestions");
+    }
+
+    function selectSearchSuggestion(keyword) {
+      const value = String(keyword || "").trim();
+      if (!value) return;
+      hideSearchSuggestions();
+      showSearchResults(value);
+    }
+
+    function hideSearchSuggestions() {
+      document.querySelectorAll(".search-suggestions").forEach(box => {
+        box.classList.remove("open");
+      });
+    }
+
+    document.addEventListener("click", event => {
+      if (!event.target.closest(".top-search, .google-search-large")) {
+        hideSearchSuggestions();
+      }
+    });
 
     function showSearchResults(keyword) {
       currentSearchKeyword = keyword;
