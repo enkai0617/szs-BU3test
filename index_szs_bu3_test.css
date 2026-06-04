@@ -4380,7 +4380,7 @@
     }
 
     body.members-open #homePage {
-      padding-top: 28px;
+      padding-top: 66px;
     }
 
     body:not(.members-open) #onlineMembersPanel {
