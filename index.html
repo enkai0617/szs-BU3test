@@ -261,9 +261,31 @@
             </div>
             <div class="favorite-db-list" id="homeFavoriteDatabases"></div>
           </div>
+
+          <div class="home-panel home-calendar-panel">
+            <div class="home-panel-head">
+              <div class="home-panel-title"><span class="num-dot">3</span><span data-zh="近期事項" data-en="Upcoming Items">近期事項</span></div>
+              <button class="home-panel-action" onclick="focusCalendarTitle()" data-zh="新增" data-en="Add">新增</button>
+            </div>
+            <form class="home-calendar-form" onsubmit="addCalendarEventFromHome(event)">
+              <input id="homeCalendarTitle" type="text" maxlength="80" placeholder="會議或重要事項" />
+              <div class="home-calendar-fields">
+                <input id="homeCalendarDate" type="date" />
+                <input id="homeCalendarTime" type="time" />
+                <select id="homeCalendarType">
+                  <option value="meeting" data-zh="會議" data-en="Meeting">會議</option>
+                  <option value="important" data-zh="重要事項" data-en="Important">重要事項</option>
+                  <option value="deadline" data-zh="期限" data-en="Deadline">期限</option>
+                  <option value="note" data-zh="提醒" data-en="Reminder">提醒</option>
+                </select>
+                <button type="submit" data-zh="加入" data-en="Add">加入</button>
+              </div>
+            </form>
+            <div class="home-calendar-list" id="homeCalendarEvents"></div>
+          </div>
         </section>
 
-        <!-- Home optional feature panels 3-5 removed per request; keep only recent files and favorites. -->
+        <!-- Home optional feature panels can be expanded gradually without changing the main database workflow. -->
 
         <section class="online-members-panel" id="onlineMembersPanel">
       <div class="online-members-head">
@@ -1431,6 +1453,28 @@
       </div>
     </div>
   </div>
+  <script>
+    window.SZS_BACKEND_CONFIG = {
+      mode: "local", // local | api
+      baseUrl: "",
+      token: "",
+      endpoints: {
+        databases: "/databases",
+        documents: "/documents",
+        users: "/users",
+        activityLogs: "/activity-logs",
+        assistantRules: "/assistant-rules",
+        files: "/files",
+        presence: "/presence",
+        feedback: "/feedback",
+        preferences: "/preferences",
+        favorites: "/favorites",
+        memberGroups: "/member-groups",
+        memberChats: "/member-chats",
+        calendarEvents: "/calendar-events"
+      }
+    };
+  </script>
   <script src="index_szs_bu3_test.js"></script>
 </body>
 </html>
