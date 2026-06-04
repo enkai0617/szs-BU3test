@@ -13526,3 +13526,46 @@ body.sidebar-collapsed #assistantPage.page.active .szs-assistant-panel {
   }
 }
 
+/* === SZS_ASSISTANT_TRUE_FULL_WIDTH_20260604 === */
+body.sidebar-collapsed:not(.auth-landing) main#assistantPage.page.active {
+  width: calc(100vw - 92px) !important;
+  max-width: none !important;
+  margin: 0 0 0 92px !important;
+  padding: 18px 24px 22px !important;
+}
+
+body:not(.sidebar-collapsed):not(.auth-landing) main#assistantPage.page.active {
+  width: calc(100vw - 274px) !important;
+  max-width: none !important;
+  margin: 0 0 0 274px !important;
+  padding: 18px 24px 22px !important;
+}
+
+body.sidebar-collapsed:not(.auth-landing) #assistantPage.page.active .assistant-full-layout,
+body.sidebar-collapsed:not(.auth-landing) #assistantPage.page.active .szs-assistant-upgrade,
+body:not(.sidebar-collapsed):not(.auth-landing) #assistantPage.page.active .assistant-full-layout,
+body:not(.sidebar-collapsed):not(.auth-landing) #assistantPage.page.active .szs-assistant-upgrade {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+}
+
+body.sidebar-collapsed:not(.auth-landing) #assistantPage.page.active .assistant-full-panel,
+body.sidebar-collapsed:not(.auth-landing) #assistantPage.page.active .szs-assistant-panel,
+body:not(.sidebar-collapsed):not(.auth-landing) #assistantPage.page.active .assistant-full-panel,
+body:not(.sidebar-collapsed):not(.auth-landing) #assistantPage.page.active .szs-assistant-panel {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  height: calc(100dvh - 118px) !important;
+}
+
+@media (max-width: 900px) {
+  body.sidebar-collapsed:not(.auth-landing) main#assistantPage.page.active,
+  body:not(.sidebar-collapsed):not(.auth-landing) main#assistantPage.page.active {
+    width: 100vw !important;
+    margin: 0 !important;
+    padding: 12px !important;
+  }
+}
+
