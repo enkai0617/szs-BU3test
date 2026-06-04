@@ -12904,3 +12904,284 @@
       color: #fff !important;
     }
 
+
+    /* === SZS_ASSISTANT_FULLPAGE_PRODUCT_POLISH_20260604 === */
+    #assistantPage.page {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 14px !important;
+      min-height: calc(100dvh - 72px) !important;
+      padding: 14px 18px 18px !important;
+    }
+
+    #assistantPage .assistant-page-top {
+      flex: 0 0 auto !important;
+      align-items: center !important;
+      gap: 16px !important;
+      margin-bottom: 0 !important;
+      padding: 0 4px !important;
+    }
+
+    #assistantPage .assistant-page-top .detail-label {
+      margin-bottom: 6px !important;
+      letter-spacing: 2px !important;
+    }
+
+    #assistantPage .assistant-page-top h1 {
+      margin-bottom: 6px !important;
+      font-size: clamp(28px, 3vw, 42px) !important;
+      line-height: 1.12 !important;
+    }
+
+    #assistantPage .assistant-page-top p {
+      max-width: 860px !important;
+      font-size: 15px !important;
+      line-height: 1.65 !important;
+    }
+
+    #assistantPage .szs-assistant-upgrade,
+    #assistantPage .assistant-full-layout {
+      flex: 1 1 auto !important;
+      min-height: 0 !important;
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) !important;
+      align-items: stretch !important;
+      gap: 16px !important;
+    }
+
+    #assistantPage .szs-assistant-panel,
+    #assistantPage .assistant-full-panel {
+      height: auto !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      width: 100% !important;
+      max-width: 1280px !important;
+      margin: 0 auto !important;
+      border-radius: 18px !important;
+    }
+
+    body:not(.sidebar-collapsed) #assistantPage .szs-assistant-panel,
+    body:not(.sidebar-collapsed) #assistantPage .assistant-full-panel,
+    body.sidebar-collapsed #assistantPage .szs-assistant-panel,
+    body.sidebar-collapsed #assistantPage .assistant-full-panel {
+      max-width: 1280px !important;
+    }
+
+    #assistantPage.summary-open .szs-assistant-upgrade,
+    #assistantPage.summary-open .assistant-full-layout {
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 340px) !important;
+      max-width: 1600px !important;
+      margin: 0 auto !important;
+    }
+
+    #assistantPage.summary-open .szs-assistant-panel,
+    #assistantPage.summary-open .assistant-full-panel {
+      max-width: none !important;
+    }
+
+    #assistantPage .szs-assistant-header,
+    #assistantPage .assistant-full-header {
+      min-height: 64px !important;
+      padding: 13px 18px !important;
+      gap: 14px !important;
+    }
+
+    #assistantPage .assistant-header-tools {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      justify-content: flex-end !important;
+      gap: 8px !important;
+    }
+
+    #assistantPage .assistant-tools-upgraded,
+    #assistantPage .assistant-tools {
+      padding: 10px 18px !important;
+    }
+
+    #assistantPage .assistant-mode-row,
+    #assistantPage .assistant-mode-row-upgraded {
+      gap: 8px !important;
+      align-items: center !important;
+    }
+
+    #assistantPage .assistant-mode-btn {
+      min-height: 34px !important;
+      padding: 8px 12px !important;
+      border-radius: 12px !important;
+    }
+
+    #assistantPage .assistant-mode-hint {
+      margin-top: 8px !important;
+      line-height: 1.45 !important;
+    }
+
+    #assistantPage .szs-assistant-body,
+    #assistantPage .assistant-full-body {
+      padding: 18px clamp(16px, 3vw, 34px) 20px !important;
+      gap: 14px !important;
+      scroll-behavior: smooth !important;
+    }
+
+    #assistantPage .assistant-welcome-card,
+    #assistantPage .message.bot {
+      max-width: min(980px, 94%) !important;
+    }
+
+    #assistantPage .message.user {
+      max-width: min(760px, 76%) !important;
+    }
+
+    #assistantPage .message,
+    #assistantPage .message.bot,
+    #assistantPage .message.user {
+      border-radius: 16px !important;
+      line-height: 1.7 !important;
+    }
+
+    #assistantPage .chat-result-card,
+    #assistantPage .assistant-source-card {
+      border-radius: 14px !important;
+    }
+
+    #assistantPage .assistant-quick-collapse-bar {
+      padding: 8px 18px !important;
+    }
+
+    #assistantPage .assistant-quick-toggle {
+      min-height: 38px !important;
+      border-radius: 12px !important;
+    }
+
+    #assistantPage .assistant-quick-question-row {
+      gap: 10px !important;
+      padding: 10px 18px !important;
+    }
+
+    #assistantPage .assistant-quick-question-row button {
+      min-height: 54px !important;
+      border-radius: 14px !important;
+      padding: 8px 10px !important;
+    }
+
+    #assistantPage .assistant-input-guide {
+      max-width: calc(100% - 36px) !important;
+      margin: 0 18px -1px !important;
+      padding: 8px 11px !important;
+      line-height: 1.45 !important;
+    }
+
+    #assistantPage .szs-assistant-footer,
+    #assistantPage .assistant-full-footer {
+      grid-template-columns: 42px minmax(0, 1fr) 50px !important;
+      padding: 12px 18px !important;
+      gap: 9px !important;
+    }
+
+    #assistantPage .assistant-attach-btn {
+      width: 42px !important;
+      min-width: 42px !important;
+      height: 42px !important;
+      min-height: 42px !important;
+    }
+
+    #assistantPage .assistant-send-btn {
+      width: 50px !important;
+      min-width: 50px !important;
+      height: 42px !important;
+      min-height: 42px !important;
+      font-size: 20px !important;
+    }
+
+    #assistantPage .szs-assistant-footer .chat-input,
+    #assistantPage .assistant-full-footer .chat-input {
+      min-height: 44px !important;
+    }
+
+    #assistantPage .assistant-database-summary {
+      position: relative !important;
+      inset: auto !important;
+      display: none !important;
+      width: 100% !important;
+      height: auto !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      border-radius: 18px !important;
+      overflow: auto !important;
+    }
+
+    #assistantPage .assistant-database-summary.open {
+      display: block !important;
+    }
+
+    @media (max-width: 1100px) {
+      #assistantPage.summary-open .szs-assistant-upgrade,
+      #assistantPage.summary-open .assistant-full-layout {
+        grid-template-columns: minmax(0, 1fr) !important;
+      }
+
+      #assistantPage .assistant-database-summary {
+        order: -1 !important;
+      }
+    }
+
+    @media (max-width: 760px) {
+      #assistantPage.page {
+        min-height: calc(100dvh - 62px) !important;
+        padding: 10px 10px 12px !important;
+      }
+
+      #assistantPage .assistant-page-top {
+        align-items: flex-start !important;
+        flex-direction: column !important;
+      }
+
+      #assistantPage .assistant-page-top h1 {
+        font-size: 28px !important;
+      }
+
+      #assistantPage .assistant-page-top p {
+        font-size: 14px !important;
+      }
+
+      #assistantPage .assistant-header-tools {
+        justify-content: flex-start !important;
+      }
+
+      #assistantPage .assistant-mode-row,
+      #assistantPage .assistant-mode-row-upgraded {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+      }
+
+      #assistantPage .assistant-mode-label {
+        margin-bottom: 0 !important;
+      }
+
+      #assistantPage .assistant-quick-question-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+
+      #assistantPage .message.user {
+        max-width: 92% !important;
+      }
+    }
+
+    @media (max-width: 520px) {
+      #assistantPage .assistant-quick-question-row {
+        grid-template-columns: 1fr !important;
+      }
+
+      #assistantPage .assistant-quick-toggle {
+        grid-template-columns: minmax(0, 1fr) auto !important;
+      }
+
+      #assistantPage .assistant-quick-toggle small {
+        display: none !important;
+      }
+    }
+
+    .dark #assistantPage .assistant-page-top p,
+    html[style*="dark"] #assistantPage .assistant-page-top p {
+      color: #94a3b8 !important;
+    }
+
