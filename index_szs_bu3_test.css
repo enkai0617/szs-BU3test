@@ -409,6 +409,24 @@
     .message.bot { background: var(--soft); color: var(--text); border: 1px solid var(--line); }
     .message.user { background: linear-gradient(135deg, var(--primary), var(--primary2)); color: white; margin-left: auto; }
     .chat-result-card { margin-top: 10px; padding: 12px; border-radius: 14px; background: color-mix(in srgb, var(--panel-solid) 84%, var(--soft)); border: 1px solid var(--line); }
+    .assistant-response-section { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); }
+    .assistant-response-title { margin-bottom: 8px; color: var(--primary); font-size: 12px; font-weight: 950; }
+    .assistant-source-card { display: grid; gap: 2px; margin-top: 8px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: color-mix(in srgb, var(--panel-solid) 88%, var(--soft)); }
+    .assistant-source-card span { color: var(--muted); font-size: 12px; }
+    .assistant-attachment-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+    .assistant-attachment-card { min-width: 0; display: flex; gap: 10px; align-items: center; padding: 10px; border: 1px solid var(--line); border-radius: 12px; background: color-mix(in srgb, var(--panel-solid) 90%, var(--soft)); color: var(--text); text-decoration: none; text-align: left; box-shadow: none; cursor: pointer; }
+    .assistant-attachment-card:hover { border-color: color-mix(in srgb, var(--primary) 45%, var(--line)); transform: translateY(-1px); }
+    .assistant-attachment-card img { width: 54px; height: 44px; object-fit: cover; border-radius: 8px; border: 1px solid var(--line); background: var(--soft); flex: 0 0 auto; }
+    .assistant-attachment-card b { width: 54px; height: 44px; display: grid; place-items: center; border-radius: 8px; background: var(--soft); color: var(--primary); font-size: 12px; flex: 0 0 auto; }
+    .assistant-attachment-card span { min-width: 0; display: grid; gap: 2px; }
+    .assistant-attachment-card strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; }
+    .assistant-attachment-card small { color: var(--muted); font-size: 11px; }
+    .assistant-attachment-table { margin-bottom: 10px; padding: 10px; border: 1px solid var(--line); border-radius: 12px; background: color-mix(in srgb, var(--panel-solid) 90%, var(--soft)); }
+    .assistant-table-scroll { margin-top: 8px; overflow-x: auto; }
+    .assistant-attachment-table table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .assistant-attachment-table th,
+    .assistant-attachment-table td { padding: 8px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    .assistant-attachment-table th { color: var(--primary); font-weight: 950; background: var(--soft); }
     .chat-footer { padding: 14px; border-top: 1px solid var(--line); background: var(--panel-solid); display: flex; gap: 10px; }
     .chat-input { flex: 1; }
     .note { padding: 0 14px 12px; text-align: center; color: var(--muted); background: var(--panel-solid); font-size: 12px; line-height: 1.5; }
@@ -5839,6 +5857,148 @@
     .favorite-star-btn { color: #f59e0b; background: #fff7ed; }
     .favorite-star-btn.is-muted { color: #94a3b8; background: #f1f5f9; }
 
+    .home-calendar-panel {
+      grid-column: 1 / -1;
+    }
+
+    .home-calendar-form {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .home-calendar-form input,
+    .home-calendar-form select {
+      min-height: 42px;
+      width: 100%;
+      border: 1px solid rgba(203,213,225,.95);
+      border-radius: 14px;
+      background: rgba(255,255,255,.92);
+      color: #0f172a;
+      font-weight: 850;
+      padding: 0 12px;
+      outline: none;
+    }
+
+    .home-calendar-form input:focus,
+    .home-calendar-form select:focus {
+      border-color: rgba(37,99,235,.72);
+      box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+    }
+
+    .home-calendar-fields {
+      display: grid;
+      grid-template-columns: minmax(150px, .9fr) minmax(120px, .6fr) minmax(140px, .72fr) auto;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .home-calendar-fields button {
+      min-height: 42px;
+      border: 0;
+      border-radius: 14px;
+      padding: 0 18px;
+      background: linear-gradient(135deg, #2563eb, #0891b2);
+      color: white;
+      font-weight: 950;
+      cursor: pointer;
+      box-shadow: 0 14px 28px rgba(37,99,235,.16);
+    }
+
+    .home-calendar-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .home-calendar-item {
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr) auto 32px;
+      gap: 10px;
+      align-items: center;
+      min-height: 58px;
+      padding: 10px;
+      border: 1px solid rgba(215,228,242,.88);
+      border-radius: 17px;
+      background: rgba(255,255,255,.88);
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .home-calendar-item:hover {
+      transform: translateY(-1px);
+      border-color: rgba(147,197,253,.92);
+      box-shadow: 0 14px 30px rgba(37,99,235,.08);
+    }
+
+    .home-calendar-check,
+    .home-calendar-delete {
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+      border: 1px solid rgba(203,213,225,.95);
+      background: rgba(248,250,252,.96);
+      color: #2563eb;
+      display: inline-grid;
+      place-items: center;
+      font-weight: 950;
+      cursor: pointer;
+    }
+
+    .home-calendar-delete {
+      color: #64748b;
+    }
+
+    .home-calendar-delete:hover {
+      color: #dc2626;
+      border-color: rgba(248,113,113,.8);
+      background: #fef2f2;
+    }
+
+    .home-calendar-meta {
+      min-width: 0;
+      display: grid;
+      gap: 4px;
+    }
+
+    .home-calendar-meta strong {
+      color: #0f172a;
+      font-size: 14px;
+      font-weight: 950;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .home-calendar-meta small {
+      color: #64748b;
+      font-size: 12px;
+      font-weight: 800;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .home-calendar-type {
+      border-radius: 999px;
+      padding: 7px 10px;
+      background: #eef2ff;
+      color: #3730a3;
+      font-size: 12px;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .home-calendar-type.important { background: #fef3c7; color: #92400e; }
+    .home-calendar-type.deadline { background: #fee2e2; color: #991b1b; }
+    .home-calendar-type.note { background: #dcfce7; color: #166534; }
+
+    .home-calendar-item.is-done {
+      opacity: .68;
+    }
+
+    .home-calendar-item.is-done .home-calendar-meta strong {
+      text-decoration: line-through;
+    }
+
     .home-secondary-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -6007,6 +6167,7 @@
     body.dark .home-panel,
     body.dark .recent-doc-item,
     body.dark .favorite-db-item,
+    body.dark .home-calendar-item,
     body.dark .smart-list-item,
     body.dark .assistant-scenario-btn,
     body.dark .confirm-demo-card,
@@ -6018,14 +6179,34 @@
     body.dark .home-panel-title,
     body.dark .recent-doc-meta strong,
     body.dark .favorite-db-meta strong,
+    body.dark .home-calendar-meta strong,
     body.dark .smart-list-meta strong,
     body.dark .assistant-scenario-btn,
     body.dark .confirm-demo-warning b,
     body.dark .optimization-item strong { color: #e5edf7; }
 
+    body.dark .home-calendar-meta small { color: #94a3b8; }
+    body.dark .home-calendar-form input,
+    body.dark .home-calendar-form select,
+    body.dark .home-calendar-check,
+    body.dark .home-calendar-delete {
+      background: rgba(15,23,42,.82);
+      border-color: rgba(71,85,105,.78);
+      color: #e5edf7;
+    }
+    body.dark .home-calendar-type {
+      background: rgba(59,130,246,.18);
+      color: #bfdbfe;
+    }
+
     @media (max-width: 1180px) {
       .home-productivity-panels,
       .home-secondary-grid { grid-template-columns: 1fr; }
+      .home-calendar-fields { grid-template-columns: 1fr 1fr; }
+      .home-calendar-fields button { grid-column: 1 / -1; }
+      .home-calendar-item { grid-template-columns: 34px minmax(0, 1fr) 32px; }
+      .home-calendar-type { grid-column: 2 / 3; justify-self: start; }
+      .home-calendar-delete { grid-column: 3 / 4; grid-row: 1 / 2; }
     }
 
 
