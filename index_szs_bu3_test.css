@@ -13435,10 +13435,94 @@
       pointer-events: none !important;
     }
 
-    main#assistantPage.page.active {
-      visibility: visible !important;
-      height: auto !important;
-      max-height: none !important;
-      pointer-events: auto !important;
-    }
+main#assistantPage.page.active {
+  visibility: visible !important;
+  height: auto !important;
+  max-height: none !important;
+  pointer-events: auto !important;
+}
+
+/* === SZS_ASSISTANT_FULLPAGE_WIDE_WORKSPACE_20260604 === */
+main#assistantPage.page.active {
+  display: flex !important;
+  flex-direction: column !important;
+  max-width: none !important;
+  padding: 18px 28px 22px !important;
+  min-height: calc(100dvh - 72px) !important;
+}
+
+#assistantPage.page.active .assistant-page-top {
+  display: none !important;
+}
+
+#assistantPage.page.active .assistant-full-layout,
+#assistantPage.page.active .szs-assistant-upgrade,
+#assistantPage.page.active.summary-open .assistant-full-layout,
+#assistantPage.page.active.summary-open .szs-assistant-upgrade {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+  flex: 1 1 auto !important;
+  display: block !important;
+  position: relative !important;
+}
+
+#assistantPage.page.active .assistant-full-panel,
+#assistantPage.page.active .szs-assistant-panel,
+body:not(.sidebar-collapsed) #assistantPage.page.active .assistant-full-panel,
+body:not(.sidebar-collapsed) #assistantPage.page.active .szs-assistant-panel,
+body.sidebar-collapsed #assistantPage.page.active .assistant-full-panel,
+body.sidebar-collapsed #assistantPage.page.active .szs-assistant-panel {
+  width: 100% !important;
+  max-width: none !important;
+  height: calc(100dvh - 118px) !important;
+  min-height: 680px !important;
+  max-height: none !important;
+  border-radius: 18px !important;
+}
+
+#assistantPage.page.active .assistant-full-body,
+#assistantPage.page.active .szs-assistant-body {
+  padding: 22px clamp(22px, 3vw, 42px) !important;
+}
+
+#assistantPage.page.active .assistant-welcome-card,
+#assistantPage.page.active .message.bot {
+  max-width: min(1120px, 88%) !important;
+}
+
+#assistantPage.page.active .message.user {
+  max-width: min(900px, 72%) !important;
+}
+
+#assistantPage.page.active .assistant-database-summary {
+  width: min(380px, calc(100% - 28px)) !important;
+}
+
+@media (max-width: 900px) {
+  main#assistantPage.page.active {
+    margin-left: 0 !important;
+    padding: 12px !important;
+    min-height: calc(100dvh - 72px) !important;
+  }
+
+  #assistantPage.page.active .assistant-full-panel,
+  #assistantPage.page.active .szs-assistant-panel {
+    height: calc(100dvh - 96px) !important;
+    min-height: 560px !important;
+    border-radius: 16px !important;
+  }
+
+  #assistantPage.page.active .assistant-full-body,
+  #assistantPage.page.active .szs-assistant-body {
+    padding: 18px 16px !important;
+  }
+
+  #assistantPage.page.active .assistant-welcome-card,
+  #assistantPage.page.active .message.bot,
+  #assistantPage.page.active .message.user {
+    max-width: 100% !important;
+  }
+}
 
