@@ -226,7 +226,7 @@
           <div class="dash-link" data-zh="查看成員狀態 →" data-en="View Members →">查看成員狀態 →</div>
         </div>
       </div>
-      <div class="dash-stat clickable" onclick="openAdmin(); setTimeout(()=>switchAdminTab('logs'), 0);">
+      <div class="dash-stat clickable" onclick="openAdminTab('logs');">
         <div class="dash-icon green">✓</div>
         <div>
           <div class="dash-label" data-zh="系統狀態" data-en="System Status">系統狀態</div>
@@ -250,7 +250,7 @@
         <strong data-zh="目前尚未建立資料" data-en="No data has been created yet">目前尚未建立資料</strong>
         <p data-zh="請至後台管理新增資料庫分類與文件，開始建立您的知識庫。" data-en="Go to Admin Panel to add database categories and documents to start building the knowledge base.">請至後台管理新增資料庫分類與文件，開始建立您的知識庫。</p>
       </div>
-      <button class="primary" onclick="openAdmin(); setTimeout(()=>switchAdminTab('databases'),0);" data-zh="前往後台管理" data-en="Open Admin Panel">前往後台管理</button>
+      <button class="primary" onclick="openAdminTab('databases');" data-zh="前往後台管理" data-en="Open Admin Panel">前往後台管理</button>
     </section>
 
     <div class="home-main-layout">
@@ -1110,7 +1110,7 @@
 
 
   <main id="assistantPage" class="page">
-    <section class="detail-top">
+    <section class="detail-top assistant-page-top">
       <div class="detail-title-area">
         <div class="detail-label">RIZEN · FULL ASSISTANT</div>
         <h1 data-zh="SZS人工智慧小幫手" data-en="SZS AI Assistant">SZS人工智慧小幫手</h1>
@@ -1146,9 +1146,9 @@
             <button id="fullModeDocsBtn" class="assistant-mode-btn" onclick="setAssistantMode('docs')" data-mode-info="只查詢目前知識庫內部文件，例如 DFM、製程、規格、測試資料。" data-zh="內部文件" data-en="Internal Docs">內部文件</button>
           </div>
           <div class="assistant-mode-tooltip" id="assistantModeTooltip">
-            <strong>全部搜尋：</strong>同時搜尋公司官網資訊與內部文件。<br>
-            <strong>官網資訊：</strong>公開資訊與公司介紹。<br>
-            <strong>內部文件：</strong>知識庫與製程相關文件。
+            <strong data-zh="全部搜尋：" data-en="All:">全部搜尋：</strong><span data-zh="同時搜尋公司官網資訊與內部文件。" data-en="Search both public website knowledge and internal documents.">同時搜尋公司官網資訊與內部文件。</span><br>
+            <strong data-zh="官網資訊：" data-en="Website:">官網資訊：</strong><span data-zh="公開資訊與公司介紹。" data-en="Public information and company profile.">公開資訊與公司介紹。</span><br>
+            <strong data-zh="內部文件：" data-en="Internal Docs:">內部文件：</strong><span data-zh="知識庫與製程相關文件。" data-en="Knowledge-base and process documents.">知識庫與製程相關文件。</span>
           </div>
           <div class="assistant-mode-hint" id="fullAssistantModeHint">目前模式：全部搜尋。會同時查詢官網知識與內部文件。</div>
         </div>
@@ -1157,16 +1157,16 @@
           <div class="assistant-welcome-card">
             <div class="assistant-welcome-avatar">🤖</div>
             <div>
-              <h3>嗨，我是 SZS 小幫手 🤖</h3>
-              <p>你可以問我公司官網資訊、產品、認證、投資人資訊，也可以搜尋目前知識庫文件。</p>
+              <h3 data-zh="嗨，我是 SZS 小幫手" data-en="Hi, I am the SZS assistant">嗨，我是 SZS 小幫手</h3>
+              <p data-zh="你可以問我公司官網資訊、產品、認證、投資人資訊，也可以搜尋目前知識庫文件。" data-en="Ask about company website information, products, certifications, investor information, or search the current knowledge-base documents.">你可以問我公司官網資訊、產品、認證、投資人資訊，也可以搜尋目前知識庫文件。</p>
             </div>
           </div>
         </div>
 
         <div class="assistant-quick-collapse-bar">
           <button id="assistantQuickToggleBtn" class="assistant-quick-toggle" type="button" onclick="toggleAssistantQuickQuestions()" aria-expanded="false">
-            <span>常用問題</span>
-            <small>需要時展開快速提問</small>
+            <span data-zh="常用問題" data-en="Common Questions">常用問題</span>
+            <small data-zh="需要時展開快速提問" data-en="Expand quick prompts when needed">需要時展開快速提問</small>
             <b>▾</b>
           </button>
         </div>
@@ -1190,7 +1190,7 @@
           </button>
         </div>
 
-        <div class="assistant-input-guide">支援：工站流程查詢 / 文件搜尋 / DFM 問答 / 資料庫內容摘要</div>
+        <div class="assistant-input-guide" data-zh="支援：工站流程查詢 / 文件搜尋 / DFM 問答 / 資料庫內容摘要" data-en="Supports: station flow lookup / document search / DFM Q&A / database summaries">支援：工站流程查詢 / 文件搜尋 / DFM 問答 / 資料庫內容摘要</div>
         <div class="assistant-full-footer szs-assistant-footer">
           <button class="assistant-attach-btn" type="button" title="附件示意">📎</button>
           <input class="chat-input" id="fullChatInput" placeholder="請輸入工站、文件名稱或問題，例如：壓合流程、DFM 規範、製程參數..." onkeydown="handleFullEnter(event)" />
