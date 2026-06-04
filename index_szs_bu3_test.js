@@ -1611,6 +1611,20 @@ function init() {
       showPage("databaseOverviewPage");
     }
 
+    function openCalendarPage() {
+      if (!currentUser) {
+        showLoginLanding();
+        return;
+      }
+      selectedDatabaseId = null;
+      closeMembersSection();
+      updateSideNav("calendar");
+      document.body.classList.add("sidebar-collapsed");
+      renderHomeCalendarEvents();
+      showPage("calendarPage");
+      setTimeout(() => renderHomeCalendarEvents(), 80);
+    }
+
 
     function homeEscapeHtml(value) {
       return escapeHtml(value);
@@ -1708,10 +1722,23 @@ function init() {
         : `${monthNamesEn[homeCalendarViewMonth]} ${homeCalendarViewYear}`;
     }
 
+    function getHomeCalendarSelectedDateLabel(dateValue) {
+      const parts = String(dateValue || "").split("-").map(part => Number(part));
+      if (parts.length < 3 || !parts[0] || !parts[1] || !parts[2]) return t("未選取日期", "No date selected");
+      const date = new Date(parts[0], parts[1] - 1, parts[2]);
+      const weekdaysZh = ["週日", "週一", "週二", "週三", "週四", "週五", "週六"];
+      const weekdaysEn = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+      return currentLang === "zh"
+        ? `${parts[0]}-${String(parts[1]).padStart(2, "0")}-${String(parts[2]).padStart(2, "0")} ${weekdaysZh[date.getDay()]}`
+        : `${weekdaysEn[date.getDay()]} ${String(parts[1]).padStart(2, "0")}/${String(parts[2]).padStart(2, "0")}/${parts[0]}`;
+    }
+
     function changeHomeCalendarMonth(offset) {
       const next = new Date(homeCalendarViewYear, homeCalendarViewMonth + Number(offset || 0), 1);
       homeCalendarViewYear = next.getFullYear();
       homeCalendarViewMonth = next.getMonth();
+      const dateInput = document.getElementById("homeCalendarDate");
+      if (dateInput) dateInput.value = getHomeCalendarDateValue(homeCalendarViewYear, homeCalendarViewMonth, 1);
       renderHomeCalendarEvents();
     }
 
@@ -1732,14 +1759,14 @@ function init() {
       focusCalendarTitle();
     }
 
-    function scrollToHomeCalendar() {
-      closeMembersSection();
-      document.body.classList.remove("members-open");
-      const panel = document.getElementById("homeCalendarPanel");
-      if (panel) {
-        panel.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
+    function handleHomeCalendarDateInput() {
+      const dateInput = document.getElementById("homeCalendarDate");
+      if (dateInput?.value) setHomeCalendarViewFromDate(dateInput.value);
       renderHomeCalendarEvents();
+    }
+
+    function scrollToHomeCalendar() {
+      openCalendarPage();
     }
 
     function focusCalendarTitle() {
@@ -1774,6 +1801,7 @@ function init() {
       if (titleInput) titleInput.value = "";
       if (timeInput) timeInput.value = "";
       renderHomeCalendarEvents();
+      renderHomeCalendarSummary();
       showToast(t("已加入近期事項。", "Upcoming item added."), "success");
     }
 
@@ -1781,11 +1809,13 @@ function init() {
       const events = loadCalendarEvents().map(event => event.id === id ? { ...event, done: !event.done } : event);
       saveCalendarEvents(events);
       renderHomeCalendarEvents();
+      renderHomeCalendarSummary();
     }
 
     function deleteCalendarEvent(id) {
       saveCalendarEvents(loadCalendarEvents().filter(event => event.id !== id));
       renderHomeCalendarEvents();
+      renderHomeCalendarSummary();
       showToast(t("已刪除近期事項。", "Upcoming item deleted."), "success");
     }
 
@@ -1794,16 +1824,21 @@ function init() {
       const grid = document.getElementById("homeCalendarGrid");
       const monthLabel = document.getElementById("homeCalendarMonthLabel");
       const overviewCount = document.getElementById("overviewCalendarCount");
+      const sideCount = document.getElementById("sideCalendarCount");
       const dateInput = document.getElementById("homeCalendarDate");
+      const selectedDateLabel = document.getElementById("homeCalendarSelectedDate");
       if (dateInput && !dateInput.value) dateInput.value = getTodayInputValue();
       const allEvents = getSortedCalendarEvents();
+      const activeEvents = allEvents.filter(event => !event.done);
       const selectedDate = dateInput?.value || "";
       const todayValue = getTodayInputValue();
       const currentMonthPrefix = `${homeCalendarViewYear}-${String(homeCalendarViewMonth + 1).padStart(2, "0")}`;
       const currentMonthEvents = allEvents.filter(event => String(event.date || "").startsWith(currentMonthPrefix));
 
       if (monthLabel) monthLabel.textContent = getHomeCalendarMonthLabel();
-      if (overviewCount) overviewCount.textContent = String(currentMonthEvents.length);
+      if (overviewCount) overviewCount.textContent = String(activeEvents.length);
+      if (sideCount) sideCount.textContent = String(activeEvents.length);
+      if (selectedDateLabel) selectedDateLabel.textContent = getHomeCalendarSelectedDateLabel(selectedDate);
 
       if (grid) {
         const weekLabels = currentLang === "zh" ? ["日", "一", "二", "三", "四", "五", "六"] : ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -1848,7 +1883,7 @@ function init() {
       }
 
       if (!list) return;
-      const events = allEvents.slice(0, 6);
+      const events = allEvents.filter(event => event.date === selectedDate);
       list.innerHTML = events.map(event => {
         const dateLabel = event.date ? homeEscapeHtml(event.date) : homeEscapeHtml(t("未設定日期", "No date"));
         const timeLabel = event.time ? ` · ${homeEscapeHtml(event.time)}` : "";
@@ -1863,7 +1898,34 @@ function init() {
             <span class="home-calendar-type ${type}">${homeEscapeHtml(getCalendarTypeLabel(event.type))}</span>
             <button class="home-calendar-delete" type="button" onclick="deleteCalendarEvent('${escapeAttr(event.id)}')" title="${escapeAttr(t("刪除", "Delete"))}">×</button>
           </div>`;
-      }).join("") || `<div class="empty-state mini"><strong>${t("尚未新增事項", "No items yet")}</strong></div>`;
+      }).join("") || `<div class="home-calendar-empty-day">${t("此日期尚未新增事項。", "No items scheduled for this date.")}</div>`;
+    }
+
+    function renderHomeCalendarSummary() {
+      const summary = document.getElementById("homeCalendarSummary");
+      const overviewCount = document.getElementById("overviewCalendarCount");
+      const sideCount = document.getElementById("sideCalendarCount");
+      const todayValue = getTodayInputValue();
+      const upcomingEvents = getSortedCalendarEvents()
+        .filter(event => !event.done && (!event.date || event.date >= todayValue))
+        .slice(0, 4);
+      const activeEvents = getSortedCalendarEvents().filter(event => !event.done);
+      if (overviewCount) overviewCount.textContent = String(activeEvents.length);
+      if (sideCount) sideCount.textContent = String(activeEvents.length);
+      if (!summary) return;
+      summary.innerHTML = upcomingEvents.map(event => {
+        const dateLabel = event.date ? homeEscapeHtml(event.date) : homeEscapeHtml(t("未設定日期", "No date"));
+        const timeLabel = event.time ? ` · ${homeEscapeHtml(event.time)}` : "";
+        return `
+          <button class="home-calendar-summary-item" type="button" onclick="openCalendarPage()">
+            <span class="home-calendar-summary-date">${dateLabel}${timeLabel}</span>
+            <span class="home-calendar-summary-meta">
+              <strong>${homeEscapeHtml(event.title)}</strong>
+              <small>${homeEscapeHtml(getCalendarTypeLabel(event.type))}</small>
+            </span>
+            <span>›</span>
+          </button>`;
+      }).join("") || `<div class="home-calendar-empty-day">${t("近期沒有待辦事項。", "No upcoming items.")}</div>`;
     }
 
     function renderHomeDashboardEnhancements() {
@@ -1913,6 +1975,7 @@ function init() {
       }
 
       renderHomeCalendarEvents();
+      renderHomeCalendarSummary();
     }
 
     function getDatabaseTotalPages(size, totalItems = databases.length) {
@@ -7737,6 +7800,7 @@ function showPage(pageId) {
       }
 
       renderHomeCalendarEvents();
+      renderHomeCalendarSummary();
     }
 
     function enhanceQuickMemberStatusSummary() {
