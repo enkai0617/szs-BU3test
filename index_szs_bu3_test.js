@@ -4871,7 +4871,7 @@ function showPage(pageId) {
       let totalMembers = 0;
       if (roleEl) {
         totalMembers = typeof getAllDisplayMembers === "function"
-          ? getAllDisplayMembers().length
+          ? getAllDisplayMembers().filter(member => member.groupKey).length
           : loadUsers().length;
         roleEl.textContent = totalMembers;
       }
