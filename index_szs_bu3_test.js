@@ -987,9 +987,6 @@ function init() {
 
     function scrollToAllMemberGroups() {
       openMembersSection();
-      setTimeout(() => {
-        document.getElementById("onlineMembersPanel")?.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 100);
     }
 
     function toggleMemberGroup(groupKey) {
@@ -1502,9 +1499,10 @@ function init() {
       if (!box) return;
 
       const keyword = currentSearchKeyword.trim();
+      const searchableDocuments = documents.filter(doc => doc.status !== "hidden");
       const docs = searchResultShowAll && !keyword
-        ? documents
-        : documents.filter(doc => documentMatchesQuery(doc, keyword));
+        ? searchableDocuments
+        : searchableDocuments.filter(doc => documentMatchesQuery(doc, keyword));
       const matchedDatabases = databases.filter(db => {
         const text = [db.titleZh, db.titleEn, db.descriptionZh, db.descriptionEn, db.id].join(" ").toLowerCase();
         const normalizedKeyword = normalizeSearchQuery(keyword);
@@ -1938,9 +1936,10 @@ function init() {
       const recentBox = document.getElementById("homeRecentDocuments");
       const favoriteBox = document.getElementById("homeFavoriteDatabases");
       const searchPreview = document.getElementById("homeSearchPreview");
+      const visibleDocuments = documents.filter(doc => doc.status !== "hidden");
 
       if (recentBox) {
-        const recentDocs = [...documents].sort((a, b) => String(b.updatedAt || "").localeCompare(String(a.updatedAt || ""))).slice(0, 4);
+        const recentDocs = [...visibleDocuments].sort((a, b) => String(b.updatedAt || "").localeCompare(String(a.updatedAt || ""))).slice(0, 4);
         recentBox.innerHTML = recentDocs.map((doc, index) => {
           const db = databases.find(item => item.id === doc.databaseId);
           const type = String(doc.type || "FILE").toUpperCase();
@@ -1971,7 +1970,7 @@ function init() {
 
       if (searchPreview) {
         const keyword = "DFM";
-        const docs = documents.filter(doc => documentMatchesQuery(doc, keyword)).slice(0, 2);
+        const docs = visibleDocuments.filter(doc => documentMatchesQuery(doc, keyword)).slice(0, 2);
         searchPreview.innerHTML = docs.map(doc => `
           <button class="smart-list-item" onclick="showDetail('${doc.databaseId}')">
             <span class="file-type-icon ${getHomeFileIconClass(doc.type)}">${homeEscapeHtml(String(doc.type || "FILE").slice(0,4).toUpperCase())}</span>
@@ -2385,9 +2384,6 @@ function showPage(pageId) {
       updateSideNav("members");
       document.body.classList.add("sidebar-collapsed");
       showPage("homePage");
-      setTimeout(() => {
-        document.getElementById("onlineMembersPanel")?.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 80);
     }
 
     function showHome() { selectedDatabaseId = null; databaseHomeView = "cards"; databaseCardPage = 1; closeMembersSection(); renderDatabases(); renderOnlineMembers(); updateSideNav("home"); document.body.classList.add("sidebar-collapsed"); showPage("homePage"); }
@@ -3039,6 +3035,15 @@ function showPage(pageId) {
       switchAdminTab("overview");
       updateSideNav("admin");
       showPage("adminPage");
+    }
+
+    function openAdminTab(tab) {
+      if (!currentUser || !canManageData()) {
+        openAdmin();
+        return;
+      }
+      openAdmin();
+      setTimeout(() => switchAdminTab(tab), 0);
     }
 
     function switchAdminTab(tab) {
@@ -4871,9 +4876,10 @@ function showPage(pageId) {
       const dbEl = document.getElementById("overviewDatabaseCount");
       const docEl = document.getElementById("overviewDocumentCount");
       const roleEl = document.getElementById("overviewUserRole");
+      const visibleDocumentCount = documents.filter(doc => doc.status !== "hidden").length;
 
       if (dbEl) dbEl.textContent = databases.length;
-      if (docEl) docEl.textContent = documents.length;
+      if (docEl) docEl.textContent = visibleDocumentCount;
       let totalMembers = 0;
       if (roleEl) {
         totalMembers = typeof getAllDisplayMembers === "function"
@@ -4883,7 +4889,7 @@ function showPage(pageId) {
       }
       const emptyCallout = document.getElementById("homeEmptyDataCallout");
       if (emptyCallout) {
-        const isEmpty = databases.length === 0 && documents.length === 0;
+        const isEmpty = databases.length === 0 && visibleDocumentCount === 0;
         emptyCallout.style.display = isEmpty ? "grid" : "none";
       }
     }
@@ -7761,9 +7767,10 @@ function showPage(pageId) {
       const recentBox = document.getElementById("homeRecentDocuments");
       const favoriteBox = document.getElementById("homeFavoriteDatabases");
       const searchPreview = document.getElementById("homeSearchPreview");
+      const visibleDocuments = documents.filter(doc => doc.status !== "hidden");
 
       if (recentBox) {
-        const recentDocs = [...documents].sort((a, b) => String(b.updatedAt || "").localeCompare(String(a.updatedAt || ""))).slice(0, 4);
+        const recentDocs = [...visibleDocuments].sort((a, b) => String(b.updatedAt || "").localeCompare(String(a.updatedAt || ""))).slice(0, 4);
         recentBox.innerHTML = recentDocs.map((doc, index) => {
           const db = databases.find(item => item.id === doc.databaseId);
           const type = String(doc.type || "FILE").toUpperCase();
@@ -7796,7 +7803,7 @@ function showPage(pageId) {
 
       if (searchPreview) {
         const keyword = "DFM";
-        const docs = documents.filter(doc => documentMatchesQuery(doc, keyword)).slice(0, 2);
+        const docs = visibleDocuments.filter(doc => documentMatchesQuery(doc, keyword)).slice(0, 2);
         searchPreview.innerHTML = docs.map(doc => `
           <button class="smart-list-item" onclick="openRecentDocument('${doc.id}')">
             <span class="file-type-icon ${getHomeFileIconClass(doc.type)}">${homeEscapeHtml(String(doc.type || "FILE").slice(0,4).toUpperCase())}</span>
