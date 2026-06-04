@@ -231,6 +231,14 @@
           <div class="dash-link" data-zh="查看操作紀錄 →" data-en="View Logs →">查看操作紀錄 →</div>
         </div>
       </div>
+      <div class="dash-stat clickable" onclick="scrollToHomeCalendar()">
+        <div class="dash-icon amber">▦</div>
+        <div>
+          <div class="dash-label" data-zh="行事曆" data-en="Calendar">行事曆</div>
+          <div class="dash-value"><span id="overviewCalendarCount">0</span><small data-zh=" 件" data-en=" items"> 件</small></div>
+          <div class="dash-link" data-zh="查看本月事項 →" data-en="View Month →">查看本月事項 →</div>
+        </div>
+      </div>
     </section>
 
     <section class="home-empty-data-callout" id="homeEmptyDataCallout" style="display:none;">
@@ -262,10 +270,18 @@
             <div class="favorite-db-list" id="homeFavoriteDatabases"></div>
           </div>
 
-          <div class="home-panel home-calendar-panel">
+          <div class="home-panel home-calendar-panel" id="homeCalendarPanel">
             <div class="home-panel-head">
-              <div class="home-panel-title"><span class="num-dot">3</span><span data-zh="近期事項" data-en="Upcoming Items">近期事項</span></div>
+              <div class="home-panel-title"><span class="num-dot">3</span><span data-zh="行事曆" data-en="Calendar">行事曆</span></div>
               <button class="home-panel-action" onclick="focusCalendarTitle()" data-zh="新增" data-en="Add">新增</button>
+            </div>
+            <div class="home-calendar-toolbar">
+              <div class="home-calendar-nav">
+                <button type="button" onclick="changeHomeCalendarMonth(-1)" aria-label="Previous month">‹</button>
+                <strong id="homeCalendarMonthLabel">-</strong>
+                <button type="button" onclick="changeHomeCalendarMonth(1)" aria-label="Next month">›</button>
+              </div>
+              <button type="button" class="home-calendar-today" onclick="goHomeCalendarToday()" data-zh="今天" data-en="Today">今天</button>
             </div>
             <form class="home-calendar-form" onsubmit="addCalendarEventFromHome(event)">
               <input id="homeCalendarTitle" type="text" maxlength="80" placeholder="會議或重要事項" />
@@ -281,7 +297,15 @@
                 <button type="submit" data-zh="加入" data-en="Add">加入</button>
               </div>
             </form>
-            <div class="home-calendar-list" id="homeCalendarEvents"></div>
+            <div class="home-calendar-split">
+              <div class="home-calendar-month-wrap">
+                <div class="home-calendar-grid" id="homeCalendarGrid"></div>
+              </div>
+              <div class="home-calendar-agenda">
+                <div class="home-calendar-agenda-title" data-zh="近期清單" data-en="Upcoming List">近期清單</div>
+                <div class="home-calendar-list" id="homeCalendarEvents"></div>
+              </div>
+            </div>
           </div>
         </section>
 
