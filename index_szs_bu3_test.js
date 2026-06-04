@@ -2352,6 +2352,7 @@ function showPage(pageId) {
       closeAssistant();
       if (pageId !== "searchPage") clearSearchInputs();
       document.body.classList.toggle("auth-landing", pageId === "loginLandingPage");
+      document.body.classList.remove("assistant-floating-hidden");
       document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
       document.getElementById(pageId).classList.add("active");
       window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
