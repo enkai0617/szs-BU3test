@@ -18,6 +18,8 @@
     let activeMemberChatId = null;
     let memberGroupState = safeJsonParse(localStorage.getItem("szs_member_group_state"), {});
     let currentMemberStatusFilter = "all";
+    let homeCalendarViewYear = new Date().getFullYear();
+    let homeCalendarViewMonth = new Date().getMonth();
 
     const SZS_BACKEND_CONFIG = {
       mode: "local", // local | api
@@ -1684,6 +1686,62 @@ function init() {
         });
     }
 
+    function getHomeCalendarDateValue(year, month, day) {
+      const monthValue = String(month + 1).padStart(2, "0");
+      const dayValue = String(day).padStart(2, "0");
+      return `${year}-${monthValue}-${dayValue}`;
+    }
+
+    function setHomeCalendarViewFromDate(dateValue) {
+      const parts = String(dateValue || "").split("-").map(part => Number(part));
+      if (parts.length >= 2 && parts[0] && parts[1]) {
+        homeCalendarViewYear = parts[0];
+        homeCalendarViewMonth = Math.max(0, Math.min(11, parts[1] - 1));
+      }
+    }
+
+    function getHomeCalendarMonthLabel() {
+      const monthNamesZh = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
+      const monthNamesEn = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      return currentLang === "zh"
+        ? `${homeCalendarViewYear} 年 ${monthNamesZh[homeCalendarViewMonth]}`
+        : `${monthNamesEn[homeCalendarViewMonth]} ${homeCalendarViewYear}`;
+    }
+
+    function changeHomeCalendarMonth(offset) {
+      const next = new Date(homeCalendarViewYear, homeCalendarViewMonth + Number(offset || 0), 1);
+      homeCalendarViewYear = next.getFullYear();
+      homeCalendarViewMonth = next.getMonth();
+      renderHomeCalendarEvents();
+    }
+
+    function goHomeCalendarToday() {
+      const today = new Date();
+      homeCalendarViewYear = today.getFullYear();
+      homeCalendarViewMonth = today.getMonth();
+      const dateInput = document.getElementById("homeCalendarDate");
+      if (dateInput) dateInput.value = getTodayInputValue();
+      renderHomeCalendarEvents();
+    }
+
+    function selectHomeCalendarDate(dateValue) {
+      const dateInput = document.getElementById("homeCalendarDate");
+      if (dateInput) dateInput.value = dateValue;
+      setHomeCalendarViewFromDate(dateValue);
+      renderHomeCalendarEvents();
+      focusCalendarTitle();
+    }
+
+    function scrollToHomeCalendar() {
+      closeMembersSection();
+      document.body.classList.remove("members-open");
+      const panel = document.getElementById("homeCalendarPanel");
+      if (panel) {
+        panel.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      renderHomeCalendarEvents();
+    }
+
     function focusCalendarTitle() {
       const input = document.getElementById("homeCalendarTitle");
       if (input) input.focus();
@@ -1712,6 +1770,7 @@ function init() {
         createdAt: new Date().toISOString()
       });
       saveCalendarEvents(events.slice(0, 80));
+      setHomeCalendarViewFromDate(events[0].date);
       if (titleInput) titleInput.value = "";
       if (timeInput) timeInput.value = "";
       renderHomeCalendarEvents();
@@ -1732,10 +1791,64 @@ function init() {
 
     function renderHomeCalendarEvents() {
       const list = document.getElementById("homeCalendarEvents");
+      const grid = document.getElementById("homeCalendarGrid");
+      const monthLabel = document.getElementById("homeCalendarMonthLabel");
+      const overviewCount = document.getElementById("overviewCalendarCount");
       const dateInput = document.getElementById("homeCalendarDate");
       if (dateInput && !dateInput.value) dateInput.value = getTodayInputValue();
+      const allEvents = getSortedCalendarEvents();
+      const selectedDate = dateInput?.value || "";
+      const todayValue = getTodayInputValue();
+      const currentMonthPrefix = `${homeCalendarViewYear}-${String(homeCalendarViewMonth + 1).padStart(2, "0")}`;
+      const currentMonthEvents = allEvents.filter(event => String(event.date || "").startsWith(currentMonthPrefix));
+
+      if (monthLabel) monthLabel.textContent = getHomeCalendarMonthLabel();
+      if (overviewCount) overviewCount.textContent = String(currentMonthEvents.length);
+
+      if (grid) {
+        const weekLabels = currentLang === "zh" ? ["日", "一", "二", "三", "四", "五", "六"] : ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        const firstDay = new Date(homeCalendarViewYear, homeCalendarViewMonth, 1).getDay();
+        const daysInMonth = new Date(homeCalendarViewYear, homeCalendarViewMonth + 1, 0).getDate();
+        const eventsByDate = currentMonthEvents.reduce((acc, event) => {
+          const key = event.date || "";
+          acc[key] = acc[key] || [];
+          acc[key].push(event);
+          return acc;
+        }, {});
+        const cells = [];
+
+        weekLabels.forEach(label => {
+          cells.push(`<div class="home-calendar-weekday">${homeEscapeHtml(label)}</div>`);
+        });
+        for (let i = 0; i < firstDay; i++) {
+          cells.push(`<div class="home-calendar-day is-empty" aria-hidden="true"></div>`);
+        }
+        for (let day = 1; day <= daysInMonth; day++) {
+          const dateValue = getHomeCalendarDateValue(homeCalendarViewYear, homeCalendarViewMonth, day);
+          const dayEvents = eventsByDate[dateValue] || [];
+          const dayClasses = [
+            "home-calendar-day",
+            dateValue === todayValue ? "is-today" : "",
+            dateValue === selectedDate ? "is-selected" : "",
+            dayEvents.length ? "has-events" : ""
+          ].filter(Boolean).join(" ");
+          const chips = dayEvents.slice(0, 2).map(event => `
+            <span class="home-calendar-chip ${event.done ? "is-done" : ""}">
+              ${event.time ? `<b>${homeEscapeHtml(event.time)}</b>` : ""}
+              ${homeEscapeHtml(event.title)}
+            </span>`).join("");
+          const more = dayEvents.length > 2 ? `<span class="home-calendar-more">+${dayEvents.length - 2}</span>` : "";
+          cells.push(`
+            <button class="${dayClasses}" type="button" onclick="selectHomeCalendarDate('${dateValue}')">
+              <span class="home-calendar-day-number">${day}</span>
+              <span class="home-calendar-day-events">${chips}${more}</span>
+            </button>`);
+        }
+        grid.innerHTML = cells.join("");
+      }
+
       if (!list) return;
-      const events = getSortedCalendarEvents().slice(0, 6);
+      const events = allEvents.slice(0, 6);
       list.innerHTML = events.map(event => {
         const dateLabel = event.date ? homeEscapeHtml(event.date) : homeEscapeHtml(t("未設定日期", "No date"));
         const timeLabel = event.time ? ` · ${homeEscapeHtml(event.time)}` : "";
