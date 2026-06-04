@@ -13,6 +13,7 @@
     const DATABASE_OVERVIEW_PAGE_SIZE = 8;
     let currentSearchKeyword = "";
     let searchResultView = "files";
+    let searchResultShowAll = false;
     let currentUser = null;
     let assistantMode = "all";
     let activeMemberChatId = null;
@@ -1475,8 +1476,9 @@ function init() {
       }
     });
 
-    function showSearchResults(keyword) {
+    function showSearchResults(keyword, options = {}) {
       currentSearchKeyword = keyword;
+      searchResultShowAll = !!options.showAll;
       searchResultView = "files";
       const topInput = document.getElementById("topSearchInput");
       const pageInput = document.getElementById("searchPageInput");
@@ -1500,7 +1502,9 @@ function init() {
       if (!box) return;
 
       const keyword = currentSearchKeyword.trim();
-      const docs = documents.filter(doc => documentMatchesQuery(doc, keyword));
+      const docs = searchResultShowAll && !keyword
+        ? documents
+        : documents.filter(doc => documentMatchesQuery(doc, keyword));
       const matchedDatabases = databases.filter(db => {
         const text = [db.titleZh, db.titleEn, db.descriptionZh, db.descriptionEn, db.id].join(" ").toLowerCase();
         const normalizedKeyword = normalizeSearchQuery(keyword);
@@ -1517,15 +1521,17 @@ function init() {
       });
 
       if (summary) {
-        summary.textContent = keyword
-          ? t(`關鍵字「${keyword}」找到 ${docs.length} 份文件、${matchedDatabases.length} 個分類。`, `Keyword "${keyword}" found ${docs.length} documents and ${matchedDatabases.length} categories.`)
-          : t("尚未搜尋：請輸入文件名稱、分類、標籤或關鍵字，例如 DFM、壓合、測試報告、SOP。", "No search yet: enter a document name, category, tag, or keyword such as DFM, press-fit, test report, or SOP.");
+        summary.textContent = searchResultShowAll && !keyword
+          ? t(`目前顯示全部 ${docs.length} 份文件。`, `Showing all ${docs.length} documents.`)
+          : keyword
+            ? t(`關鍵字「${keyword}」找到 ${docs.length} 份文件、${matchedDatabases.length} 個分類。`, `Keyword "${keyword}" found ${docs.length} documents and ${matchedDatabases.length} categories.`)
+            : t("尚未搜尋：請輸入文件名稱、分類、標籤或關鍵字，例如 DFM、壓合、測試報告、SOP。", "No search yet: enter a document name, category, tag, or keyword such as DFM, press-fit, test report, or SOP.");
       }
 
       const visibleCount = searchResultView === "categories" ? matchedDatabases.length : searchResultView === "files" ? docs.length : docs.length + matchedDatabases.length;
       if (count) count.textContent = currentLang === "zh" ? `${visibleCount} 筆結果` : `${visibleCount} results`;
 
-      if (!keyword) {
+      if (!keyword && !searchResultShowAll) {
         box.innerHTML = `<div class="empty-state"><div class="search-empty-guide"><div class="search-empty-icon">⌕</div><div><strong>${t("尚未搜尋", "No search yet")}</strong>${t("請輸入文件名稱、分類、標籤或關鍵字。", "Enter a document name, category, tag, or keyword.")}<div class="search-empty-examples"><span>DFM</span><span>壓合</span><span>測試報告</span><span>SOP</span></div></div></div></div>`;
         return;
       }
@@ -7744,7 +7750,7 @@ function showPage(pageId) {
     }
 
     function showAllDocumentsFromHome() {
-      showSearchResults("");
+      showSearchResults("", { showAll: true });
       setTimeout(() => {
         const input = document.getElementById("searchPageInput");
         if (input && !input.value) input.placeholder = t("搜尋全部文件、分類或標籤...", "Search all documents, categories, or tags...");
