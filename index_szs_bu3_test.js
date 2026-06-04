@@ -7918,7 +7918,7 @@ function showPage(pageId) {
       if (btn) {
         btn.setAttribute('aria-expanded', String(!isCollapsed));
         btn.innerHTML = isCollapsed
-          ? '<span>常用問題</span><small>需要時展開快速提問</small><b>▾</b>'
-          : '<span>收合常用問題</span><small>保留更多對話閱讀空間</small><b>▾</b>';
+          ? `<span>${t("常用問題", "Common Questions")}</span><small>${t("需要時展開快速提問", "Expand quick prompts when needed")}</small><b>▾</b>`
+          : `<span>${t("收合常用問題", "Collapse Questions")}</span><small>${t("保留更多對話閱讀空間", "Keep more room for reading")}</small><b>▾</b>`;
       }
     }
