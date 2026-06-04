@@ -101,6 +101,9 @@
       <button class="side-item" onclick="openDatabaseOverviewPage()" data-side="databases" title="資料庫分類">
         <span class="side-icon">▦</span><span class="side-label" data-zh="資料庫分類" data-en="Databases">資料庫分類</span><span class="side-badge" id="sideDatabaseCount">6</span>
       </button>
+      <button class="side-item" onclick="openCalendarPage()" data-side="calendar" title="行事曆">
+        <span class="side-icon">▣</span><span class="side-label" data-zh="行事曆" data-en="Calendar">行事曆</span><span class="side-badge" id="sideCalendarCount">0</span>
+      </button>
       <button class="side-item" onclick="openAssistantPage()" data-side="assistant" title="小幫手">
         <span class="side-icon">✦</span><span class="side-label" data-zh="小幫手" data-en="Assistant">小幫手</span><span class="side-badge side-badge-new">NEW</span>
       </button>
@@ -273,39 +276,9 @@
           <div class="home-panel home-calendar-panel" id="homeCalendarPanel">
             <div class="home-panel-head">
               <div class="home-panel-title"><span class="num-dot">3</span><span data-zh="行事曆" data-en="Calendar">行事曆</span></div>
-              <button class="home-panel-action" onclick="focusCalendarTitle()" data-zh="新增" data-en="Add">新增</button>
+              <button class="home-panel-action" onclick="openCalendarPage()" data-zh="查看全部" data-en="View All">查看全部</button>
             </div>
-            <div class="home-calendar-toolbar">
-              <div class="home-calendar-nav">
-                <button type="button" onclick="changeHomeCalendarMonth(-1)" aria-label="Previous month">‹</button>
-                <strong id="homeCalendarMonthLabel">-</strong>
-                <button type="button" onclick="changeHomeCalendarMonth(1)" aria-label="Next month">›</button>
-              </div>
-              <button type="button" class="home-calendar-today" onclick="goHomeCalendarToday()" data-zh="今天" data-en="Today">今天</button>
-            </div>
-            <form class="home-calendar-form" onsubmit="addCalendarEventFromHome(event)">
-              <input id="homeCalendarTitle" type="text" maxlength="80" placeholder="會議或重要事項" />
-              <div class="home-calendar-fields">
-                <input id="homeCalendarDate" type="date" />
-                <input id="homeCalendarTime" type="time" />
-                <select id="homeCalendarType">
-                  <option value="meeting" data-zh="會議" data-en="Meeting">會議</option>
-                  <option value="important" data-zh="重要事項" data-en="Important">重要事項</option>
-                  <option value="deadline" data-zh="期限" data-en="Deadline">期限</option>
-                  <option value="note" data-zh="提醒" data-en="Reminder">提醒</option>
-                </select>
-                <button type="submit" data-zh="加入" data-en="Add">加入</button>
-              </div>
-            </form>
-            <div class="home-calendar-split">
-              <div class="home-calendar-month-wrap">
-                <div class="home-calendar-grid" id="homeCalendarGrid"></div>
-              </div>
-              <div class="home-calendar-agenda">
-                <div class="home-calendar-agenda-title" data-zh="近期清單" data-en="Upcoming List">近期清單</div>
-                <div class="home-calendar-list" id="homeCalendarEvents"></div>
-              </div>
-            </div>
+            <div class="home-calendar-summary-list" id="homeCalendarSummary"></div>
           </div>
         </section>
 
@@ -370,6 +343,66 @@
         </aside>
     </div>
     <div class="member-chat-modal" id="memberChatModal"></div>
+  </main>
+
+
+  <main id="calendarPage" class="page calendar-page">
+    <section class="detail-top calendar-page-top">
+      <div class="detail-title-area">
+        <div class="detail-label">SZS · CALENDAR</div>
+        <h1 data-zh="行事曆" data-en="Calendar">行事曆</h1>
+        <p data-zh="集中管理會議、期限與提醒；首頁只保留近期摘要，完整月曆由左側功能列進入。"
+           data-en="Manage meetings, deadlines, and reminders in one place. Home keeps only a compact upcoming summary.">
+          集中管理會議、期限與提醒；首頁只保留近期摘要，完整月曆由左側功能列進入。
+        </p>
+      </div>
+      <div class="detail-actions">
+        <button onclick="showHome()" data-zh="← 返回首頁" data-en="← Back Home">← 返回首頁</button>
+      </div>
+    </section>
+
+    <section class="calendar-workspace">
+      <div class="home-calendar-panel calendar-full-panel" id="calendarFullPanel">
+        <div class="home-panel-head">
+          <div class="home-panel-title"><span class="num-dot">3</span><span data-zh="月檢視" data-en="Month View">月檢視</span></div>
+          <button class="home-panel-action" onclick="focusCalendarTitle()" data-zh="新增事項" data-en="Add Item">新增事項</button>
+        </div>
+        <div class="home-calendar-toolbar">
+          <div class="home-calendar-nav">
+            <button type="button" onclick="changeHomeCalendarMonth(-1)" aria-label="Previous month">‹</button>
+            <strong id="homeCalendarMonthLabel">-</strong>
+            <button type="button" onclick="changeHomeCalendarMonth(1)" aria-label="Next month">›</button>
+          </div>
+          <button type="button" class="home-calendar-today" onclick="goHomeCalendarToday()" data-zh="今天" data-en="Today">今天</button>
+        </div>
+        <form class="home-calendar-form" onsubmit="addCalendarEventFromHome(event)">
+          <input id="homeCalendarTitle" type="text" maxlength="80" placeholder="會議或重要事項" />
+          <div class="home-calendar-fields">
+            <input id="homeCalendarDate" type="date" onchange="handleHomeCalendarDateInput()" />
+            <input id="homeCalendarTime" type="time" />
+            <select id="homeCalendarType">
+              <option value="meeting" data-zh="會議" data-en="Meeting">會議</option>
+              <option value="important" data-zh="重要事項" data-en="Important">重要事項</option>
+              <option value="deadline" data-zh="期限" data-en="Deadline">期限</option>
+              <option value="note" data-zh="提醒" data-en="Reminder">提醒</option>
+            </select>
+            <button type="submit" data-zh="加入" data-en="Add">加入</button>
+          </div>
+        </form>
+        <div class="home-calendar-split">
+          <div class="home-calendar-month-wrap">
+            <div class="home-calendar-grid" id="homeCalendarGrid"></div>
+          </div>
+          <div class="home-calendar-agenda">
+            <div class="home-calendar-agenda-head">
+              <div class="home-calendar-agenda-title" data-zh="當日事項" data-en="Selected Day">當日事項</div>
+              <div class="home-calendar-selected-date" id="homeCalendarSelectedDate">-</div>
+            </div>
+            <div class="home-calendar-list" id="homeCalendarEvents"></div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
 
