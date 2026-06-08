@@ -109,9 +109,9 @@
       </button>
     </div>
 
-    <div class="side-section side-section-admin">
+    <div class="side-section side-section-admin" id="sideAdminSection">
       <div class="side-section-title" data-zh="管理功能" data-en="Admin">管理功能</div>
-      <button class="side-item" onclick="openAdmin()" data-side="admin" title="後台管理">
+      <button class="side-item" id="sideAdminButton" onclick="openAdmin()" data-side="admin" title="後台管理">
         <span class="side-icon">▤</span><span class="side-label" data-zh="後台管理" data-en="Admin Panel">後台管理</span>
       </button>
     </div>
@@ -577,23 +577,24 @@
     </section>
 
     <section class="settings-center-grid">
-      <article class="settings-feature-card admin-card">
+      <article class="settings-feature-card admin-card" id="settingsAdminCard">
         <div class="settings-card-head">
           <div class="settings-feature-icon blue">▥</div>
           <div>
             <h3 data-zh="後台管理" data-en="Admin Panel">後台管理</h3>
             <p data-zh="管理資料庫分類、文件、會員權限與操作紀錄。" data-en="Manage categories, documents, permissions, and activity logs.">管理資料庫分類、文件、會員權限與操作紀錄。</p>
           </div>
-          <button class="settings-card-arrow" onclick="openAdmin()" title="Open">›</button>
+          <button class="settings-card-arrow" id="settingsAdminArrow" onclick="openAdmin()" title="Open">›</button>
         </div>
         <div class="settings-permission-box">
           <div><b>Owner</b><span data-zh="可管理所有資料與會員權限" data-en="Can manage all data and member permissions">可管理所有資料與會員權限</span></div>
           <div><b>Manager</b><span data-zh="可管理資料與文件" data-en="Can manage databases and files">可管理資料與文件</span></div>
           <div><b>User</b><span data-zh="僅可查詢與使用小幫手" data-en="Can search and use assistant only">僅可查詢與使用小幫手</span></div>
         </div>
+        <div class="settings-permission-hint" id="settingsPermissionHint"></div>
         <div class="settings-card-bottom">
           <span data-zh="目前權限：" data-en="Current role:">目前權限：</span><b id="settingsCurrentRole">Owner</b>
-          <button class="primary" onclick="openAdmin()" data-zh="進入後台管理 →" data-en="Open Admin Panel →">進入後台管理 →</button>
+          <button class="primary" id="settingsAdminOpenButton" onclick="openAdmin()" data-zh="進入後台管理 →" data-en="Open Admin Panel →">進入後台管理 →</button>
         </div>
       </article>
 
@@ -1144,6 +1145,7 @@
             <button id="fullModeAllBtn" class="assistant-mode-btn active" onclick="setAssistantMode('all')" data-mode-info="同時搜尋公司官網資訊與內部文件。" data-zh="全部搜尋" data-en="All">全部搜尋</button>
             <button id="fullModeWebsiteBtn" class="assistant-mode-btn" onclick="setAssistantMode('website')" data-mode-info="只查詢公開官網資訊，例如公司、產品、認證、投資人資訊。" data-zh="官網資訊" data-en="Website">官網資訊</button>
             <button id="fullModeDocsBtn" class="assistant-mode-btn" onclick="setAssistantMode('docs')" data-mode-info="只查詢目前知識庫內部文件，例如 DFM、製程、規格、測試資料。" data-zh="內部文件" data-en="Internal Docs">內部文件</button>
+            <button id="fullModeAiBtn" class="assistant-mode-btn" onclick="setAssistantMode('ai')" data-mode-info="透過本機 Node.js 後端呼叫 Ollama 模型。" data-zh="本機 AI" data-en="Local AI">本機 AI</button>
           </div>
           <div class="assistant-mode-tooltip" id="assistantModeTooltip">
             <strong data-zh="全部搜尋：" data-en="All:">全部搜尋：</strong><span data-zh="同時搜尋公司官網資訊與內部文件。" data-en="Search both public website knowledge and internal documents.">同時搜尋公司官網資訊與內部文件。</span><br>
@@ -1282,6 +1284,7 @@
               <option value="all" data-zh="全部搜尋" data-en="All Search">全部搜尋</option>
               <option value="docs" data-zh="內部文件" data-en="Internal Docs">內部文件</option>
               <option value="website" data-zh="官網資訊" data-en="Website">官網資訊</option>
+              <option value="ai" data-zh="本機 AI" data-en="Local AI">本機 AI</option>
             </select>
           </label>
         </div>
@@ -1420,6 +1423,7 @@
         <button id="modeAllBtn" class="assistant-mode-btn active" onclick="setAssistantMode('all')" data-zh="全部搜尋" data-en="All">全部搜尋</button>
         <button id="modeWebsiteBtn" class="assistant-mode-btn" onclick="setAssistantMode('website')" data-zh="官網資訊" data-en="Website">官網資訊</button>
         <button id="modeDocsBtn" class="assistant-mode-btn" onclick="setAssistantMode('docs')" data-zh="內部文件" data-en="Internal Docs">內部文件</button>
+        <button id="modeAiBtn" class="assistant-mode-btn" onclick="setAssistantMode('ai')" data-zh="本機 AI" data-en="Local AI">本機 AI</button>
       </div>
       <div class="assistant-mode-hint" id="assistantModeHint">目前模式：全部搜尋。會同時查詢官網知識與內部文件。</div>
       <div class="suggestion-row">
