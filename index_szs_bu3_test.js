@@ -509,6 +509,72 @@
       return currentUser && currentUser.role === "owner";
     }
 
+    function showPermissionDenied(requiredRole = "manager") {
+      const requiredText = requiredRole === "owner" ? "Owner" : "Manager / Owner";
+      appAlert(
+        t(
+          `權限不足：此功能需要 ${requiredText} 權限。你目前可以查詢資料、使用小幫手與查看個人設定。`,
+          `Permission denied: This feature requires ${requiredText} access. You can still search data, use the assistant, and view personal settings.`
+        ),
+        { title: t("權限不足", "Permission Denied"), tone: "warning", icon: "!" }
+      );
+    }
+
+    function syncPermissionUI() {
+      const canManage = !!canManageData();
+      const isLoggedIn = !!currentUser;
+      const sideAdminSection = document.getElementById("sideAdminSection");
+      const sideAdminButton = document.getElementById("sideAdminButton");
+      const settingsAdminCard = document.getElementById("settingsAdminCard");
+      const settingsAdminArrow = document.getElementById("settingsAdminArrow");
+      const settingsAdminOpenButton = document.getElementById("settingsAdminOpenButton");
+      const settingsPermissionHint = document.getElementById("settingsPermissionHint");
+      const adminUserTab = document.getElementById("adminUserTab");
+
+      if (sideAdminSection) sideAdminSection.hidden = !canManage;
+      if (sideAdminButton) {
+        sideAdminButton.disabled = !canManage;
+        sideAdminButton.setAttribute("aria-disabled", String(!canManage));
+        sideAdminButton.title = canManage
+          ? t("後台管理", "Admin Panel")
+          : t("此功能需要 Manager 或 Owner 權限", "Manager or Owner access required");
+      }
+
+      if (settingsAdminCard) {
+        settingsAdminCard.classList.toggle("permission-locked", isLoggedIn && !canManage);
+        settingsAdminCard.classList.toggle("permission-available", canManage);
+      }
+
+      [settingsAdminArrow, settingsAdminOpenButton].forEach(button => {
+        if (!button) return;
+        button.disabled = isLoggedIn && !canManage;
+        button.setAttribute("aria-disabled", String(isLoggedIn && !canManage));
+      });
+
+      if (settingsAdminOpenButton) {
+        settingsAdminOpenButton.textContent = canManage
+          ? t("進入後台管理 →", "Open Admin Panel →")
+          : t("需 Manager / Owner 權限", "Manager / Owner required");
+        settingsAdminOpenButton.title = canManage
+          ? t("進入後台管理", "Open Admin Panel")
+          : t("請聯絡 Manager 或 Owner 升級權限", "Contact a Manager or Owner to upgrade access");
+      }
+
+      if (settingsPermissionHint) {
+        settingsPermissionHint.textContent = canManage
+          ? t("你的帳號可使用後台管理。", "Your account can access the admin panel.")
+          : t("你目前是 User，管理功能已鎖定；需要新增文件、調整資料庫或管理會員時，請聯絡 Manager 或 Owner。", "You are currently a User, so admin features are locked. Contact a Manager or Owner to add documents, edit databases, or manage members.");
+      }
+
+      if (adminUserTab) {
+        adminUserTab.disabled = isLoggedIn && !canManageUsers();
+        adminUserTab.classList.toggle("permission-locked-tab", isLoggedIn && !canManageUsers());
+        adminUserTab.title = canManageUsers()
+          ? t("會員權限管理", "Member Permissions")
+          : t("只有 Owner 可以管理會員權限", "Only the Owner can manage member permissions");
+      }
+    }
+
     function getRoleLabel(role) {
       if (role === "owner") return "Owner";
       if (role === "manager") return "Manager";
@@ -688,18 +754,7 @@ function init() {
     }
 
 
-    const DEMO_MEMBER_SEED = [
-      { companyId: "E00123", department: "BU1 產品工程", name: "林志豪", email: "lin.zhih@szs.com.tw", role: "manager", titleZh: "資深工程師", titleEn: "Senior Engineer", defaultStatus: "online" },
-      { companyId: "E00145", department: "BU1 產品工程", name: "陳怡君", email: "chen.yj@szs.com.tw", role: "user", titleZh: "工程師", titleEn: "Engineer", defaultStatus: "online" },
-      { companyId: "E00189", department: "BU1 產品工程", name: "黃子軒", email: "huang.zx@szs.com.tw", role: "user", titleZh: "工程師", titleEn: "Engineer", defaultStatus: "away" },
-      { companyId: "E00211", department: "BU1 產品工程", name: "張雅涵", email: "chang.yh@szs.com.tw", role: "user", titleZh: "助理工程師", titleEn: "Assistant Engineer", defaultStatus: "offline" },
-      { companyId: "E00345", department: "BU3 產品工程", name: "吳柏毅", email: "wu.by@szs.com.tw", role: "manager", titleZh: "資深工程師", titleEn: "Senior Engineer", defaultStatus: "online" },
-      { companyId: "E00378", department: "BU3 產品工程", name: "李昱廷", email: "lee.yt@szs.com.tw", role: "user", titleZh: "工程師", titleEn: "Engineer", defaultStatus: "online" },
-      { companyId: "E00392", department: "BU3 產品工程", name: "劉子晴", email: "liu.zq@szs.com.tw", role: "user", titleZh: "工程師", titleEn: "Engineer", defaultStatus: "away" },
-      { companyId: "E00010", department: "系統管理部", name: "王建國", email: "wang.jg@szs.com.tw", role: "user", titleZh: "工程師", titleEn: "Engineer", defaultStatus: "online" },
-      { companyId: "E00021", department: "資訊管理部", name: "周筱玲", email: "chou.sl@szs.com.tw", role: "manager", titleZh: "知識庫管理者", titleEn: "Knowledge Base Manager", defaultStatus: "online" },
-      { companyId: "E00030", department: "策略規劃部", name: "許昱翔", email: "hsu.yh@szs.com.tw", role: "user", titleZh: "工程師", titleEn: "Engineer", defaultStatus: "offline" }
-    ];
+    const DEMO_MEMBER_SEED = [];
 
     function saveMemberGroupState() {
       localStorage.setItem("szs_member_group_state", JSON.stringify(memberGroupState));
@@ -2998,6 +3053,7 @@ function showPage(pageId) {
         const el = document.getElementById(`settingsTheme${name}`);
         if (el) el.classList.toggle("active", themeMode === name.toLowerCase());
       });
+      syncPermissionUI();
     }
 
     function openSystemSettings() {
@@ -3021,9 +3077,7 @@ function showPage(pageId) {
       }
 
       if (!canManageData()) {
-        showToast(t("你目前是 User，只能查詢資料；如需新增資料請聯絡管理者。", "You are currently a User and can only search data. Please contact an administrator if you need to add data."), "error");
-        openAssistant();
-        addBotMessage(t("你目前是 User 權限，可以查詢資料與使用小幫手；若需要新增文件、修改資料庫或管理後台，請聯絡 Manager 或 Owner。", "Your current role is User. You can search data and use the assistant. To add documents, edit databases, or access the admin panel, please contact a Manager or Owner."));
+        showPermissionDenied("manager");
         return;
       }
 
@@ -3049,7 +3103,7 @@ function showPage(pageId) {
 
     function switchAdminTab(tab) {
       if (tab === "users" && !canManageUsers()) {
-        appAlert(t("權限不足：只有 Owner 可以管理會員權限。", "Permission denied: Only the Owner can manage member permissions."), { title: t("權限不足", "Permission Denied"), tone: "warning", icon: "!" });
+        showPermissionDenied("owner");
         tab = "overview";
       }
 
@@ -3067,6 +3121,7 @@ function showPage(pageId) {
       document.getElementById("adminUserTab").classList.toggle("active", tab === "users");
       document.getElementById("adminLogTab").classList.toggle("active", tab === "logs");
 
+      syncPermissionUI();
       updateSideNav("admin");
     }
 
@@ -4425,6 +4480,7 @@ function showPage(pageId) {
       const quickSearchInput = document.getElementById("quickMemberSearch");
       if (quickSearchInput) quickSearchInput.placeholder = currentLang === "zh" ? "搜尋成員..." : "Search members...";
       renderOnlineMembers();
+      syncPermissionUI();
     }
 
     function toggleTheme() {
@@ -4896,6 +4952,13 @@ function showPage(pageId) {
     }
 
     function getAssistantModeHintText() {
+      if (assistantMode === "ai") {
+        return t(
+          "目前模式：本機 AI。會透過 Node.js 後端呼叫 Ollama；若尚未啟動會顯示連線提示。",
+          "Current mode: Local AI. It calls Ollama through the Node.js backend; connection guidance appears if it is not running."
+        );
+      }
+
       if (assistantMode === "website") {
         return t(
           "目前模式：官網資訊。會優先回答 SZS 官網整理內容。",
@@ -5027,11 +5090,12 @@ function showPage(pageId) {
 
       applySettingsTheme(getSettingsThemeMode(), { skipRender: true });
 
-      if (prefs.assistantMode && ["all", "docs", "website"].includes(prefs.assistantMode)) {
+      if (prefs.assistantMode && ["all", "docs", "website", "ai"].includes(prefs.assistantMode)) {
         assistantMode = prefs.assistantMode;
         updateAssistantModeUI();
       }
 
+      syncPermissionUI();
       renderNotifications();
     }
 
@@ -7370,7 +7434,7 @@ function showPage(pageId) {
       updateAssistantModeUI();
       updateSystemOverview();
       updateAssistantModeHint();
-      const label = mode === "website" ? t("官網資訊", "Website") : mode === "docs" ? t("內部文件", "Internal Docs") : t("全部搜尋", "All");
+      const label = mode === "ai" ? t("本機 AI", "Local AI") : mode === "website" ? t("官網資訊", "Website") : mode === "docs" ? t("內部文件", "Internal Docs") : t("全部搜尋", "All");
       showToast(t(`小幫手已切換為「${label}」模式。`, `Assistant switched to "${label}" mode.`));
     }
 
@@ -7379,9 +7443,11 @@ function showPage(pageId) {
         ["modeAllBtn", "all"],
         ["modeWebsiteBtn", "website"],
         ["modeDocsBtn", "docs"],
+        ["modeAiBtn", "ai"],
         ["fullModeAllBtn", "all"],
         ["fullModeWebsiteBtn", "website"],
-        ["fullModeDocsBtn", "docs"]
+        ["fullModeDocsBtn", "docs"],
+        ["fullModeAiBtn", "ai"]
       ];
       map.forEach(([id, mode]) => {
         const btn = document.getElementById(id);
@@ -7487,7 +7553,52 @@ function showPage(pageId) {
       sendMessageFromInput("chatInput");
     }
 
-    function sendMessageFromInput(inputId) {
+    function getLocalAiEndpoint() {
+      const configured = window.SZS_LOCAL_AI_CONFIG && window.SZS_LOCAL_AI_CONFIG.endpoint;
+      if (configured) return configured;
+      return window.location.protocol === "file:" ? "http://localhost:3000/api/chat" : "/api/chat";
+    }
+
+    function renderLocalAiAnswer(answer, model) {
+      const safeAnswer = escapeHtml(answer).replace(/\n/g, "<br>");
+      const safeModel = escapeHtml(model || "Ollama");
+      return `
+        <div class="source-badge">${t("來源分類：本機 AI", "Source: Local AI")}</div>
+        <div class="assistant-section-title">${t("本機 AI 回覆", "Local AI Answer")}</div>
+        <div>${safeAnswer}</div>
+        <div class="assistant-local-ai-note">${t(`模型：${safeModel}。此回答來自本機模型，重要內容請再與知識庫或文件確認。`, `Model: ${safeModel}. This answer comes from a local model; verify important details with the knowledge base or source documents.`)}</div>
+      `;
+    }
+
+    async function askLocalAi(keyword) {
+      addBotMessage(t("正在詢問本機 AI，請稍候...", "Asking local AI, please wait..."));
+
+      try {
+        const response = await fetch(getLocalAiEndpoint(), {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            message: keyword,
+            language: currentLang,
+            mode: assistantMode
+          })
+        });
+
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || !data.ok) {
+          throw new Error(data.error || `HTTP ${response.status}`);
+        }
+
+        addBotMessage(addRelatedQuestions(renderLocalAiAnswer(data.answer || "", data.model), "", keyword));
+      } catch (error) {
+        addBotMessage(t(
+          `目前還連不上本機 AI。請確認 Node.js 後端已啟動，Ollama 已開啟，且模型已下載。\n\n建議指令：\n1. ollama pull llama3.2\n2. npm run dev\n\n錯誤：${escapeHtml(error.message || error)}`,
+          `Local AI is not reachable yet. Please make sure the Node.js backend is running, Ollama is open, and the model is downloaded.\n\nSuggested commands:\n1. ollama pull llama3.2\n2. npm run dev\n\nError: ${escapeHtml(error.message || error)}`
+        ).replace(/\n/g, "<br>"));
+      }
+    }
+
+    async function sendMessageFromInput(inputId) {
       const input = document.getElementById(inputId);
       const keyword = input.value.trim();
       if (!keyword) return;
@@ -7501,6 +7612,11 @@ function showPage(pageId) {
 
       addUserMessage(keyword);
       input.value = "";
+
+      if (assistantMode === "ai") {
+        await askLocalAi(keyword);
+        return;
+      }
 
       const stationFlowAnswer = assistantMode !== "website" ? buildStationFlowAnswer(keyword) : "";
       if (stationFlowAnswer) {
