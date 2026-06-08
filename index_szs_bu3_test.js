@@ -1232,9 +1232,9 @@ function init() {
       if (summaryBox) {
         summaryBox.innerHTML = `
           <div class="member-status-stat total"><div class="member-status-icon total">${uiIcon("users")}</div><div><span>${t('總人數', 'Total')}</span><strong>${statusCounts.total}<small>${currentLang === 'zh' ? ' 人' : ''}</small></strong><em>${t('所有成員總數', 'All visible members')}</em></div></div>
-          <div class="member-status-stat online"><div class="member-status-icon online">●</div><div><span>${t('目前線上', 'Online')}</span><strong>${statusCounts.online}<small>${currentLang === 'zh' ? ' 人' : ''}</small></strong><em>${t('即時線上成員', 'Members online now')}</em></div></div>
-          <div class="member-status-stat away"><div class="member-status-icon away">◔</div><div><span>${t('離開', 'Away')}</span><strong>${statusCounts.away}<small>${currentLang === 'zh' ? ' 人' : ''}</small></strong><em>${t('暫時離開', 'Temporarily away')}</em></div></div>
-          <div class="member-status-stat offline"><div class="member-status-icon offline">◕</div><div><span>${t('離線', 'Offline')}</span><strong>${statusCounts.offline}<small>${currentLang === 'zh' ? ' 人' : ''}</small></strong><em>${t('目前離線', 'Currently offline')}</em></div></div>
+          <div class="member-status-stat online"><div class="member-status-icon online">${uiIcon("check")}</div><div><span>${t('目前線上', 'Online')}</span><strong>${statusCounts.online}<small>${currentLang === 'zh' ? ' 人' : ''}</small></strong><em>${t('即時線上成員', 'Members online now')}</em></div></div>
+          <div class="member-status-stat away"><div class="member-status-icon away">${uiIcon("clock")}</div><div><span>${t('離開', 'Away')}</span><strong>${statusCounts.away}<small>${currentLang === 'zh' ? ' 人' : ''}</small></strong><em>${t('暫時離開', 'Temporarily away')}</em></div></div>
+          <div class="member-status-stat offline"><div class="member-status-icon offline">${uiIcon("moon")}</div><div><span>${t('離線', 'Offline')}</span><strong>${statusCounts.offline}<small>${currentLang === 'zh' ? ' 人' : ''}</small></strong><em>${t('目前離線', 'Currently offline')}</em></div></div>
         `;
       }
       const filterBox = document.getElementById("memberStatusFilters");
