@@ -6635,18 +6635,18 @@
     .assistant-welcome-avatar::before {
       content: "" !important;
       display: block !important;
-      width: 34px !important;
-      height: 31px !important;
-      border: 3px solid #0f172a !important;
-      border-radius: 11px !important;
+      width: 40px !important;
+      height: 36px !important;
+      border: 4px solid #0f172a !important;
+      border-radius: 13px !important;
       background:
-        radial-gradient(circle at 31% 45%, #0ea5e9 0 4px, transparent 4.5px),
-        radial-gradient(circle at 69% 45%, #fb3f73 0 4px, transparent 4.5px),
-        linear-gradient(#0f172a, #0f172a) center 73% / 14px 3px no-repeat,
+        radial-gradient(circle at 31% 45%, #0ea5e9 0 5px, transparent 5.5px),
+        radial-gradient(circle at 69% 45%, #fb3f73 0 5px, transparent 5.5px),
+        linear-gradient(#0f172a, #0f172a) center 74% / 16px 4px no-repeat,
         linear-gradient(135deg, #ffffff 0%, #dff7ff 100%) !important;
       box-shadow:
-        -8px 8px 0 -5px #0f172a,
-        8px 8px 0 -5px #0f172a,
+        -10px 9px 0 -6px #0f172a,
+        10px 9px 0 -6px #0f172a,
         inset 0 -3px 0 rgba(14, 165, 233, .16) !important;
       position: relative !important;
     }
@@ -6656,16 +6656,16 @@
       content: "" !important;
       display: block !important;
       position: absolute !important;
-      width: 4px !important;
-      height: 10px !important;
+      width: 5px !important;
+      height: 12px !important;
       left: 50% !important;
-      top: 13px !important;
-      margin-left: -2px !important;
+      top: 11px !important;
+      margin-left: -2.5px !important;
       border-radius: 999px !important;
       background: #0f172a !important;
       box-shadow:
-        -16px 7px 0 -1px #0f172a,
-        16px 7px 0 -1px #0f172a !important;
+        -18px 8px 0 -1px #0f172a,
+        18px 8px 0 -1px #0f172a !important;
       transform: translateY(-100%) !important;
     }
 
@@ -6684,12 +6684,12 @@
       --ui-icon-color: currentColor;
       position: relative;
       display: inline-flex;
-      width: 1.12em;
-      height: 1.12em;
-      min-width: 1.12em;
-      min-height: 1.12em;
+      width: 1.24em;
+      height: 1.24em;
+      min-width: 1.24em;
+      min-height: 1.24em;
       color: inherit;
-      vertical-align: -0.14em;
+      vertical-align: -0.18em;
       flex: 0 0 auto;
     }
 
@@ -6722,7 +6722,7 @@
 
     .ui-icon-file::before {
       inset: 9% 17% 8% 17%;
-      border: .12em solid var(--ui-icon-color);
+      border: .14em solid var(--ui-icon-color);
       border-radius: .16em;
       background:
         linear-gradient(var(--ui-icon-color), var(--ui-icon-color)) 34% 46% / 46% .1em no-repeat,
@@ -6734,8 +6734,8 @@
       top: 10%;
       width: 28%;
       height: 28%;
-      border-left: .12em solid var(--ui-icon-color);
-      border-bottom: .12em solid var(--ui-icon-color);
+      border-left: .14em solid var(--ui-icon-color);
+      border-bottom: .14em solid var(--ui-icon-color);
       transform: skew(-6deg);
       background: color-mix(in srgb, var(--panel-solid) 70%, transparent);
     }
@@ -6745,7 +6745,7 @@
       right: 24%;
       top: 19%;
       bottom: 22%;
-      border: .12em solid var(--ui-icon-color);
+      border: .14em solid var(--ui-icon-color);
       border-radius: .5em .5em .22em .22em;
     }
 
@@ -6811,7 +6811,7 @@
       top: 9%;
       width: 38%;
       height: 48%;
-      border: .13em solid var(--ui-icon-color);
+      border: .15em solid var(--ui-icon-color);
       border-bottom: 0;
       border-radius: .5em .5em 0 0;
     }
@@ -6855,14 +6855,14 @@
 
     .ui-icon-globe::before {
       inset: 8%;
-      border: .12em solid var(--ui-icon-color);
+      border: .14em solid var(--ui-icon-color);
       border-radius: 50%;
     }
 
     .ui-icon-globe::after {
       inset: 20% 36%;
-      border-left: .1em solid var(--ui-icon-color);
-      border-right: .1em solid var(--ui-icon-color);
+      border-left: .12em solid var(--ui-icon-color);
+      border-right: .12em solid var(--ui-icon-color);
       box-shadow: 0 .27em 0 -.22em var(--ui-icon-color), 0 -.27em 0 -.22em var(--ui-icon-color);
     }
 
@@ -6880,20 +6880,20 @@
       left: 12%;
       right: 10%;
       bottom: 10%;
-      height: .12em;
+      height: .14em;
       background: var(--ui-icon-color);
     }
 
     .ui-icon-clock::before {
       inset: 9%;
-      border: .12em solid var(--ui-icon-color);
+      border: .14em solid var(--ui-icon-color);
       border-radius: 50%;
     }
 
     .ui-icon-clock::after {
       left: 50%;
       top: 25%;
-      width: .12em;
+      width: .14em;
       height: 34%;
       background: var(--ui-icon-color);
       transform-origin: bottom center;
@@ -6903,7 +6903,7 @@
 
     .ui-icon-calendar::before {
       inset: 14% 10% 10% 10%;
-      border: .12em solid var(--ui-icon-color);
+      border: .14em solid var(--ui-icon-color);
       border-radius: .16em;
       background:
         linear-gradient(var(--ui-icon-color), var(--ui-icon-color)) top .24em left / 100% .12em no-repeat;
@@ -6912,7 +6912,7 @@
     .ui-icon-calendar::after {
       left: 28%;
       top: 7%;
-      width: .12em;
+      width: .14em;
       height: 25%;
       background: var(--ui-icon-color);
       box-shadow: .42em 0 0 0 var(--ui-icon-color);
@@ -6920,7 +6920,7 @@
 
     .ui-icon-settings::before {
       inset: 19%;
-      border: .16em solid var(--ui-icon-color);
+      border: .18em solid var(--ui-icon-color);
       border-radius: 50%;
       box-shadow:
         0 -.38em 0 -.08em var(--ui-icon-color),
@@ -6940,7 +6940,7 @@
       top: 8%;
       width: 48%;
       height: 80%;
-      border: .13em solid var(--ui-icon-color);
+      border: .15em solid var(--ui-icon-color);
       border-radius: .45em;
       border-left-color: transparent;
       transform: rotate(24deg);
@@ -6951,7 +6951,7 @@
       top: 28%;
       width: 31%;
       height: 45%;
-      border: .1em solid var(--ui-icon-color);
+      border: .12em solid var(--ui-icon-color);
       border-radius: .32em;
       border-left-color: transparent;
       transform: rotate(24deg);
@@ -6960,7 +6960,7 @@
     .ui-icon-chat::before {
       inset: 15% 12% 24% 12%;
       border-radius: .28em;
-      border: .12em solid var(--ui-icon-color);
+      border: .14em solid var(--ui-icon-color);
     }
 
     .ui-icon-chat::after {
@@ -6968,8 +6968,8 @@
       bottom: 14%;
       width: 20%;
       height: 20%;
-      border-left: .12em solid var(--ui-icon-color);
-      border-bottom: .12em solid var(--ui-icon-color);
+      border-left: .14em solid var(--ui-icon-color);
+      border-bottom: .14em solid var(--ui-icon-color);
       transform: skew(-18deg);
     }
 
@@ -6978,7 +6978,7 @@
       right: 8%;
       top: 28%;
       height: 44%;
-      border: .12em solid var(--ui-icon-color);
+      border: .14em solid var(--ui-icon-color);
       border-radius: 50% / 60%;
     }
 
@@ -6992,7 +6992,7 @@
       left: 20%;
       top: 52%;
       width: 62%;
-      height: .16em;
+      height: .18em;
       border-radius: 999px;
       background: var(--ui-icon-color);
       transform: rotate(-42deg);
@@ -7004,8 +7004,8 @@
       bottom: 11%;
       width: 28%;
       height: 18%;
-      border-left: .13em solid var(--ui-icon-color);
-      border-bottom: .13em solid var(--ui-icon-color);
+      border-left: .15em solid var(--ui-icon-color);
+      border-bottom: .15em solid var(--ui-icon-color);
       transform: skew(-12deg);
     }
 
@@ -7014,8 +7014,8 @@
       top: 47%;
       width: 24%;
       height: 46%;
-      border-right: .16em solid var(--ui-icon-color);
-      border-bottom: .16em solid var(--ui-icon-color);
+      border-right: .19em solid var(--ui-icon-color);
+      border-bottom: .19em solid var(--ui-icon-color);
       transform: translateY(-55%) rotate(42deg);
     }
 
@@ -7024,7 +7024,7 @@
       right: 10%;
       top: 16%;
       height: 54%;
-      border: .12em solid var(--ui-icon-color);
+      border: .14em solid var(--ui-icon-color);
       border-radius: .16em;
     }
 
@@ -7032,7 +7032,7 @@
       left: 31%;
       right: 31%;
       bottom: 12%;
-      height: .12em;
+      height: .14em;
       background: var(--ui-icon-color);
       border-radius: 999px;
       box-shadow: 0 -.14em 0 -.02em var(--ui-icon-color);
@@ -7043,7 +7043,7 @@
       right: 10%;
       top: 27%;
       height: 52%;
-      border: .12em solid var(--ui-icon-color);
+      border: .14em solid var(--ui-icon-color);
       border-radius: .18em;
     }
 
@@ -7052,7 +7052,7 @@
       top: 41%;
       width: 24%;
       height: 24%;
-      border: .12em solid var(--ui-icon-color);
+      border: .14em solid var(--ui-icon-color);
       border-radius: 50%;
       box-shadow: -.34em -.22em 0 -.08em var(--ui-icon-color);
     }
@@ -7062,7 +7062,7 @@
       right: 14%;
       bottom: 12%;
       height: 48%;
-      border: .12em solid var(--ui-icon-color);
+      border: .14em solid var(--ui-icon-color);
       border-top: 0;
       border-radius: 0 0 .16em .16em;
     }
@@ -7072,8 +7072,8 @@
       top: 17%;
       width: 60%;
       height: 60%;
-      border-left: .13em solid var(--ui-icon-color);
-      border-top: .13em solid var(--ui-icon-color);
+      border-left: .15em solid var(--ui-icon-color);
+      border-top: .15em solid var(--ui-icon-color);
       transform: rotate(45deg);
       border-radius: .08em 0 0 0;
     }
@@ -7091,7 +7091,7 @@
       left: 13%;
       right: 13%;
       top: 24%;
-      height: .13em;
+      height: .15em;
       border-radius: 999px;
       background: var(--ui-icon-color);
       box-shadow: 0 .28em 0 0 var(--ui-icon-color), 0 .56em 0 0 var(--ui-icon-color);
@@ -7116,6 +7116,59 @@
       height: 1em;
       min-width: 1em;
       min-height: 1em;
+    }
+
+    .sidebar-toggle .ui-icon,
+    .icon-btn .ui-icon {
+      width: 1.18em;
+      height: 1.18em;
+      min-width: 1.18em;
+      min-height: 1.18em;
+    }
+
+    .side-icon .ui-icon {
+      width: 1.22em;
+      height: 1.22em;
+      min-width: 1.22em;
+      min-height: 1.22em;
+    }
+
+    .dash-icon .ui-icon,
+    .database-overview-icon .ui-icon,
+    .admin-stat-icon .ui-icon,
+    .admin-entry-icon .ui-icon,
+    .settings-status-icon .ui-icon,
+    .settings-feature-icon .ui-icon {
+      width: 1.34em;
+      height: 1.34em;
+      min-width: 1.34em;
+      min-height: 1.34em;
+      filter: drop-shadow(0 5px 8px rgba(15, 23, 42, .14));
+    }
+
+    .assistant-send-btn .ui-icon,
+    .member-chat-inputbar button .ui-icon {
+      width: 1.34em;
+      height: 1.34em;
+      min-width: 1.34em;
+      min-height: 1.34em;
+      transform: translateX(1px);
+    }
+
+    .assistant-attach-btn .ui-icon {
+      width: 1.22em;
+      height: 1.22em;
+      min-width: 1.22em;
+      min-height: 1.22em;
+    }
+
+    .station-style-btn .ui-icon {
+      width: 1.18em;
+      height: 1.18em;
+      min-width: 1.18em;
+      min-height: 1.18em;
+      margin-right: 7px;
+      vertical-align: -0.2em;
     }
 
     .settings-preference-list .ui-icon {
