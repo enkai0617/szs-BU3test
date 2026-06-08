@@ -90,6 +90,9 @@
         '"': "&quot;"
       }[ch]));
     }
+    function uiIcon(name) {
+      return `<span class="ui-icon ui-icon-${escapeHtml(name)}" aria-hidden="true"></span>`;
+    }
     function escapeJsAttr(value) {
       return escapeAttr(String(value ?? "")
         .replace(/\\/g, "\\\\")
@@ -326,7 +329,7 @@
         detail.textContent = config.detail || "";
         detail.style.display = config.detail ? "block" : "none";
         icon.className = `app-dialog-icon ${tone}`;
-        icon.textContent = config.icon || (tone === "danger" ? "!" : tone === "warning" ? "!" : tone === "success" ? "✓" : "i");
+        icon.innerHTML = config.icon || (tone === "danger" ? "!" : tone === "warning" ? "!" : tone === "success" ? uiIcon("check") : "i");
         cancelBtn.textContent = config.cancelText || t("取消", "Cancel");
         confirmBtn.textContent = config.confirmText || t("確定", "OK");
         confirmBtn.classList.toggle("danger", tone === "danger");
@@ -1149,7 +1152,7 @@ function init() {
           </div>
           <div class="member-chat-inputbar">
             <input id="memberChatInput" placeholder="${currentLang === 'zh' ? '輸入訊息...' : 'Type a message...'}" onkeydown="handleMemberChatEnter(event)" />
-            <button onclick="sendMemberChatMessage()">➤</button>
+            <button onclick="sendMemberChatMessage()" aria-label="send">${uiIcon("send")}</button>
           </div>
         </div>
       `;
@@ -1228,7 +1231,7 @@ function init() {
       const summaryBox = document.getElementById("memberStatusDashboard");
       if (summaryBox) {
         summaryBox.innerHTML = `
-          <div class="member-status-stat total"><div class="member-status-icon total">👥</div><div><span>${t('總人數', 'Total')}</span><strong>${statusCounts.total}<small>${currentLang === 'zh' ? ' 人' : ''}</small></strong><em>${t('所有成員總數', 'All visible members')}</em></div></div>
+          <div class="member-status-stat total"><div class="member-status-icon total">${uiIcon("users")}</div><div><span>${t('總人數', 'Total')}</span><strong>${statusCounts.total}<small>${currentLang === 'zh' ? ' 人' : ''}</small></strong><em>${t('所有成員總數', 'All visible members')}</em></div></div>
           <div class="member-status-stat online"><div class="member-status-icon online">●</div><div><span>${t('目前線上', 'Online')}</span><strong>${statusCounts.online}<small>${currentLang === 'zh' ? ' 人' : ''}</small></strong><em>${t('即時線上成員', 'Members online now')}</em></div></div>
           <div class="member-status-stat away"><div class="member-status-icon away">◔</div><div><span>${t('離開', 'Away')}</span><strong>${statusCounts.away}<small>${currentLang === 'zh' ? ' 人' : ''}</small></strong><em>${t('暫時離開', 'Temporarily away')}</em></div></div>
           <div class="member-status-stat offline"><div class="member-status-icon offline">◕</div><div><span>${t('離線', 'Offline')}</span><strong>${statusCounts.offline}<small>${currentLang === 'zh' ? ' 人' : ''}</small></strong><em>${t('目前離線', 'Currently offline')}</em></div></div>
@@ -1949,7 +1952,7 @@ function init() {
         const type = homeEscapeHtml(event.type || "note");
         return `
           <div class="home-calendar-item ${event.done ? "is-done" : ""}">
-            <button class="home-calendar-check" type="button" onclick="toggleCalendarEventDone('${escapeAttr(event.id)}')" title="${escapeAttr(t("切換完成", "Toggle done"))}">${event.done ? "✓" : ""}</button>
+            <button class="home-calendar-check" type="button" onclick="toggleCalendarEventDone('${escapeAttr(event.id)}')" title="${escapeAttr(t("切換完成", "Toggle done"))}">${event.done ? uiIcon("check") : ""}</button>
             <span class="home-calendar-meta">
               <strong>${homeEscapeHtml(event.title)}</strong>
               <small>${dateLabel}${timeLabel} · ${homeEscapeHtml(getCalendarTypeLabel(event.type))}</small>
@@ -2243,7 +2246,7 @@ function init() {
           return `
             <div class="db-list-row database-overview-admin-row">
               <div class="db-list-name">
-                <span class="db-folder" aria-hidden="true">📁</span>
+                <span class="db-folder" aria-hidden="true">${uiIcon("folder")}</span>
                 <div>
                   <strong>${dbTitle}</strong>
                   <p>${dbDescription}</p>
@@ -2253,9 +2256,9 @@ function init() {
               <div class="db-list-date">${escapeHtml(displayDate)}</div>
               <div class="db-list-owner">SZS</div>
               <div class="database-overview-list-actions">
-                <button class="db-list-btn" type="button" onclick="showDetail('${dbActionId}')">👁 ${escapeHtml(t("查看", "View"))}</button>
+                <button class="db-list-btn" type="button" onclick="showDetail('${dbActionId}')">${uiIcon("view")} ${escapeHtml(t("查看", "View"))}</button>
                 <button class="db-list-btn" type="button" onclick="openDatabaseActionModal('document', '${dbActionId}')">＋ ${escapeHtml(t("新增", "Add"))}</button>
-                <button class="db-list-btn" type="button" onclick="openDatabaseOverviewEditCategory('${dbActionId}')">✎ ${escapeHtml(t("編輯", "Edit"))}</button>
+                <button class="db-list-btn" type="button" onclick="openDatabaseOverviewEditCategory('${dbActionId}')">${uiIcon("edit")} ${escapeHtml(t("編輯", "Edit"))}</button>
                 <button class="db-list-btn" type="button" onclick="copyDatabaseName('${dbActionId}')">⋯</button>
               </div>
             </div>`;
@@ -2370,7 +2373,7 @@ function init() {
           return `
             <div class="db-list-row">
               <div class="db-list-name">
-                <span class="db-folder" aria-hidden="true">📁</span>
+                <span class="db-folder" aria-hidden="true">${uiIcon("folder")}</span>
                 <div>
                   <strong>${t(db.titleZh, db.titleEn)}</strong>
                   <p>${t(db.descriptionZh, db.descriptionEn)}</p>
@@ -3013,7 +3016,7 @@ function showPage(pageId) {
 
       const themeBtn = document.getElementById("themeBtn");
       if (themeBtn) {
-        themeBtn.textContent = theme.isDark ? "☀️" : "🌙";
+        themeBtn.innerHTML = uiIcon(theme.isDark ? "sun" : "moon");
         themeBtn.setAttribute("aria-label", theme.isDark ? "切換為白天模式" : "切換為夜間模式");
         themeBtn.title = theme.isDark ? "切換為白天模式" : "切換為夜間模式";
       }
@@ -3164,7 +3167,7 @@ function showPage(pageId) {
 
       const pendingRows = [
         {
-          icon: "⏱",
+          iconName: "clock",
           color: "orange",
           titleZh: "尚未發布文件",
           titleEn: "Unpublished Documents",
@@ -3174,7 +3177,7 @@ function showPage(pageId) {
           action: "switchAdminTab('documents')"
         },
         {
-          icon: "📁",
+          iconName: "folder",
           color: "blue",
           titleZh: "空資料庫分類",
           titleEn: "Empty Categories",
@@ -3184,7 +3187,7 @@ function showPage(pageId) {
           action: "switchAdminTab('databases')"
         },
         {
-          icon: "👥",
+          iconName: "users",
           color: "purple",
           titleZh: "未設定完整成員資訊",
           titleEn: "Incomplete Member Info",
@@ -3194,7 +3197,7 @@ function showPage(pageId) {
           action: canUseUserManagement ? "switchAdminTab('users')" : "appAlert(t('只有 Owner 可以管理會員權限。','Only the Owner can manage member permissions.'), { title: t('權限不足','Permission Denied'), tone: 'warning', icon: '!' })"
         },
         {
-          icon: "✓",
+          iconName: "check",
           color: "green",
           titleZh: "最近 7 天未更新分類",
           titleEn: "Categories Not Updated in 7 Days",
@@ -3207,7 +3210,7 @@ function showPage(pageId) {
 
       const renderPendingRows = pendingRows.map(item => `
         <button class="admin-pending-row" type="button" onclick="${item.action}">
-          <span class="admin-pending-icon ${item.color}">${item.icon}</span>
+          <span class="admin-pending-icon ${item.color}">${uiIcon(item.iconName || "file")}</span>
           <span>
             <span class="admin-pending-title">${t(item.titleZh, item.titleEn)}</span>
             <span class="admin-pending-desc">${t(item.descZh, item.descEn)}</span>
@@ -3219,8 +3222,8 @@ function showPage(pageId) {
       const memberManageCard = canUseUserManagement
         ? `
           <div class="admin-entry-card">
-            <div class="admin-entry-head">
-              <div class="admin-entry-icon members">👤</div>
+              <div class="admin-entry-head">
+              <div class="admin-entry-icon members">${uiIcon("user")}</div>
               <div><h3>${t('會員權限管理', 'Member Permissions')}</h3></div>
             </div>
             <p>${t('查看成員、調整角色與權限，維護部門群組名稱。', 'Review members, adjust roles and permissions, and maintain department groups.')}</p>
@@ -3229,8 +3232,8 @@ function showPage(pageId) {
           </div>`
         : `
           <div class="admin-entry-card disabled">
-            <div class="admin-entry-head">
-              <div class="admin-entry-icon members">👤</div>
+              <div class="admin-entry-head">
+              <div class="admin-entry-icon members">${uiIcon("user")}</div>
               <div><h3>${t('會員權限管理', 'Member Permissions')}</h3></div>
             </div>
             <p>${t('此功能保留給 Owner。你目前可以查看總覽，但不能進行會員權限調整。', 'This area is reserved for the Owner. You can view the overview but cannot change member permissions.')}</p>
@@ -3250,7 +3253,7 @@ function showPage(pageId) {
             </div>
             <div class="admin-stat-grid v2">
               <div class="admin-stat-card">
-                <div class="admin-stat-icon docs">📄</div>
+                <div class="admin-stat-icon docs">${uiIcon("file")}</div>
                 <div>
                   <div class="admin-stat-label">${t('總文件數', 'Total Documents')}</div>
                   <div class="admin-stat-value">${documents.length} ${t('份', 'files')}</div>
@@ -3258,7 +3261,7 @@ function showPage(pageId) {
                 </div>
               </div>
               <div class="admin-stat-card">
-                <div class="admin-stat-icon db">🗂️</div>
+                <div class="admin-stat-icon db">${uiIcon("folder")}</div>
                 <div>
                   <div class="admin-stat-label">${t('資料庫分類數', 'Database Categories')}</div>
                   <div class="admin-stat-value">${databases.length} ${t('個', 'categories')}</div>
@@ -3266,7 +3269,7 @@ function showPage(pageId) {
                 </div>
               </div>
               <div class="admin-stat-card">
-                <div class="admin-stat-icon members">👤</div>
+                <div class="admin-stat-icon members">${uiIcon("user")}</div>
                 <div>
                   <div class="admin-stat-label">${t('會員數', 'Members')}</div>
                   <div class="admin-stat-value">${users.length} ${t('人', 'members')}</div>
@@ -3295,7 +3298,7 @@ function showPage(pageId) {
             <div class="admin-entry-grid v2">
               <div class="admin-entry-card">
                 <div class="admin-entry-head">
-                  <div class="admin-entry-icon files">📄</div>
+                  <div class="admin-entry-icon files">${uiIcon("file")}</div>
                   <div><h3>${t('文件管理', 'Document Manager')}</h3></div>
                 </div>
                 <p>${t('新增、修改、隱藏或刪除文件，管理文件屬性與所屬資料庫。', 'Add, edit, hide, or delete documents and manage their properties and database assignment.')}</p>
@@ -3304,7 +3307,7 @@ function showPage(pageId) {
               </div>
               <div class="admin-entry-card">
                 <div class="admin-entry-head">
-                  <div class="admin-entry-icon db">🗂️</div>
+                  <div class="admin-entry-icon db">${uiIcon("folder")}</div>
                   <div><h3>${t('資料庫分類管理', 'Database Categories')}</h3></div>
                 </div>
                 <p>${t('建立資料庫分類與維護分類說明，讓前台入口更清楚。', 'Create database categories and maintain descriptions so the frontend entry points stay clear.')}</p>
@@ -5048,7 +5051,7 @@ function showPage(pageId) {
       if (!list) return;
 
       if (!prefs.notificationsEnabled) {
-        list.innerHTML = `<div class="notification-item"><div class="notification-icon">🔕</div><div><strong>${t("通知已關閉", "Notifications Off")}</strong><p>${t("可到「我的設定」重新開啟通知提示。", "Turn notifications back on in My Settings.")}</p></div></div>`;
+        list.innerHTML = `<div class="notification-item"><div class="notification-icon">${uiIcon("bell")}</div><div><strong>${t("通知已關閉", "Notifications Off")}</strong><p>${t("可到「我的設定」重新開啟通知提示。", "Turn notifications back on in My Settings.")}</p></div></div>`;
         if (dot) dot.style.display = "none";
         return;
       }
@@ -5056,7 +5059,7 @@ function showPage(pageId) {
       const notifications = getNotifications();
       list.innerHTML = notifications.map(item => `
         <div class="notification-item">
-          <div class="notification-icon">${item.type === "file" ? "📄" : item.type === "role" ? "🔐" : item.type === "chat" ? "💬" : "🔔"}</div>
+          <div class="notification-icon">${uiIcon(item.type === "file" ? "file" : item.type === "role" ? "lock" : item.type === "chat" ? "chat" : "bell")}</div>
           <div>
             <strong>${t(item.titleZh, item.titleEn)}</strong>
             <p>${t(item.textZh, item.textEn)}</p>
@@ -5210,7 +5213,7 @@ function showPage(pageId) {
         const messages = getNotifications();
         content.innerHTML = messages.map(item => `
           <div class="profile-message-item">
-            <div class="profile-message-icon">${item.type === "file" ? "📄" : item.type === "role" ? "🔐" : item.type === "chat" ? "💬" : "🔔"}</div>
+            <div class="profile-message-icon">${uiIcon(item.type === "file" ? "file" : item.type === "role" ? "lock" : item.type === "chat" ? "chat" : "bell")}</div>
             <div>
               <strong>${escapeProfileHtml(t(item.titleZh, item.titleEn))}</strong>
               <p>${escapeProfileHtml(t(item.textZh, item.textEn))}</p>
@@ -7120,7 +7123,7 @@ function showPage(pageId) {
         titleEn: "Notebook Pressing DFM / Customer Classification",
         labelZh: "筆電",
         labelEn: "Notebook",
-        icon: "💻",
+        iconName: "monitor",
         tagZh: "產品分類",
         tagEn: "Product Classification",
         summaryZh: "筆電類壓合請先依客戶或產品結構分類，再往下確認壓合基準、治具定位、膠材 / 泡棉 / 鐵件位置與檢查項目。",
@@ -7139,7 +7142,7 @@ function showPage(pageId) {
         titleEn: "Camera Pressing DFM / Customer Classification",
         labelZh: "相機",
         labelEn: "Camera",
-        icon: "📷",
+        iconName: "camera",
         tagZh: "產品分類",
         tagEn: "Product Classification",
         summaryZh: "相機類壓合請先依客戶別分流，後續再依圖面 / 2D / 3D 確認治具定位、壓合順序、壓合面與外觀檢查項目。",
@@ -7271,7 +7274,7 @@ function showPage(pageId) {
       const buttons = (station.categories || []).map(categoryKey => {
         const category = productCustomerClassification[categoryKey];
         if (!category) return "";
-        const label = `${category.icon || ""} ${t(category.labelZh, category.labelEn)}`;
+        const label = `${uiIcon(category.iconName || "folder")} ${t(category.labelZh, category.labelEn)}`;
         return renderStationActionButton(label, `${category.labelZh} 壓合`);
       }).join("");
 
@@ -7312,7 +7315,7 @@ function showPage(pageId) {
           <div class="station-flow-head">
             <div>
               <div class="station-flow-kicker">${t("產品分類分流", "Product Classification Branch")}</div>
-              <div class="station-flow-title">${category.icon || ""} ${t(category.titleZh, category.titleEn)}</div>
+              <div class="station-flow-title">${uiIcon(category.iconName || "folder")} ${t(category.titleZh, category.titleEn)}</div>
             </div>
             <span class="station-flow-tag">${t(category.tagZh, category.tagEn)}</span>
           </div>
@@ -7325,7 +7328,7 @@ function showPage(pageId) {
           <div>
             <div class="related-questions-title">${t("切換產品分類", "Switch product category")}</div>
             <div class="station-style-actions">
-              ${Object.entries(productCustomerClassification).filter(([key]) => key !== categoryKey).map(([key, item]) => renderStationActionButton(`${item.icon || ""} ${t(item.labelZh, item.labelEn)}`, `${item.labelZh} 壓合`)).join("")}
+              ${Object.entries(productCustomerClassification).filter(([key]) => key !== categoryKey).map(([key, item]) => renderStationActionButton(`${uiIcon(item.iconName || "folder")} ${t(item.labelZh, item.labelEn)}`, `${item.labelZh} 壓合`)).join("")}
               ${renderStationActionButton(t("回到壓合總覽", "Back to pressing overview"), "壓合")}
             </div>
           </div>
@@ -7361,7 +7364,7 @@ function showPage(pageId) {
           <div class="station-flow-head">
             <div>
               <div class="station-flow-kicker">${t("細項分類結果", "Sub-category Result")}</div>
-              <div class="station-flow-title">${category.icon || ""} ${t(note[0], option.labelEn + " Pressing")}</div>
+              <div class="station-flow-title">${uiIcon(category.iconName || "folder")} ${t(note[0], option.labelEn + " Pressing")}</div>
             </div>
             <span class="station-flow-tag">${t(category.labelZh, category.labelEn)} / ${t(option.labelZh, option.labelEn)}</span>
           </div>
@@ -7987,7 +7990,7 @@ function showPage(pageId) {
       const bubble = document.createElement('div');
       bubble.id = 'assistantHintBubble';
       bubble.className = 'assistant-hint-bubble';
-      bubble.innerHTML = `<strong>${t('您好！我是小幫手 🤖', 'Hi, I am the assistant 🤖')}</strong>${t('可問我：壓合流程、DFM 製作方式、文件在哪裡。', 'Ask me about station flow, DFM methods, or where a file is.')}`;
+      bubble.innerHTML = `<strong>${t('您好！我是小幫手', 'Hi, I am the assistant')}</strong>${t('可問我：壓合流程、DFM 製作方式、文件在哪裡。', 'Ask me about station flow, DFM methods, or where a file is.')}`;
       document.body.appendChild(bubble);
       const hide = () => bubble.classList.add('hidden');
       launcher.addEventListener('click', hide, { once: false });
