@@ -91,6 +91,34 @@
       }[ch]));
     }
     function uiIcon(name) {
+      const emojiIconMap = {
+        attach: "📎",
+        bell: "🔔",
+        "bell-off": "🔕",
+        bellOff: "🔕",
+        calendar: "🗓️",
+        camera: "📷",
+        chart: "📊",
+        chat: "💬",
+        clock: "🕘",
+        database: "🗂️",
+        db: "🗂️",
+        edit: "✎",
+        file: "📄",
+        folder: "📁",
+        globe: "🌐",
+        lock: "🔒",
+        monitor: "💻",
+        moon: "🌙",
+        settings: "⚙️",
+        sun: "☀️",
+        user: "👤",
+        users: "👥",
+        view: "👁"
+      };
+      if (Object.prototype.hasOwnProperty.call(emojiIconMap, name)) {
+        return `<span class="emoji-icon" aria-hidden="true">${escapeHtml(emojiIconMap[name])}</span>`;
+      }
       return `<span class="ui-icon ui-icon-${escapeHtml(name)}" aria-hidden="true"></span>`;
     }
     function escapeJsAttr(value) {
@@ -2019,7 +2047,7 @@ function init() {
           const count = getDocumentsByDatabase(db.id).length;
           return `
             <div class="favorite-db-item">
-              <span class="folder-type-icon">▰</span>
+              <span class="folder-type-icon">📁</span>
               <button class="favorite-db-meta" onclick="showDetail('${db.id}')"><strong>${homeEscapeHtml(t(db.titleZh, db.titleEn))}</strong><small>${count} ${t("份文件", "docs")} · STREAM ${homeEscapeHtml(db.id)}</small></button>
               <button class="favorite-star-btn" onclick="toggleFavoriteDatabase('${db.id}')" title="Favorite">★</button>
             </div>`;
@@ -3177,7 +3205,7 @@ function showPage(pageId) {
           action: "switchAdminTab('documents')"
         },
         {
-          iconName: "folder",
+          iconName: "database",
           color: "blue",
           titleZh: "空資料庫分類",
           titleEn: "Empty Categories",
@@ -3223,7 +3251,7 @@ function showPage(pageId) {
         ? `
           <div class="admin-entry-card">
               <div class="admin-entry-head">
-              <div class="admin-entry-icon members">${uiIcon("user")}</div>
+              <div class="admin-entry-icon members">${uiIcon("users")}</div>
               <div><h3>${t('會員權限管理', 'Member Permissions')}</h3></div>
             </div>
             <p>${t('查看成員、調整角色與權限，維護部門群組名稱。', 'Review members, adjust roles and permissions, and maintain department groups.')}</p>
@@ -3233,7 +3261,7 @@ function showPage(pageId) {
         : `
           <div class="admin-entry-card disabled">
               <div class="admin-entry-head">
-              <div class="admin-entry-icon members">${uiIcon("user")}</div>
+              <div class="admin-entry-icon members">${uiIcon("users")}</div>
               <div><h3>${t('會員權限管理', 'Member Permissions')}</h3></div>
             </div>
             <p>${t('此功能保留給 Owner。你目前可以查看總覽，但不能進行會員權限調整。', 'This area is reserved for the Owner. You can view the overview but cannot change member permissions.')}</p>
@@ -3261,7 +3289,7 @@ function showPage(pageId) {
                 </div>
               </div>
               <div class="admin-stat-card">
-                <div class="admin-stat-icon db">${uiIcon("folder")}</div>
+                <div class="admin-stat-icon db">${uiIcon("database")}</div>
                 <div>
                   <div class="admin-stat-label">${t('資料庫分類數', 'Database Categories')}</div>
                   <div class="admin-stat-value">${databases.length} ${t('個', 'categories')}</div>
@@ -3269,7 +3297,7 @@ function showPage(pageId) {
                 </div>
               </div>
               <div class="admin-stat-card">
-                <div class="admin-stat-icon members">${uiIcon("user")}</div>
+                <div class="admin-stat-icon members">${uiIcon("users")}</div>
                 <div>
                   <div class="admin-stat-label">${t('會員數', 'Members')}</div>
                   <div class="admin-stat-value">${users.length} ${t('人', 'members')}</div>
@@ -3277,7 +3305,7 @@ function showPage(pageId) {
                 </div>
               </div>
               <div class="admin-stat-card">
-                <div class="admin-stat-icon recent">↻</div>
+                <div class="admin-stat-icon recent">${uiIcon("clock")}</div>
                 <div>
                   <div class="admin-stat-label">${t('本週更新文件', 'Updated This Week')}</div>
                   <div class="admin-stat-value">${recentDocumentCount} ${t('份', 'files')}</div>
@@ -3307,7 +3335,7 @@ function showPage(pageId) {
               </div>
               <div class="admin-entry-card">
                 <div class="admin-entry-head">
-                  <div class="admin-entry-icon db">${uiIcon("folder")}</div>
+                  <div class="admin-entry-icon db">${uiIcon("database")}</div>
                   <div><h3>${t('資料庫分類管理', 'Database Categories')}</h3></div>
                 </div>
                 <p>${t('建立資料庫分類與維護分類說明，讓前台入口更清楚。', 'Create database categories and maintain descriptions so the frontend entry points stay clear.')}</p>
@@ -3317,7 +3345,7 @@ function showPage(pageId) {
               ${memberManageCard}
               <div class="admin-entry-card">
                 <div class="admin-entry-head">
-                  <div class="admin-entry-icon logs">↻</div>
+                  <div class="admin-entry-icon logs">${uiIcon("clock")}</div>
                   <div><h3>${t('操作紀錄', 'Activity Logs')}</h3></div>
                 </div>
                 <p>${t('追蹤新增、修改、刪除與登入紀錄，讓重要異動可回溯。', 'Trace add, edit, delete, and login records so important changes remain auditable.')}</p>
@@ -5051,7 +5079,7 @@ function showPage(pageId) {
       if (!list) return;
 
       if (!prefs.notificationsEnabled) {
-        list.innerHTML = `<div class="notification-item"><div class="notification-icon">${uiIcon("bell")}</div><div><strong>${t("通知已關閉", "Notifications Off")}</strong><p>${t("可到「我的設定」重新開啟通知提示。", "Turn notifications back on in My Settings.")}</p></div></div>`;
+        list.innerHTML = `<div class="notification-item"><div class="notification-icon">${uiIcon("bell-off")}</div><div><strong>${t("通知已關閉", "Notifications Off")}</strong><p>${t("可到「我的設定」重新開啟通知提示。", "Turn notifications back on in My Settings.")}</p></div></div>`;
         if (dot) dot.style.display = "none";
         return;
       }
@@ -7914,7 +7942,7 @@ function showPage(pageId) {
           const dbTitle = homeEscapeHtml(t(db.titleZh, db.titleEn));
           return `
             <div class="favorite-db-item" onclick="showDetail('${db.id}')" title="${t('查看所有文件', 'View all documents')}">
-              <span class="folder-type-icon">▰</span>
+              <span class="folder-type-icon">📁</span>
               <span class="favorite-db-meta"><strong>${dbTitle}</strong><small>${count} ${t("份文件", "docs")} · STREAM ${homeEscapeHtml(db.id)}</small></span>
               <button class="favorite-star-btn" onclick="event.stopPropagation(); toggleFavoriteDatabase('${db.id}')" data-tip="${t('取消收藏', 'Remove favorite')}" title="${t('取消收藏', 'Remove favorite')}">★</button>
             </div>`;
