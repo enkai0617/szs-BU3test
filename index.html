@@ -26,7 +26,7 @@
 </head>
 <body class="sidebar-collapsed">
   <header>
-    <button id="sidebarToggleBtn" class="sidebar-toggle" onclick="toggleSidebar(event)">☰</button>
+    <button id="sidebarToggleBtn" class="sidebar-toggle" onclick="toggleSidebar(event)" aria-label="menu"><span class="ui-icon ui-icon-menu" aria-hidden="true"></span></button>
     <div class="brand" onclick="showHome()">
       <img src="logo.png" alt="SZS Logo" class="logo" onerror="this.style.display='none'; const f=this.parentElement.querySelector('.logo-fallback'); if(f){f.classList.add('show');}">
       <div>
@@ -53,8 +53,8 @@
 
       <span class="user-pill" id="userPill"></span>
       <button class="ghost" onclick="switchLanguage()" id="langBtn">English</button>
-      <button onclick="toggleTheme()" id="themeBtn">🌙</button>
-      <button id="notificationBtn" class="icon-btn" onclick="toggleNotifications(event)" title="通知">🔔<span id="notificationDot"></span></button>
+      <button onclick="toggleTheme()" id="themeBtn" class="icon-btn theme-icon-btn"><span class="ui-icon ui-icon-moon" aria-hidden="true"></span></button>
+      <button id="notificationBtn" class="icon-btn" onclick="toggleNotifications(event)" title="通知"><span class="ui-icon ui-icon-bell" aria-hidden="true"></span><span id="notificationDot"></span></button>
       <div class="profile-wrap" id="profileWrap">
         <button id="profileBtn" class="profile-btn" onclick="toggleProfileMenu(event)">
           <span class="profile-avatar" id="profileAvatar">U</span>
@@ -96,38 +96,38 @@
     <div class="side-section side-section-primary">
       <div class="side-section-title" data-zh="主要功能" data-en="Main">主要功能</div>
       <button class="side-item active" onclick="showHome()" data-side="home" title="首頁">
-        <span class="side-icon">⌂</span><span class="side-label" data-zh="首頁" data-en="Home">首頁</span>
+        <span class="side-icon"><span class="ui-icon ui-icon-home" aria-hidden="true"></span></span><span class="side-label" data-zh="首頁" data-en="Home">首頁</span>
       </button>
       <button class="side-item" onclick="openDatabaseOverviewPage()" data-side="databases" title="資料庫分類">
-        <span class="side-icon">▦</span><span class="side-label" data-zh="資料庫分類" data-en="Databases">資料庫分類</span><span class="side-badge" id="sideDatabaseCount">6</span>
+        <span class="side-icon"><span class="ui-icon ui-icon-folder" aria-hidden="true"></span></span><span class="side-label" data-zh="資料庫分類" data-en="Databases">資料庫分類</span><span class="side-badge" id="sideDatabaseCount">6</span>
       </button>
       <button class="side-item" onclick="openCalendarPage()" data-side="calendar" title="行事曆">
-        <span class="side-icon">▣</span><span class="side-label" data-zh="行事曆" data-en="Calendar">行事曆</span><span class="side-badge" id="sideCalendarCount">0</span>
+        <span class="side-icon"><span class="ui-icon ui-icon-calendar" aria-hidden="true"></span></span><span class="side-label" data-zh="行事曆" data-en="Calendar">行事曆</span><span class="side-badge" id="sideCalendarCount">0</span>
       </button>
       <button class="side-item" onclick="openAssistantPage()" data-side="assistant" title="小幫手">
-        <span class="side-icon">✦</span><span class="side-label" data-zh="小幫手" data-en="Assistant">小幫手</span><span class="side-badge side-badge-new">NEW</span>
+        <span class="side-icon"><span class="ui-icon ui-icon-chat" aria-hidden="true"></span></span><span class="side-label" data-zh="小幫手" data-en="Assistant">小幫手</span><span class="side-badge side-badge-new">NEW</span>
       </button>
     </div>
 
     <div class="side-section side-section-admin" id="sideAdminSection">
       <div class="side-section-title" data-zh="管理功能" data-en="Admin">管理功能</div>
       <button class="side-item" id="sideAdminButton" onclick="openAdmin()" data-side="admin" title="後台管理">
-        <span class="side-icon">▤</span><span class="side-label" data-zh="後台管理" data-en="Admin Panel">後台管理</span>
+        <span class="side-icon"><span class="ui-icon ui-icon-chart" aria-hidden="true"></span></span><span class="side-label" data-zh="後台管理" data-en="Admin Panel">後台管理</span>
       </button>
     </div>
 
     <div class="side-section side-section-system">
       <div class="side-section-title" data-zh="系統" data-en="System">系統</div>
       <button class="side-item" onclick="openMembersSection()" data-side="members" title="線上成員">
-        <span class="side-icon">☷</span><span class="side-label" data-zh="成員狀態" data-en="Member Status">成員狀態</span><span class="side-badge" id="sideMemberCount">13</span>
+        <span class="side-icon"><span class="ui-icon ui-icon-users" aria-hidden="true"></span></span><span class="side-label" data-zh="成員狀態" data-en="Member Status">成員狀態</span><span class="side-badge" id="sideMemberCount">13</span>
       </button>
       <button class="side-item" onclick="openSystemSettings()" data-side="settings" title="系統設定">
-        <span class="side-icon">⚙</span><span class="side-label" data-zh="系統設定" data-en="Settings">系統設定</span>
+        <span class="side-icon"><span class="ui-icon ui-icon-settings" aria-hidden="true"></span></span><span class="side-label" data-zh="系統設定" data-en="Settings">系統設定</span>
       </button>
     </div>
 
     <div class="side-card compact-side-card">
-      <div class="side-card-art">🔐</div>
+      <div class="side-card-art"><span class="ui-icon ui-icon-lock" aria-hidden="true"></span></div>
       <strong data-zh="安全・可靠・共享" data-en="Secure · Reliable · Shared">安全・可靠・共享</strong>
       <p data-zh="建立標準化文件，讓知識成為團隊的力量。" data-en="Standardize files and turn knowledge into team power.">建立標準化文件，讓知識成為團隊的力量。</p>
       <button onclick="openDatabaseSection()" data-zh="查看資料庫 ↗" data-en="View Databases ↗">查看資料庫 ↗</button>
@@ -148,7 +148,7 @@
           <div class="kb-art">
             <div class="kb-float search">⌕</div>
             <div class="kb-float cloud">↕</div>
-            <div class="kb-float lock">🔒</div>
+            <div class="kb-float lock"><span class="ui-icon ui-icon-lock" aria-hidden="true"></span></div>
             <div class="kb-doc-stack"><span></span><span></span><span></span></div>
             <div class="kb-art-laptop"><div class="kb-search-icon"></div></div>
             <div class="kb-art-base"></div>
@@ -169,13 +169,13 @@
           <h2 data-zh="歡迎登入" data-en="Welcome Back">歡迎登入</h2>
           <div class="template-b-error" id="landingLoginError"></div>
           <div class="template-b-field">
-            <span>♙</span>
+            <span><span class="ui-icon ui-icon-user" aria-hidden="true"></span></span>
             <input id="landingLoginId" autocomplete="username" placeholder="工號" onkeydown="handleLandingLoginEnter(event)" />
           </div>
           <div class="template-b-field template-b-password">
-            <span>▣</span>
+            <span><span class="ui-icon ui-icon-lock" aria-hidden="true"></span></span>
             <input id="landingLoginPassword" type="password" autocomplete="current-password" placeholder="密碼" onkeydown="handleLandingLoginEnter(event)" />
-            <button type="button" class="template-b-eye" onclick="toggleLandingPassword()" aria-label="show password">◉</button>
+            <button type="button" class="template-b-eye" onclick="toggleLandingPassword()" aria-label="show password"><span class="ui-icon ui-icon-view" aria-hidden="true"></span></button>
           </div>
           <div class="template-b-row">
             <label class="template-b-check"><input type="checkbox" id="landingRememberMe"> <span data-zh="記住我" data-en="Remember me">記住我</span></label>
@@ -203,7 +203,7 @@
 
     <section class="dashboard-overview" aria-label="dashboard overview">
       <div class="dash-stat clickable" onclick="openDatabaseOverviewPage()">
-        <div class="dash-icon blue">▣</div>
+        <div class="dash-icon blue"><span class="ui-icon ui-icon-folder" aria-hidden="true"></span></div>
         <div>
           <div class="dash-label" data-zh="資料庫分類" data-en="Database Categories">資料庫分類</div>
           <div class="dash-value"><span id="overviewDatabaseCount">0</span><small data-zh=" 個" data-en=" categories"> 個</small></div>
@@ -211,7 +211,7 @@
         </div>
       </div>
       <div class="dash-stat clickable" onclick="showAllDocumentsFromHome()">
-        <div class="dash-icon cyan">▤</div>
+        <div class="dash-icon cyan"><span class="ui-icon ui-icon-file" aria-hidden="true"></span></div>
         <div>
           <div class="dash-label" data-zh="總文件數" data-en="Total Documents">總文件數</div>
           <div class="dash-value"><span id="overviewDocumentCount">0</span><small data-zh=" 份" data-en=" docs"> 份</small></div>
@@ -219,7 +219,7 @@
         </div>
       </div>
       <div class="dash-stat clickable" onclick="openMembersSection()">
-        <div class="dash-icon purple">♙</div>
+        <div class="dash-icon purple"><span class="ui-icon ui-icon-users" aria-hidden="true"></span></div>
         <div>
           <div class="dash-label" data-zh="總人數" data-en="Total Members">總人數</div>
           <div class="dash-value"><span id="overviewUserRole">0</span><small data-zh=" 人" data-en=" members"> 人</small></div>
@@ -227,7 +227,7 @@
         </div>
       </div>
       <div class="dash-stat clickable" onclick="openAdminTab('logs');">
-        <div class="dash-icon green">✓</div>
+        <div class="dash-icon green"><span class="ui-icon ui-icon-check" aria-hidden="true"></span></div>
         <div>
           <div class="dash-label" data-zh="系統狀態" data-en="System Status">系統狀態</div>
           <div class="dash-value"><span data-zh="正常" data-en="OK">正常</span></div>
@@ -245,7 +245,7 @@
     </section>
 
     <section class="home-empty-data-callout" id="homeEmptyDataCallout" style="display:none;">
-      <div class="home-empty-illustration">📂</div>
+      <div class="home-empty-illustration"><span class="ui-icon ui-icon-folder" aria-hidden="true"></span></div>
       <div>
         <strong data-zh="目前尚未建立資料" data-en="No data has been created yet">目前尚未建立資料</strong>
         <p data-zh="請至後台管理新增資料庫分類與文件，開始建立您的知識庫。" data-en="Go to Admin Panel to add database categories and documents to start building the knowledge base.">請至後台管理新增資料庫分類與文件，開始建立您的知識庫。</p>
@@ -427,21 +427,21 @@
 
       <div class="database-overview-summary">
         <div class="database-overview-stat">
-          <span class="database-overview-icon blue">▣</span>
+          <span class="database-overview-icon blue"><span class="ui-icon ui-icon-folder" aria-hidden="true"></span></span>
           <div>
             <span data-zh="分類總數" data-en="Total Categories">分類總數</span>
             <strong><span id="databaseOverviewCategoryCount">0</span> <small data-zh="個分類" data-en="categories">個分類</small></strong>
           </div>
         </div>
         <div class="database-overview-stat">
-          <span class="database-overview-icon cyan">▤</span>
+          <span class="database-overview-icon cyan"><span class="ui-icon ui-icon-file" aria-hidden="true"></span></span>
           <div>
             <span data-zh="總文件數" data-en="Total Documents">總文件數</span>
             <strong><span id="databaseOverviewDocumentCount">0</span> <small data-zh="份" data-en="docs">份</small></strong>
           </div>
         </div>
         <div class="database-overview-stat">
-          <span class="database-overview-icon purple">◷</span>
+          <span class="database-overview-icon purple"><span class="ui-icon ui-icon-clock" aria-hidden="true"></span></span>
           <div>
             <span data-zh="最近更新" data-en="Latest Update">最近更新</span>
             <strong id="databaseOverviewLatestDate">-</strong>
@@ -467,7 +467,7 @@
       </select>
       <div class="database-overview-view-toggle">
         <button id="databaseOverviewCardBtn" type="button" class="active" onclick="setDatabaseOverviewView('cards')" data-zh="▦ 卡片式" data-en="▦ Card View">▦ 卡片式</button>
-        <button id="databaseOverviewListBtn" type="button" onclick="setDatabaseOverviewView('list')" data-zh="☷ 清單式" data-en="☷ List View">☷ 清單式</button>
+        <button id="databaseOverviewListBtn" type="button" onclick="setDatabaseOverviewView('list')" data-zh="清單式" data-en="List View">清單式</button>
       </div>
     </section>
 
@@ -554,19 +554,19 @@
       <div class="settings-strip-title" data-zh="目前系統狀態總覽" data-en="Current System Status">目前系統狀態總覽</div>
       <div class="settings-status-grid">
         <div class="settings-status-item">
-          <div class="settings-status-icon blue">👤</div>
+          <div class="settings-status-icon blue"><span class="ui-icon ui-icon-user" aria-hidden="true"></span></div>
           <div><span data-zh="目前登入" data-en="Signed in as">目前登入</span><strong id="settingsUserName">SZS Owner</strong><small id="settingsUserRole">Owner</small></div>
         </div>
         <div class="settings-status-item">
-          <div class="settings-status-icon green">✓</div>
+          <div class="settings-status-icon green"><span class="ui-icon ui-icon-check" aria-hidden="true"></span></div>
           <div><span data-zh="系統狀態" data-en="System Status">系統狀態</span><strong data-zh="正常" data-en="Normal">正常</strong><small data-zh="系統運作一切正常" data-en="System is running normally">系統運作一切正常</small></div>
         </div>
         <div class="settings-status-item">
-          <div class="settings-status-icon amber">▣</div>
+          <div class="settings-status-icon amber"><span class="ui-icon ui-icon-folder" aria-hidden="true"></span></div>
           <div><span data-zh="資料庫分類" data-en="Database Categories">資料庫分類</span><strong id="settingsDbCount">0 個</strong><small id="settingsDbMeta">啟用中 0 個分類</small></div>
         </div>
         <div class="settings-status-item">
-          <div class="settings-status-icon cyan">▤</div>
+          <div class="settings-status-icon cyan"><span class="ui-icon ui-icon-file" aria-hidden="true"></span></div>
           <div><span data-zh="文件數" data-en="Documents">文件數</span><strong id="settingsDocCount">0 份</strong><small id="settingsDocMeta">本週新增 0 份</small></div>
         </div>
         <div class="settings-status-item">
@@ -626,17 +626,17 @@
           <button class="settings-card-arrow" onclick="openProfileSettingsDialog()" title="Open">›</button>
         </div>
         <div class="settings-preference-list">
-          <div><span>🌐 <span data-zh="語言" data-en="Language">語言</span></span><strong id="settingsLanguageValue">繁體中文</strong></div>
-          <div><span>🔔 <span data-zh="通知" data-en="Notifications">通知</span></span><strong data-zh="開啟" data-en="On">開啟</strong></div>
-          <div><span>🤖 <span data-zh="小幫手提示" data-en="Assistant Tips">小幫手提示</span></span><strong data-zh="開啟" data-en="On">開啟</strong></div>
-          <div><span>⌂ <span data-zh="預設首頁" data-en="Default Page">預設首頁</span></span><strong id="settingsDefaultPageValue">首頁</strong></div>
+          <div><span><span class="ui-icon ui-icon-globe" aria-hidden="true"></span><span data-zh="語言" data-en="Language">語言</span></span><strong id="settingsLanguageValue">繁體中文</strong></div>
+          <div><span><span class="ui-icon ui-icon-bell" aria-hidden="true"></span><span data-zh="通知" data-en="Notifications">通知</span></span><strong data-zh="開啟" data-en="On">開啟</strong></div>
+          <div><span>AI <span data-zh="小幫手提示" data-en="Assistant Tips">小幫手提示</span></span><strong data-zh="開啟" data-en="On">開啟</strong></div>
+          <div><span><span class="ui-icon ui-icon-home" aria-hidden="true"></span> <span data-zh="預設首頁" data-en="Default Page">預設首頁</span></span><strong id="settingsDefaultPageValue">首頁</strong></div>
         </div>
         <button onclick="openProfileSettingsDialog()" data-zh="查看我的設定 →" data-en="View My Settings →">查看我的設定 →</button>
       </article>
 
       <article class="settings-feature-card appearance-card">
         <div class="settings-card-head">
-          <div class="settings-feature-icon orange">◉</div>
+          <div class="settings-feature-icon orange"><span class="ui-icon ui-icon-view" aria-hidden="true"></span></div>
           <div>
             <h3 data-zh="外觀模式" data-en="Appearance">外觀模式</h3>
             <p data-zh="選擇適合目前工作環境的顯示模式，降低長時間閱讀的視覺負擔。" data-en="Choose the appearance mode that fits your working environment and reduces eye strain.">選擇適合目前工作環境的顯示模式，降低長時間閱讀的視覺負擔。</p>
@@ -684,11 +684,11 @@
     </section>
 
     <div class="admin-tabs">
-      <button id="adminOverviewTab" class="admin-tab-button active" onclick="switchAdminTab('overview')" data-zh="📊 總覽首頁" data-en="📊 Overview">📊 總覽首頁</button>
-      <button id="adminDocTab" class="admin-tab-button" onclick="switchAdminTab('documents')" data-zh="📄 文件管理" data-en="📄 Document Manager">📄 文件管理</button>
-      <button id="adminDbTab" class="admin-tab-button" onclick="switchAdminTab('databases')" data-zh="🗂 資料庫分類管理" data-en="🗂 Database Manager">🗂 資料庫分類管理</button>
-      <button id="adminUserTab" class="admin-tab-button" onclick="switchAdminTab('users')" data-zh="👥 會員權限管理" data-en="👥 Member Permissions">👥 會員權限管理</button>
-      <button id="adminLogTab" class="admin-tab-button" onclick="switchAdminTab('logs')" data-zh="🕘 操作紀錄" data-en="🕘 Activity Logs">🕘 操作紀錄</button>
+      <button id="adminOverviewTab" class="admin-tab-button active" onclick="switchAdminTab('overview')"><span class="ui-icon ui-icon-chart" aria-hidden="true"></span><span data-zh="總覽首頁" data-en="Overview">總覽首頁</span></button>
+      <button id="adminDocTab" class="admin-tab-button" onclick="switchAdminTab('documents')"><span class="ui-icon ui-icon-file" aria-hidden="true"></span><span data-zh="文件管理" data-en="Document Manager">文件管理</span></button>
+      <button id="adminDbTab" class="admin-tab-button" onclick="switchAdminTab('databases')"><span class="ui-icon ui-icon-folder" aria-hidden="true"></span><span data-zh="資料庫分類管理" data-en="Database Manager">資料庫分類管理</span></button>
+      <button id="adminUserTab" class="admin-tab-button" onclick="switchAdminTab('users')"><span class="ui-icon ui-icon-users" aria-hidden="true"></span><span data-zh="會員權限管理" data-en="Member Permissions">會員權限管理</span></button>
+      <button id="adminLogTab" class="admin-tab-button" onclick="switchAdminTab('logs')"><span class="ui-icon ui-icon-clock" aria-hidden="true"></span><span data-zh="操作紀錄" data-en="Activity Logs">操作紀錄</span></button>
     </div>
 
     <section id="adminOverviewSection" class="admin-section active">
@@ -1157,7 +1157,7 @@
 
         <div class="assistant-full-body szs-assistant-body" id="fullChatBody">
           <div class="assistant-welcome-card">
-            <div class="assistant-welcome-avatar">🤖</div>
+            <div class="assistant-welcome-avatar" aria-hidden="true"></div>
             <div>
               <h3 data-zh="嗨，我是 SZS 小幫手" data-en="Hi, I am the SZS assistant">嗨，我是 SZS 小幫手</h3>
               <p data-zh="你可以問我公司官網資訊、產品、認證、投資人資訊，也可以搜尋目前知識庫文件。" data-en="Ask about company website information, products, certifications, investor information, or search the current knowledge-base documents.">你可以問我公司官網資訊、產品、認證、投資人資訊，也可以搜尋目前知識庫文件。</p>
@@ -1175,33 +1175,33 @@
 
         <div class="assistant-quick-question-row">
           <button onclick="askAssistantQuestion('目前搜尋範圍有哪些文件')">
-            <span class="assistant-quick-icon">📁</span>
+            <span class="assistant-quick-icon"><span class="ui-icon ui-icon-folder" aria-hidden="true"></span></span>
             <span class="assistant-quick-text"><strong class="assistant-quick-dynamic-scope">全部資料庫</strong><small>有哪些文件？</small></span>
           </button>
           <button onclick="askAssistantQuestion('幫我找 DFM 生成規範')">
-            <span class="assistant-quick-icon">📄</span>
+            <span class="assistant-quick-icon"><span class="ui-icon ui-icon-file" aria-hidden="true"></span></span>
             <span class="assistant-quick-text"><strong>幫我找</strong><small>DFM 生成規範</small></span>
           </button>
           <button onclick="askAssistantQuestion('壓合流程怎麼做')">
-            <span class="assistant-quick-icon">⚙️</span>
+            <span class="assistant-quick-icon"><span class="ui-icon ui-icon-settings" aria-hidden="true"></span></span>
             <span class="assistant-quick-text"><strong>壓合流程</strong><small>怎麼做？</small></span>
           </button>
           <button onclick="askAssistantQuestion('目前搜尋範圍最近更新什麼')">
-            <span class="assistant-quick-icon">🗓️</span>
+            <span class="assistant-quick-icon"><span class="ui-icon ui-icon-calendar" aria-hidden="true"></span></span>
             <span class="assistant-quick-text"><strong class="assistant-quick-dynamic-scope">全部資料庫</strong><small>最近更新什麼？</small></span>
           </button>
         </div>
 
         <div class="assistant-input-guide" data-zh="支援：工站流程查詢 / 文件搜尋 / DFM 問答 / 資料庫內容摘要" data-en="Supports: station flow lookup / document search / DFM Q&A / database summaries">支援：工站流程查詢 / 文件搜尋 / DFM 問答 / 資料庫內容摘要</div>
         <div class="assistant-full-footer szs-assistant-footer">
-          <button class="assistant-attach-btn" type="button" title="附件示意">📎</button>
+          <button class="assistant-attach-btn" type="button" title="附件示意"><span class="ui-icon ui-icon-attach" aria-hidden="true"></span></button>
           <input class="chat-input" id="fullChatInput" placeholder="請輸入工站、文件名稱或問題，例如：壓合流程、DFM 規範、製程參數..." onkeydown="handleFullEnter(event)" />
-          <button class="primary assistant-send-btn" onclick="sendFullMessage()" data-zh="➤" data-en="➤">➤</button>
+          <button class="primary assistant-send-btn" onclick="sendFullMessage()" aria-label="send"><span class="ui-icon ui-icon-send" aria-hidden="true"></span></button>
         </div>
       </div>
 
       <aside class="assistant-database-summary" id="assistantDatabaseSummary">
-        <div class="summary-folder-icon">📁</div>
+        <div class="summary-folder-icon"><span class="ui-icon ui-icon-folder" aria-hidden="true"></span></div>
         <button class="summary-close-btn" type="button" onclick="closeAssistantSummaryPanel()" aria-label="關閉資料庫摘要">×</button>
         <h3 id="assistantSummaryTitle">目前資料庫<br><span>摘要</span></h3>
         <div class="summary-metric-grid">
@@ -1404,7 +1404,7 @@
     </div>
   </div>
 
-  <div class="assistant-launcher" id="assistantLauncher" onclick="if(!window.__assistantLauncherDragged) toggleAssistant()">?</div>
+  <div class="assistant-launcher" id="assistantLauncher" aria-label="小幫手" onclick="if(!window.__assistantLauncherDragged) toggleAssistant()"></div>
 
   <div class="chat-box" id="chatBox">
     <div class="chat-header">
