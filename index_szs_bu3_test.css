@@ -14430,3 +14430,88 @@ body.dark .assistant-local-ai-note {
   transform: translate(-50%, -58%) rotate(42deg) !important;
 }
 
+
+/* === SZS_ASSISTANT_AI_BADGE_AND_CHECK_CENTER_20260608 === */
+.assistant-launcher,
+.assistant-welcome-avatar {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+}
+
+.assistant-welcome-avatar {
+  width: 58px !important;
+  height: 58px !important;
+  border-radius: 18px !important;
+  background:
+    radial-gradient(circle at 32% 24%, rgba(255,255,255,.9), transparent 28%),
+    linear-gradient(135deg, #dbeafe 0%, #cffafe 100%) !important;
+  box-shadow: inset 0 0 0 1px rgba(125, 211, 252, .42) !important;
+}
+
+.assistant-launcher::before,
+.assistant-welcome-avatar::before {
+  content: "AI" !important;
+  position: relative !important;
+  inset: auto !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 40px !important;
+  height: 40px !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 15px !important;
+  background:
+    radial-gradient(circle at 30% 24%, rgba(255,255,255,.92), transparent 22%),
+    linear-gradient(135deg, #2563eb 0%, #0891b2 100%) !important;
+  color: #ffffff !important;
+  font-size: 15px !important;
+  line-height: 1 !important;
+  font-weight: 950 !important;
+  letter-spacing: .04em !important;
+  font-family: Arial, "Microsoft JhengHei", sans-serif !important;
+  box-shadow:
+    inset 0 -5px 0 rgba(15, 23, 42, .14),
+    0 12px 22px rgba(37, 99, 235, .24) !important;
+  transform: none !important;
+}
+
+.assistant-launcher::after,
+.assistant-welcome-avatar::after {
+  content: "" !important;
+  position: absolute !important;
+  display: block !important;
+  left: auto !important;
+  top: auto !important;
+  right: 11px !important;
+  bottom: 10px !important;
+  width: 11px !important;
+  height: 11px !important;
+  margin: 0 !important;
+  border-radius: 999px !important;
+  background: #22c55e !important;
+  border: 2px solid rgba(255,255,255,.92) !important;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, .14) !important;
+  transform: none !important;
+}
+
+.dash-icon.green .ui-icon-check,
+.settings-status-icon.green .ui-icon-check {
+  display: none !important;
+}
+
+.dash-icon.green::before,
+.settings-status-icon.green::before {
+  content: "" !important;
+  display: block !important;
+  width: 14px !important;
+  height: 24px !important;
+  border-right: 5px solid #ffffff !important;
+  border-bottom: 5px solid #ffffff !important;
+  border-radius: 2px !important;
+  transform: translateY(-2px) rotate(42deg) !important;
+}
+
