@@ -6607,6 +6607,23 @@
       white-space: nowrap;
     }
 
+
+
+    /* === SZS_FIX_HOME_DATABASE_WIDTH_SYNC_20260608 === */
+    #homePage .home-main-column #databaseSection {
+      width: 100% !important;
+      max-width: none !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    #homePage .home-main-column #databaseSection .section-head,
+    #homePage .home-main-column #databaseGrid,
+    #homePage .home-main-column #databaseCardPagination,
+    #homePage .home-main-column #databaseListPanel {
+      width: 100% !important;
+    }
+
     .confirm-actions button,
     .member-dialog-actions button,
     .app-dialog-actions button {
@@ -13567,5 +13584,106 @@ body:not(.sidebar-collapsed):not(.auth-landing) #assistantPage.page.active .szs-
     margin: 0 !important;
     padding: 12px !important;
   }
+}
+
+
+/* === SZS_PERMISSION_LOCKED_UX_20260605 === */
+.side-section[hidden] {
+  display: none !important;
+}
+
+.side-item:disabled,
+.admin-tab-button:disabled,
+.settings-card-arrow:disabled,
+.settings-card-bottom button:disabled {
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.settings-feature-card.permission-locked {
+  border-color: rgba(148, 163, 184, .42) !important;
+  background: linear-gradient(135deg, rgba(248,250,252,.92), rgba(241,245,249,.78)) !important;
+  box-shadow: 0 16px 42px rgba(15, 23, 42, .06) !important;
+}
+
+.settings-feature-card.permission-locked .settings-feature-icon {
+  background: linear-gradient(135deg, #94a3b8, #64748b) !important;
+  box-shadow: 0 12px 26px rgba(100, 116, 139, .14) !important;
+}
+
+.settings-feature-card.permission-locked .settings-card-arrow,
+.settings-feature-card.permission-locked .settings-card-bottom button {
+  opacity: .62;
+  color: #64748b !important;
+  background: #f1f5f9 !important;
+  border-color: #dbe7f5 !important;
+}
+
+.settings-permission-hint {
+  display: none;
+  padding: 12px 14px;
+  border: 1px solid rgba(148, 163, 184, .38);
+  border-radius: 16px;
+  background: rgba(248, 250, 252, .9);
+  color: #475569;
+  font-size: 13px;
+  font-weight: 850;
+  line-height: 1.7;
+}
+
+.settings-feature-card.permission-locked .settings-permission-hint,
+.settings-feature-card.permission-available .settings-permission-hint {
+  display: block;
+}
+
+.settings-feature-card.permission-available .settings-permission-hint {
+  color: #0369a1;
+  background: rgba(224, 242, 254, .72);
+  border-color: rgba(125, 211, 252, .5);
+}
+
+.admin-tab-button.permission-locked-tab {
+  opacity: .62;
+  color: #64748b !important;
+  background: #f1f5f9 !important;
+  border-color: #dbe7f5 !important;
+}
+
+body.dark .settings-feature-card.permission-locked {
+  background: rgba(15, 23, 42, .86) !important;
+  border-color: rgba(148, 163, 184, .28) !important;
+}
+
+body.dark .settings-permission-hint {
+  color: #cbd5e1;
+  background: rgba(30, 41, 59, .72);
+  border-color: rgba(148, 163, 184, .22);
+}
+
+body.dark .settings-feature-card.permission-available .settings-permission-hint {
+  color: #7dd3fc;
+  background: rgba(14, 165, 233, .12);
+  border-color: rgba(56, 189, 248, .22);
+}
+
+
+/* === SZS_LOCAL_AI_ASSISTANT_BRIDGE_20260608 === */
+.assistant-local-ai-note {
+  margin-top: 14px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(125, 211, 252, .42);
+  background: rgba(224, 242, 254, .58);
+  color: #0369a1;
+  font-size: 12px;
+  font-weight: 850;
+  line-height: 1.65;
+}
+
+body.dark .assistant-local-ai-note {
+  color: #7dd3fc;
+  background: rgba(14, 165, 233, .12);
+  border-color: rgba(56, 189, 248, .22);
 }
 
