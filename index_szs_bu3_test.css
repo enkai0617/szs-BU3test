@@ -14852,3 +14852,61 @@ body.members-open .members-page-top {
   margin-bottom: 22px !important;
 }
 
+
+/* === SZS_FIX_SIDE_PAGE_TOP_ALIGNMENT_20260609 === */
+.side-page-top .database-overview-title-row {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  align-items: end !important;
+  justify-content: stretch !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+.side-page-top .database-overview-title,
+.side-page-top .detail-title-area {
+  min-width: 0 !important;
+  max-width: 760px !important;
+}
+
+.side-page-top .database-overview-actions,
+.side-page-top .detail-actions {
+  justify-self: end !important;
+  align-self: end !important;
+  margin-left: 0 !important;
+}
+
+.side-page-top .database-overview-back-btn {
+  white-space: nowrap !important;
+}
+
+body.members-open #homePage .home-main-layout {
+  display: block !important;
+  width: 100% !important;
+}
+
+body.members-open #homePage .home-main-column {
+  width: 100% !important;
+}
+
+body.members-open .members-page-top.side-page-top {
+  padding-top: 34px !important;
+}
+
+body.members-open #onlineMembersPanel {
+  margin-top: 0 !important;
+}
+
+@media (max-width: 900px) {
+  .side-page-top .database-overview-title-row {
+    grid-template-columns: 1fr !important;
+    align-items: start !important;
+  }
+
+  .side-page-top .database-overview-actions,
+  .side-page-top .detail-actions {
+    justify-self: stretch !important;
+    width: 100% !important;
+  }
+}
+
