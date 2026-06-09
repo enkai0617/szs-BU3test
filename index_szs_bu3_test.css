@@ -14716,3 +14716,127 @@ body.dark .assistant-local-ai-note {
   transform: translate(-50%, -60%) rotate(42deg) !important;
 }
 
+
+/* === SZS_UNIFY_LEFT_NAV_PAGE_TOPS_20260609 === */
+.side-page-top.database-overview-top {
+  display: block !important;
+  margin: 0 -40px 0 !important;
+  padding: 24px 40px 26px !important;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.78) 0%, rgba(239,247,255,.62) 58%, rgba(248,251,255,.86) 100%) !important;
+  border-bottom: 1px solid #dbe7f5 !important;
+  box-shadow: none !important;
+}
+
+.side-page-top .database-breadcrumb {
+  margin: 0 0 22px !important;
+}
+
+.side-page-top .database-overview-title-row {
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: space-between !important;
+  gap: 24px !important;
+}
+
+.side-page-top .database-overview-title,
+.side-page-top .detail-title-area {
+  max-width: 760px !important;
+}
+
+.side-page-top .detail-label {
+  margin: 0 0 12px !important;
+  color: #0284c7 !important;
+  font-size: 13px !important;
+  font-weight: 950 !important;
+  letter-spacing: .22em !important;
+}
+
+.side-page-top .database-overview-title h1,
+.side-page-top .detail-title-area h1 {
+  margin: 0 0 12px !important;
+  color: #0f172a !important;
+  font-size: clamp(42px, 4vw, 58px) !important;
+  line-height: 1.08 !important;
+  letter-spacing: -1.5px !important;
+  font-weight: 950 !important;
+}
+
+.side-page-top .database-overview-title p,
+.side-page-top .detail-title-area p {
+  margin: 0 !important;
+  max-width: 720px !important;
+  color: #64748b !important;
+  font-size: 15px !important;
+  line-height: 1.75 !important;
+  font-weight: 850 !important;
+}
+
+.side-page-top .database-overview-actions,
+.side-page-top .detail-actions {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 12px !important;
+  flex-wrap: wrap !important;
+}
+
+.side-page-top .database-overview-actions button,
+.side-page-top .detail-actions button {
+  min-height: 52px !important;
+  border-radius: 16px !important;
+  padding: 0 24px !important;
+  font-size: 15px !important;
+  font-weight: 950 !important;
+}
+
+.side-page-top .role-guide {
+  display: none !important;
+}
+
+.members-page-top {
+  display: none !important;
+}
+
+body.members-open .members-page-top {
+  display: block !important;
+}
+
+body.members-open #onlineMembersPanel .online-members-head {
+  display: none !important;
+}
+
+body.dark .side-page-top.database-overview-top {
+  background: rgba(15, 23, 42, 0.84) !important;
+  border-color: rgba(56,189,248,.18) !important;
+}
+
+body.dark .side-page-top .database-overview-title h1,
+body.dark .side-page-top .detail-title-area h1 {
+  color: #e2e8f0 !important;
+}
+
+body.dark .side-page-top .database-overview-title p,
+body.dark .side-page-top .detail-title-area p {
+  color: #94a3b8 !important;
+}
+
+@media (max-width: 900px) {
+  .side-page-top.database-overview-top {
+    margin: 0 -18px 0 !important;
+    padding: 22px 18px 24px !important;
+  }
+
+  .side-page-top .database-overview-title-row {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+  }
+
+  .side-page-top .database-overview-actions,
+  .side-page-top .detail-actions,
+  .side-page-top .database-overview-actions button,
+  .side-page-top .detail-actions button {
+    width: 100% !important;
+  }
+}
+
