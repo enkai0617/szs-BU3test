@@ -14545,3 +14545,97 @@ body.dark .assistant-local-ai-note {
   }
 }
 
+
+/* === SZS_FIX_THREE_OVERVIEW_ICON_SIZE_20260609 === */
+#databaseOverviewPage .database-overview-icon,
+#assistantPage .assistant-welcome-avatar,
+#assistantPage .assistant-quick-question-row button .assistant-quick-icon,
+#assistantPage .summary-folder-icon,
+#onlineMembersPanel .member-status-icon,
+.member-status-dashboard .member-status-icon {
+  position: relative !important;
+  inset: auto !important;
+  width: var(--szs-home-icon-size) !important;
+  height: var(--szs-home-icon-size) !important;
+  min-width: var(--szs-home-icon-size) !important;
+  min-height: var(--szs-home-icon-size) !important;
+  border-radius: var(--szs-home-icon-radius) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  place-items: center !important;
+  flex: 0 0 var(--szs-home-icon-size) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  text-align: center !important;
+  font-size: var(--szs-home-icon-emoji-size) !important;
+  opacity: 1 !important;
+  overflow: hidden !important;
+  transform: none !important;
+}
+
+#databaseOverviewPage .database-overview-icon .emoji-icon,
+#assistantPage .assistant-quick-question-row button .assistant-quick-icon .emoji-icon,
+#assistantPage .summary-folder-icon .emoji-icon,
+#onlineMembersPanel .member-status-icon .emoji-icon,
+.member-status-dashboard .member-status-icon .emoji-icon,
+#databaseOverviewPage .database-overview-icon .ui-icon,
+#assistantPage .assistant-quick-question-row button .assistant-quick-icon .ui-icon,
+#assistantPage .summary-folder-icon .ui-icon,
+#onlineMembersPanel .member-status-icon .ui-icon,
+.member-status-dashboard .member-status-icon .ui-icon {
+  width: 1em !important;
+  height: 1em !important;
+  min-width: 1em !important;
+  min-height: 1em !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+#databaseOverviewPage .database-overview-icon::before,
+#databaseOverviewPage .database-overview-icon::after {
+  display: none !important;
+  content: none !important;
+}
+
+#assistantPage .assistant-welcome-avatar::before {
+  width: 1em !important;
+  height: 1em !important;
+  font-size: 28px !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  transform: none !important;
+}
+
+#onlineMembersPanel .member-status-stat::before,
+.member-status-dashboard .member-status-stat::before {
+  display: none !important;
+  content: none !important;
+}
+
+#onlineMembersPanel .member-status-icon.online .ui-icon-check,
+.member-status-dashboard .member-status-icon.online .ui-icon-check {
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  min-height: 34px !important;
+  position: relative !important;
+}
+
+#onlineMembersPanel .member-status-icon.online .ui-icon-check::before,
+.member-status-dashboard .member-status-icon.online .ui-icon-check::before {
+  left: 50% !important;
+  top: 50% !important;
+  width: 12px !important;
+  height: 22px !important;
+  border-right-width: 5px !important;
+  border-bottom-width: 5px !important;
+  transform: translate(-50%, -60%) rotate(42deg) !important;
+}
+
