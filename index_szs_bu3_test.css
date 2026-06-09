@@ -14355,7 +14355,7 @@ body.dark .assistant-local-ai-note {
 :root {
   --szs-home-icon-size: 54px;
   --szs-home-icon-radius: 17px;
-  --szs-home-icon-emoji-size: 24px;
+  --szs-home-icon-emoji-size: 26px;
 }
 
 .dash-icon,
@@ -14592,6 +14592,7 @@ body.dark .assistant-local-ai-note {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
+  font-size: 30px !important;
   line-height: 1 !important;
   margin: 0 !important;
   filter: none !important;
@@ -14607,7 +14608,7 @@ body.dark .assistant-local-ai-note {
 #assistantPage .assistant-welcome-avatar::before {
   width: 1em !important;
   height: 1em !important;
-  font-size: 28px !important;
+  font-size: 34px !important;
   line-height: 1 !important;
   margin: 0 !important;
   transform: none !important;
