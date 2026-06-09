@@ -365,24 +365,24 @@
 
 
   <main id="calendarPage" class="page calendar-page">
-    <section class="detail-top calendar-page-top database-overview-top side-page-top" style="position: relative; display: block; width: 100%;">
+    <section class="detail-top calendar-page-top database-overview-top side-page-top">
       <div class="database-breadcrumb">
         <span onclick="showHome()" data-zh="首頁" data-en="Home">首頁</span>
         <span>›</span>
         <span data-zh="行事曆" data-en="Calendar">行事曆</span>
       </div>
       <div class="database-overview-title-row">
-      <div class="detail-title-area database-overview-title">
-        <div class="detail-label">SZS · CALENDAR</div>
-        <h1 data-zh="行事曆" data-en="Calendar">行事曆</h1>
-        <p data-zh="集中管理會議、期限與提醒；首頁只保留近期摘要，完整月曆由左側功能列進入。"
-           data-en="Manage meetings, deadlines, and reminders in one place. Home keeps only a compact upcoming summary.">
-          集中管理會議、期限與提醒；首頁只保留近期摘要，完整月曆由左側功能列進入。
-        </p>
-      </div>
-      </div>
-      <div class="side-page-back-actions database-overview-actions" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); display: flex; justify-content: flex-end;">
-        <button class="database-overview-back-btn" onclick="showHome()" data-zh="← 返回首頁" data-en="← Back Home">← 返回首頁</button>
+        <div class="detail-title-area database-overview-title">
+          <div class="detail-label">SZS · CALENDAR</div>
+          <h1 data-zh="行事曆" data-en="Calendar">行事曆</h1>
+          <p data-zh="集中管理會議、期限與提醒；首頁只保留近期摘要，完整月曆由左側功能列進入。"
+             data-en="Manage meetings, deadlines, and reminders in one place. Home keeps only a compact upcoming summary.">
+            集中管理會議、期限與提醒；首頁只保留近期摘要，完整月曆由左側功能列進入。
+          </p>
+        </div>
+        <div class="detail-actions database-overview-actions">
+          <button class="database-overview-back-btn" onclick="showHome()" data-zh="← 返回首頁" data-en="← Back Home">← 返回首頁</button>
+        </div>
       </div>
     </section>
 
@@ -564,21 +564,21 @@
 
 
   <main id="settingsPage" class="page settings-center-page">
-    <section class="detail-top settings-hero-top database-overview-top side-page-top" style="position: relative; display: block; width: 100%;">
+    <section class="detail-top settings-hero-top database-overview-top side-page-top">
       <div class="database-breadcrumb">
         <span onclick="showHome()" data-zh="首頁" data-en="Home">首頁</span>
         <span>›</span>
         <span data-zh="系統設定" data-en="System Settings">系統設定</span>
       </div>
       <div class="database-overview-title-row">
-      <div class="detail-title-area database-overview-title">
-        <div class="detail-label">SYSTEM SETTINGS</div>
-        <h1 data-zh="系統設定" data-en="System Settings">系統設定</h1>
-        <p data-zh="這裡集中管理系統資訊、個人偏好、外觀模式與後台入口。" data-en="Manage system info, personal preferences, appearance, and admin entry points here.">這裡集中管理系統資訊、個人偏好、外觀模式與後台入口。</p>
-      </div>
-      </div>
-      <div class="side-page-back-actions database-overview-actions" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); display: flex; justify-content: flex-end;">
-        <button class="database-overview-back-btn" onclick="showHome()" data-zh="← 返回首頁" data-en="← Back Home">← 返回首頁</button>
+        <div class="detail-title-area database-overview-title">
+          <div class="detail-label">SYSTEM SETTINGS</div>
+          <h1 data-zh="系統設定" data-en="System Settings">系統設定</h1>
+          <p data-zh="這裡集中管理系統資訊、個人偏好、外觀模式與後台入口。" data-en="Manage system info, personal preferences, appearance, and admin entry points here.">這裡集中管理系統資訊、個人偏好、外觀模式與後台入口。</p>
+        </div>
+        <div class="detail-actions database-overview-actions">
+          <button class="database-overview-back-btn" onclick="showHome()" data-zh="← 返回首頁" data-en="← Back Home">← 返回首頁</button>
+        </div>
       </div>
     </section>
 
@@ -687,38 +687,38 @@
 
 
   <main id="adminPage" class="page">
-    <section class="detail-top database-overview-top side-page-top admin-page-top" style="position: relative; display: block; width: 100%;">
+    <section class="detail-top database-overview-top side-page-top admin-page-top">
       <div class="database-breadcrumb">
         <span onclick="showHome()" data-zh="首頁" data-en="Home">首頁</span>
         <span>›</span>
         <span data-zh="後台管理" data-en="Admin Panel">後台管理</span>
       </div>
       <div class="database-overview-title-row">
-      <div class="detail-title-area database-overview-title">
-        <div class="detail-label">ADMIN PROTOTYPE</div>
-        <h1 data-zh="後台管理" data-en="Admin Panel">後台管理</h1>
-        <p data-zh="這裡是部門資料維護中心。總覽首頁僅供查看，真正的新增、修改與刪除請進入對應管理頁面操作。"
-           data-en="This is the department data maintenance center. The overview page is view-only, and actual add/edit/delete actions should be done inside the corresponding management page.">
-          這裡是部門資料維護中心。總覽首頁僅供查看，真正的新增、修改與刪除請進入對應管理頁面操作。
-        </p>
-        <div class="role-guide">
-          <div class="role-card">
-            <strong>Owner</strong>
-            <span data-zh="部門維護權限：可管理資料、會員權限與操作紀錄。" data-en="Department maintenance permission: manage data, member permissions, and activity logs.">部門維護權限：可管理資料、會員權限與操作紀錄。</span>
-          </div>
-          <div class="role-card">
-            <strong>Manager</strong>
-            <span data-zh="資料維護權限：可新增、修改、刪除資料庫與文件。" data-en="Data maintenance permission: add, edit, and delete databases and documents.">資料維護權限：可新增、修改、刪除資料庫與文件。</span>
-          </div>
-          <div class="role-card">
-            <strong>User</strong>
-            <span data-zh="使用權限：可登入、查詢資料與使用小幫手。" data-en="Usage permission: log in, search data, and use the assistant.">使用權限：可登入、查詢資料與使用小幫手。</span>
+        <div class="detail-title-area database-overview-title">
+          <div class="detail-label">ADMIN PROTOTYPE</div>
+          <h1 data-zh="後台管理" data-en="Admin Panel">後台管理</h1>
+          <p data-zh="這裡是部門資料維護中心。總覽首頁僅供查看，真正的新增、修改與刪除請進入對應管理頁面操作。"
+             data-en="This is the department data maintenance center. The overview page is view-only, and actual add/edit/delete actions should be done inside the corresponding management page.">
+            這裡是部門資料維護中心。總覽首頁僅供查看，真正的新增、修改與刪除請進入對應管理頁面操作。
+          </p>
+          <div class="role-guide">
+            <div class="role-card">
+              <strong>Owner</strong>
+              <span data-zh="部門維護權限：可管理資料、會員權限與操作紀錄。" data-en="Department maintenance permission: manage data, member permissions, and activity logs.">部門維護權限：可管理資料、會員權限與操作紀錄。</span>
+            </div>
+            <div class="role-card">
+              <strong>Manager</strong>
+              <span data-zh="資料維護權限：可新增、修改、刪除資料庫與文件。" data-en="Data maintenance permission: add, edit, and delete databases and documents.">資料維護權限：可新增、修改、刪除資料庫與文件。</span>
+            </div>
+            <div class="role-card">
+              <strong>User</strong>
+              <span data-zh="使用權限：可登入、查詢資料與使用小幫手。" data-en="Usage permission: log in, search data, and use the assistant.">使用權限：可登入、查詢資料與使用小幫手。</span>
+            </div>
           </div>
         </div>
-      </div>
-      </div>
-      <div class="side-page-back-actions database-overview-actions" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); display: flex; justify-content: flex-end;">
-        <button class="database-overview-back-btn" onclick="showHome()" data-zh="← 返回首頁" data-en="← Back Home">← 返回首頁</button>
+        <div class="detail-actions database-overview-actions">
+          <button class="database-overview-back-btn" onclick="showHome()" data-zh="← 返回首頁" data-en="← Back Home">← 返回首頁</button>
+        </div>
       </div>
     </section>
 
