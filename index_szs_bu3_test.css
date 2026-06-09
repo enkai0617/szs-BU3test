@@ -14840,6 +14840,48 @@ body.dark .side-page-top .detail-title-area p {
   }
 }
 
+
+/* === SZS_SIDE_PAGE_BACK_ACTION_SLOT_20260609 === */
+@media (min-width: 901px) {
+  #calendarPage > .side-page-top,
+  #settingsPage > .side-page-top,
+  #adminPage > .side-page-top {
+    min-height: 150px !important;
+  }
+
+  #calendarPage > .side-page-top > .database-overview-title-row,
+  #settingsPage > .side-page-top > .database-overview-title-row,
+  #adminPage > .side-page-top > .database-overview-title-row {
+    padding-right: 240px !important;
+  }
+
+  #calendarPage > .side-page-top > .side-page-back-actions,
+  #settingsPage > .side-page-top > .side-page-back-actions,
+  #adminPage > .side-page-top > .side-page-back-actions {
+    right: 0 !important;
+    left: auto !important;
+    width: auto !important;
+    margin: 0 !important;
+  }
+}
+
+@media (max-width: 900px) {
+  #calendarPage > .side-page-top > .side-page-back-actions,
+  #settingsPage > .side-page-top > .side-page-back-actions,
+  #adminPage > .side-page-top > .side-page-back-actions {
+    position: static !important;
+    transform: none !important;
+    width: 100% !important;
+    margin-top: 18px !important;
+  }
+
+  #calendarPage > .side-page-top > .side-page-back-actions button,
+  #settingsPage > .side-page-top > .side-page-back-actions button,
+  #adminPage > .side-page-top > .side-page-back-actions button {
+    width: 100% !important;
+  }
+}
+
 body.members-open #homePage {
   padding-top: 0 !important;
 }
