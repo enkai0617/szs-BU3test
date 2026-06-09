@@ -15220,3 +15220,170 @@ body:not(.sidebar-collapsed):not(.auth-landing) main#adminPage.page {
   }
 }
 
+/* === SZS_MATCH_DATABASE_OVERVIEW_LAYOUT_20260609 === */
+#calendarPage.page,
+#settingsPage.page,
+#adminPage.page {
+  max-width: none !important;
+}
+
+#calendarPage > .side-page-top.database-overview-top,
+#settingsPage > .side-page-top.database-overview-top,
+#adminPage > .side-page-top.database-overview-top {
+  display: grid !important;
+  gap: 24px !important;
+  margin: 0 0 26px !important;
+  padding: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+#calendarPage > .side-page-top .database-breadcrumb,
+#settingsPage > .side-page-top .database-breadcrumb,
+#adminPage > .side-page-top .database-breadcrumb {
+  margin: 0 !important;
+}
+
+#calendarPage > .side-page-top > .database-overview-title-row,
+#settingsPage > .side-page-top > .database-overview-title-row,
+#adminPage > .side-page-top > .database-overview-title-row {
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: space-between !important;
+  gap: 20px !important;
+  flex-wrap: wrap !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  position: static !important;
+}
+
+#calendarPage > .side-page-top .database-overview-title,
+#settingsPage > .side-page-top .database-overview-title,
+#adminPage > .side-page-top .database-overview-title {
+  flex: 1 1 640px !important;
+  max-width: none !important;
+}
+
+#calendarPage > .side-page-top .detail-label,
+#settingsPage > .side-page-top .detail-label,
+#adminPage > .side-page-top .detail-label {
+  display: block !important;
+}
+
+#calendarPage > .side-page-top .database-overview-actions,
+#settingsPage > .side-page-top .database-overview-actions,
+#adminPage > .side-page-top .database-overview-actions {
+  position: static !important;
+  transform: none !important;
+  flex: 0 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 12px !important;
+  margin-left: auto !important;
+  width: auto !important;
+}
+
+#calendarPage > .side-page-top .database-overview-actions button,
+#settingsPage > .side-page-top .database-overview-actions button,
+#adminPage > .side-page-top .database-overview-actions button {
+  width: auto !important;
+}
+
+@media (max-width: 900px) {
+  #calendarPage > .side-page-top > .database-overview-title-row,
+  #settingsPage > .side-page-top > .database-overview-title-row,
+  #adminPage > .side-page-top > .database-overview-title-row {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+  }
+
+  #calendarPage > .side-page-top .database-overview-actions,
+  #settingsPage > .side-page-top .database-overview-actions,
+  #adminPage > .side-page-top .database-overview-actions,
+  #calendarPage > .side-page-top .database-overview-actions button,
+  #settingsPage > .side-page-top .database-overview-actions button,
+  #adminPage > .side-page-top .database-overview-actions button {
+    width: 100% !important;
+  }
+}
+
+/* === SZS_SIDE_PAGES_USE_DATABASE_OVERVIEW_STANDARD_20260609 === */
+#calendarPage > .database-overview-top,
+#settingsPage > .database-overview-top,
+#adminPage > .database-overview-top {
+  display: grid !important;
+  gap: 24px !important;
+  margin: 0 0 26px !important;
+  padding: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+#calendarPage > .database-overview-top > .database-overview-title-row,
+#settingsPage > .database-overview-top > .database-overview-title-row,
+#adminPage > .database-overview-top > .database-overview-title-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-end !important;
+  gap: 20px !important;
+  flex-wrap: wrap !important;
+  width: 100% !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+}
+
+#calendarPage > .database-overview-top .database-overview-title,
+#settingsPage > .database-overview-top .database-overview-title,
+#adminPage > .database-overview-top .database-overview-title {
+  flex: 1 1 640px !important;
+  max-width: none !important;
+}
+
+#calendarPage > .database-overview-top .database-overview-actions,
+#settingsPage > .database-overview-top .database-overview-actions,
+#adminPage > .database-overview-top .database-overview-actions {
+  position: static !important;
+  transform: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 12px !important;
+  flex: 0 0 auto !important;
+  margin-left: auto !important;
+  width: auto !important;
+}
+
+#calendarPage > .database-overview-top .database-overview-actions button,
+#settingsPage > .database-overview-top .database-overview-actions button,
+#adminPage > .database-overview-top .database-overview-actions button {
+  width: auto !important;
+}
+
+@media (max-width: 900px) {
+  #calendarPage > .database-overview-top > .database-overview-title-row,
+  #settingsPage > .database-overview-top > .database-overview-title-row,
+  #adminPage > .database-overview-top > .database-overview-title-row {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+  }
+
+  #calendarPage > .database-overview-top .database-overview-actions,
+  #settingsPage > .database-overview-top .database-overview-actions,
+  #adminPage > .database-overview-top .database-overview-actions,
+  #calendarPage > .database-overview-top .database-overview-actions button,
+  #settingsPage > .database-overview-top .database-overview-actions button,
+  #adminPage > .database-overview-top .database-overview-actions button {
+    width: 100% !important;
+  }
+}
+
