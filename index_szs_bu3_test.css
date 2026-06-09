@@ -15103,3 +15103,88 @@ body.members-open #onlineMembersPanel {
   }
 }
 
+/* === SZS_RESTORE_SIDE_PAGE_TOP_SPACING_20260609 === */
+#calendarPage > .side-page-top,
+#settingsPage > .side-page-top,
+#adminPage > .side-page-top {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 18px !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 0 !important;
+  margin: 0 0 22px !important;
+  padding: 0 !important;
+  position: static !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+#calendarPage > .side-page-top > .database-overview-title-row,
+#settingsPage > .side-page-top > .database-overview-title-row,
+#adminPage > .side-page-top > .database-overview-title-row {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  align-items: end !important;
+  gap: 24px !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  position: static !important;
+}
+
+#calendarPage > .side-page-top .database-overview-title,
+#calendarPage > .side-page-top .detail-title-area,
+#settingsPage > .side-page-top .database-overview-title,
+#settingsPage > .side-page-top .detail-title-area,
+#adminPage > .side-page-top .database-overview-title,
+#adminPage > .side-page-top .detail-title-area {
+  max-width: 760px !important;
+  min-width: 0 !important;
+}
+
+#calendarPage > .side-page-top .database-overview-actions,
+#calendarPage > .side-page-top .detail-actions,
+#settingsPage > .side-page-top .database-overview-actions,
+#settingsPage > .side-page-top .detail-actions,
+#adminPage > .side-page-top .database-overview-actions,
+#adminPage > .side-page-top .detail-actions {
+  position: static !important;
+  transform: none !important;
+  justify-self: end !important;
+  align-self: center !important;
+  width: auto !important;
+  margin: 0 !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+}
+
+@media (max-width: 900px) {
+  #calendarPage > .side-page-top,
+  #settingsPage > .side-page-top,
+  #adminPage > .side-page-top {
+    padding-top: 0 !important;
+  }
+
+  #calendarPage > .side-page-top > .database-overview-title-row,
+  #settingsPage > .side-page-top > .database-overview-title-row,
+  #adminPage > .side-page-top > .database-overview-title-row {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  #calendarPage > .side-page-top .database-overview-actions,
+  #settingsPage > .side-page-top .database-overview-actions,
+  #adminPage > .side-page-top .database-overview-actions {
+    justify-self: stretch !important;
+  }
+
+  #calendarPage > .side-page-top .database-overview-actions button,
+  #settingsPage > .side-page-top .database-overview-actions button,
+  #adminPage > .side-page-top .database-overview-actions button {
+    width: 100% !important;
+  }
+}
+
