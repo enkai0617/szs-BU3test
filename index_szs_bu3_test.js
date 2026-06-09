@@ -1061,11 +1061,13 @@ function init() {
     }
 
     function focusMemberGroup(groupKey) {
-      document.body.classList.add("members-open");
+      document.body.classList.remove("members-open");
       updateSideNav("members");
+      document.body.classList.add("sidebar-collapsed");
       memberGroupState[groupKey] = false;
       saveMemberGroupState();
       renderOnlineMembers();
+      showPage("membersPage");
       setTimeout(() => {
         document.getElementById(`member-group-${groupKey}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 40);
@@ -2464,13 +2466,11 @@ function showPage(pageId) {
         return;
       }
       selectedDatabaseId = null;
-      databaseHomeView = "cards";
-      document.body.classList.add("members-open");
-      renderDatabases();
+      document.body.classList.remove("members-open");
       renderOnlineMembers();
       updateSideNav("members");
       document.body.classList.add("sidebar-collapsed");
-      showPage("homePage");
+      showPage("membersPage");
     }
 
     function showHome() { selectedDatabaseId = null; databaseHomeView = "cards"; databaseCardPage = 1; closeMembersSection(); renderDatabases(); renderOnlineMembers(); updateSideNav("home"); document.body.classList.add("sidebar-collapsed"); showPage("homePage"); }
