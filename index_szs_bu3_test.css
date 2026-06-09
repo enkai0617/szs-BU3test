@@ -14719,17 +14719,17 @@ body.dark .assistant-local-ai-note {
 
 /* === SZS_UNIFY_LEFT_NAV_PAGE_TOPS_20260609 === */
 .side-page-top.database-overview-top {
-  display: block !important;
-  margin: 0 -40px 0 !important;
-  padding: 24px 40px 26px !important;
-  background:
-    linear-gradient(135deg, rgba(255,255,255,.78) 0%, rgba(239,247,255,.62) 58%, rgba(248,251,255,.86) 100%) !important;
-  border-bottom: 1px solid #dbe7f5 !important;
+  display: grid !important;
+  gap: 18px !important;
+  margin: 0 0 22px !important;
+  padding: 34px 0 0 !important;
+  background: transparent !important;
+  border-bottom: 0 !important;
   box-shadow: none !important;
 }
 
 .side-page-top .database-breadcrumb {
-  margin: 0 0 22px !important;
+  margin: 0 !important;
 }
 
 .side-page-top .database-overview-title-row {
@@ -14737,6 +14737,8 @@ body.dark .assistant-local-ai-note {
   align-items: flex-end !important;
   justify-content: space-between !important;
   gap: 24px !important;
+  flex-wrap: nowrap !important;
+  width: 100% !important;
 }
 
 .side-page-top .database-overview-title,
@@ -14745,20 +14747,16 @@ body.dark .assistant-local-ai-note {
 }
 
 .side-page-top .detail-label {
-  margin: 0 0 12px !important;
-  color: #0284c7 !important;
-  font-size: 13px !important;
-  font-weight: 950 !important;
-  letter-spacing: .22em !important;
+  display: none !important;
 }
 
 .side-page-top .database-overview-title h1,
 .side-page-top .detail-title-area h1 {
-  margin: 0 0 12px !important;
+  margin: 0 0 10px !important;
   color: #0f172a !important;
-  font-size: clamp(42px, 4vw, 58px) !important;
+  font-size: clamp(34px, 4vw, 48px) !important;
   line-height: 1.08 !important;
-  letter-spacing: -1.5px !important;
+  letter-spacing: -1px !important;
   font-weight: 950 !important;
 }
 
@@ -14779,6 +14777,8 @@ body.dark .assistant-local-ai-note {
   justify-content: flex-end !important;
   gap: 12px !important;
   flex-wrap: wrap !important;
+  margin-left: auto !important;
+  flex: 0 0 auto !important;
 }
 
 .side-page-top .database-overview-actions button,
@@ -14823,8 +14823,8 @@ body.dark .side-page-top .detail-title-area p {
 
 @media (max-width: 900px) {
   .side-page-top.database-overview-top {
-    margin: 0 -18px 0 !important;
-    padding: 22px 18px 24px !important;
+    margin: 0 0 22px !important;
+    padding: 26px 0 0 !important;
   }
 
   .side-page-top .database-overview-title-row {
@@ -14838,5 +14838,17 @@ body.dark .side-page-top .detail-title-area p {
   .side-page-top .detail-actions button {
     width: 100% !important;
   }
+}
+
+body.members-open #homePage {
+  padding-top: 0 !important;
+}
+
+body.members-open .home-main-layout {
+  margin-top: 0 !important;
+}
+
+body.members-open .members-page-top {
+  margin-bottom: 22px !important;
 }
 
