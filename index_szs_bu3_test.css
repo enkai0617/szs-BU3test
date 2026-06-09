@@ -15014,3 +15014,50 @@ body.members-open #onlineMembersPanel {
   }
 }
 
+
+/* === SZS_FORCE_BACK_HOME_RIGHT_EDGE_20260609 === */
+@media (min-width: 901px) {
+  #calendarPage > .side-page-top,
+  #settingsPage > .side-page-top,
+  #adminPage > .side-page-top {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  #calendarPage > .side-page-top .database-overview-title-row,
+  #settingsPage > .side-page-top .database-overview-title-row,
+  #adminPage > .side-page-top .database-overview-title-row {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    min-height: 98px !important;
+    padding-right: 220px !important;
+  }
+
+  #calendarPage > .side-page-top .database-overview-title,
+  #calendarPage > .side-page-top .detail-title-area,
+  #settingsPage > .side-page-top .database-overview-title,
+  #settingsPage > .side-page-top .detail-title-area,
+  #adminPage > .side-page-top .database-overview-title,
+  #adminPage > .side-page-top .detail-title-area {
+    max-width: min(760px, calc(100% - 220px)) !important;
+  }
+
+  #calendarPage > .side-page-top .database-overview-actions,
+  #calendarPage > .side-page-top .detail-actions,
+  #settingsPage > .side-page-top .database-overview-actions,
+  #settingsPage > .side-page-top .detail-actions,
+  #adminPage > .side-page-top .database-overview-actions,
+  #adminPage > .side-page-top .detail-actions {
+    position: absolute !important;
+    right: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: auto !important;
+    margin: 0 !important;
+    justify-content: flex-end !important;
+  }
+}
+
