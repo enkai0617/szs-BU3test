@@ -15188,3 +15188,35 @@ body.members-open #onlineMembersPanel {
   }
 }
 
+/* === SZS_RESTORE_SIDE_PAGE_CANVAS_PADDING_20260609 === */
+body.sidebar-collapsed:not(.auth-landing) main#calendarPage.page,
+body.sidebar-collapsed:not(.auth-landing) main#settingsPage.page,
+body.sidebar-collapsed:not(.auth-landing) main#adminPage.page {
+  width: calc(100vw - 92px) !important;
+  max-width: none !important;
+  margin-left: 92px !important;
+  padding: 40px 48px 70px 58px !important;
+}
+
+body:not(.sidebar-collapsed):not(.auth-landing) main#calendarPage.page,
+body:not(.sidebar-collapsed):not(.auth-landing) main#settingsPage.page,
+body:not(.sidebar-collapsed):not(.auth-landing) main#adminPage.page {
+  width: calc(100vw - 274px) !important;
+  max-width: none !important;
+  margin-left: 274px !important;
+  padding: 40px 48px 70px 58px !important;
+}
+
+@media (max-width: 900px) {
+  body.sidebar-collapsed:not(.auth-landing) main#calendarPage.page,
+  body.sidebar-collapsed:not(.auth-landing) main#settingsPage.page,
+  body.sidebar-collapsed:not(.auth-landing) main#adminPage.page,
+  body:not(.sidebar-collapsed):not(.auth-landing) main#calendarPage.page,
+  body:not(.sidebar-collapsed):not(.auth-landing) main#settingsPage.page,
+  body:not(.sidebar-collapsed):not(.auth-landing) main#adminPage.page {
+    width: 100vw !important;
+    margin-left: 0 !important;
+    padding: 26px 18px 70px !important;
+  }
+}
+
