@@ -14350,3 +14350,198 @@ body.dark .assistant-local-ai-note {
   }
 }
 
+
+/* === SZS_UNIFY_ICON_CENTER_AND_HOME_SIZE_20260609 === */
+:root {
+  --szs-home-icon-size: 54px;
+  --szs-home-icon-radius: 17px;
+  --szs-home-icon-emoji-size: 24px;
+}
+
+.dash-icon,
+.admin-stat-icon,
+.admin-entry-icon,
+.admin-pending-icon,
+.database-overview-icon,
+.settings-status-icon,
+.settings-feature-icon,
+.member-status-icon,
+.notification-icon,
+.profile-message-icon,
+.assistant-quick-icon,
+.summary-folder-icon,
+.file-type-icon,
+.folder-type-icon,
+.smart-type-icon,
+.side-card-art,
+.home-empty-illustration,
+.kb-float.lock,
+.db-folder,
+.database-icon-badge,
+.file-type-badge,
+.admin-file-badge,
+.admin-log-badge,
+.assistant-quick-btn-icon,
+.assistant-welcome-avatar {
+  width: var(--szs-home-icon-size) !important;
+  height: var(--szs-home-icon-size) !important;
+  min-width: var(--szs-home-icon-size) !important;
+  min-height: var(--szs-home-icon-size) !important;
+  border-radius: var(--szs-home-icon-radius) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  place-items: center !important;
+  flex: 0 0 var(--szs-home-icon-size) !important;
+  line-height: 1 !important;
+  text-align: center !important;
+  font-size: var(--szs-home-icon-emoji-size) !important;
+  overflow: hidden !important;
+}
+
+.dash-icon .emoji-icon,
+.admin-stat-icon .emoji-icon,
+.admin-entry-icon .emoji-icon,
+.admin-pending-icon .emoji-icon,
+.database-overview-icon .emoji-icon,
+.settings-status-icon .emoji-icon,
+.settings-feature-icon .emoji-icon,
+.member-status-icon .emoji-icon,
+.notification-icon .emoji-icon,
+.profile-message-icon .emoji-icon,
+.assistant-quick-icon .emoji-icon,
+.summary-folder-icon .emoji-icon,
+.file-type-icon .emoji-icon,
+.folder-type-icon .emoji-icon,
+.smart-type-icon .emoji-icon,
+.side-card-art .emoji-icon,
+.home-empty-illustration .emoji-icon,
+.kb-float.lock .emoji-icon,
+.db-folder .emoji-icon,
+.database-icon-badge .emoji-icon,
+.file-type-badge .emoji-icon,
+.admin-file-badge .emoji-icon,
+.admin-log-badge .emoji-icon,
+.dash-icon .ui-icon,
+.admin-stat-icon .ui-icon,
+.admin-entry-icon .ui-icon,
+.admin-pending-icon .ui-icon,
+.database-overview-icon .ui-icon,
+.settings-status-icon .ui-icon,
+.settings-feature-icon .ui-icon,
+.member-status-icon .ui-icon,
+.notification-icon .ui-icon,
+.profile-message-icon .ui-icon,
+.assistant-quick-icon .ui-icon,
+.summary-folder-icon .ui-icon,
+.side-card-art .ui-icon {
+  width: 1em !important;
+  height: 1em !important;
+  min-width: 1em !important;
+  min-height: 1em !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  transform: none !important;
+}
+
+.dash-icon .ui-icon::before,
+.dash-icon .ui-icon::after,
+.admin-stat-icon .ui-icon::before,
+.admin-stat-icon .ui-icon::after,
+.admin-entry-icon .ui-icon::before,
+.admin-entry-icon .ui-icon::after,
+.admin-pending-icon .ui-icon::before,
+.admin-pending-icon .ui-icon::after,
+.database-overview-icon .ui-icon::before,
+.database-overview-icon .ui-icon::after,
+.settings-status-icon .ui-icon::before,
+.settings-status-icon .ui-icon::after,
+.settings-feature-icon .ui-icon::before,
+.settings-feature-icon .ui-icon::after,
+.member-status-icon .ui-icon::before,
+.member-status-icon .ui-icon::after,
+.notification-icon .ui-icon::before,
+.notification-icon .ui-icon::after,
+.profile-message-icon .ui-icon::before,
+.profile-message-icon .ui-icon::after,
+.assistant-quick-icon .ui-icon::before,
+.assistant-quick-icon .ui-icon::after,
+.summary-folder-icon .ui-icon::before,
+.summary-folder-icon .ui-icon::after,
+.side-card-art .ui-icon::before,
+.side-card-art .ui-icon::after {
+  box-sizing: border-box !important;
+}
+
+.dash-icon.green .ui-icon-check,
+.settings-status-icon.green .ui-icon-check {
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  min-height: 34px !important;
+  position: relative !important;
+}
+
+.dash-icon.green .ui-icon-check::before,
+.settings-status-icon.green .ui-icon-check::before {
+  left: 50% !important;
+  top: 50% !important;
+  width: 12px !important;
+  height: 22px !important;
+  border-right-width: 5px !important;
+  border-bottom-width: 5px !important;
+  transform: translate(-50%, -60%) rotate(42deg) !important;
+}
+
+.icon-btn .emoji-icon,
+.sidebar-toggle .ui-icon,
+.assistant-send-btn .ui-icon,
+.assistant-attach-btn .emoji-icon,
+.member-chat-inputbar button .ui-icon {
+  width: 1.18em !important;
+  height: 1.18em !important;
+  min-width: 1.18em !important;
+  min-height: 1.18em !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  transform: none !important;
+}
+
+.side-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.side-icon .emoji-icon,
+.side-icon .ui-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  transform: none !important;
+}
+
+.assistant-launcher {
+  font-size: 32px !important;
+}
+
+.assistant-welcome-avatar::before {
+  font-size: 28px !important;
+}
+
+@media (max-width: 760px) {
+  :root {
+    --szs-home-icon-size: 50px;
+    --szs-home-icon-radius: 16px;
+    --szs-home-icon-emoji-size: 22px;
+  }
+}
+
