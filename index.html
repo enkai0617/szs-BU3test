@@ -282,53 +282,6 @@
           </div>
         </section>
 
-        <!-- Home optional feature panels can be expanded gradually without changing the main database workflow. -->
-
-        <section class="database-overview-top side-page-top members-page-top" id="membersPageTop">
-          <div class="database-breadcrumb">
-            <span onclick="showHome()" data-zh="首頁" data-en="Home">首頁</span>
-            <span>›</span>
-            <span data-zh="成員狀態總覽" data-en="Member Status Overview">成員狀態總覽</span>
-          </div>
-          <div class="database-overview-title-row">
-            <div class="database-overview-title">
-              <h1 data-zh="成員狀態總覽" data-en="Member Status Overview">成員狀態總覽</h1>
-              <p data-zh="查看所有成員狀態與所屬群組，快速掌握團隊可用性。" data-en="View every member status and group, and quickly understand team availability.">查看所有成員狀態與所屬群組，快速掌握團隊可用性。</p>
-            </div>
-            <div class="database-overview-actions">
-              <button class="database-overview-back-btn" type="button" onclick="showHome()" data-zh="← 返回首頁" data-en="← Back Home">← 返回首頁</button>
-            </div>
-          </div>
-        </section>
-
-        <section class="online-members-panel" id="onlineMembersPanel">
-      <div class="online-members-head">
-        <div>
-          <h2 data-zh="成員狀態總覽" data-en="Member Status Overview">成員狀態總覽</h2>
-          <p data-zh="查看所有成員狀態與所屬群組，快速掌握團隊可用性；點選成員即可開啟對話框。" data-en="View every member status and group, quickly understand team availability, and click a member to open a chat dialog.">查看所有成員狀態與所屬群組，快速掌握團隊可用性；點選成員即可開啟對話框。</p>
-        </div>
-        <div class="my-status-control">
-          <span data-zh="我的狀態" data-en="My Status">我的狀態</span>
-          <button id="presenceOnlineBtn" class="status-btn online" onclick="setMyPresence('online')" data-zh="線上" data-en="Online">線上</button>
-          <button id="presenceAwayBtn" class="status-btn away" onclick="setMyPresence('away')" data-zh="離開" data-en="Away">離開</button>
-          <button id="presenceOfflineBtn" class="status-btn offline" onclick="setMyPresence('offline')" data-zh="離線" data-en="Offline">離線</button>
-        </div>
-      </div>
-      <div class="member-status-dashboard" id="memberStatusDashboard"></div>
-      <div class="member-status-toolbar">
-        <div class="member-status-search">
-          <span>⌕</span>
-          <input id="memberStatusSearch" placeholder="搜尋成員姓名、工號或部門..." oninput="syncMemberSearch('memberStatus')" />
-        </div>
-        <div class="member-status-filters" id="memberStatusFilters"></div>
-        <div class="member-status-actions" id="memberStatusActions"></div>
-      </div>
-      <div class="members-hybrid-grid">
-        <div class="online-members-list" id="onlineMembersList"></div>
-
-      </div>
-        </section>
-
         <section id="databaseSection" class="view-cards">
       <div class="section-head">
         <div class="section-title">
@@ -359,8 +312,56 @@
           </div>
         </aside>
     </div>
-    <div class="member-chat-modal" id="memberChatModal"></div>
   </main>
+
+  <main id="membersPage" class="page members-page">
+    <section class="database-overview-top side-page-top members-page-top" id="membersPageTop">
+      <div class="database-breadcrumb">
+        <span onclick="showHome()" data-zh="首頁" data-en="Home">首頁</span>
+        <span>›</span>
+        <span data-zh="成員狀態總覽" data-en="Member Status Overview">成員狀態總覽</span>
+      </div>
+      <div class="database-overview-title-row">
+        <div class="database-overview-title">
+          <h1 data-zh="成員狀態總覽" data-en="Member Status Overview">成員狀態總覽</h1>
+          <p data-zh="查看所有成員狀態與所屬群組，快速掌握團隊可用性。" data-en="View every member status and group, and quickly understand team availability.">查看所有成員狀態與所屬群組，快速掌握團隊可用性。</p>
+        </div>
+        <div class="database-overview-actions">
+          <button class="database-overview-back-btn" type="button" onclick="showHome()" data-zh="← 返回首頁" data-en="← Back Home">← 返回首頁</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="online-members-panel" id="onlineMembersPanel">
+      <div class="online-members-head">
+        <div>
+          <h2 data-zh="成員狀態總覽" data-en="Member Status Overview">成員狀態總覽</h2>
+          <p data-zh="查看所有成員狀態與所屬群組，快速掌握團隊可用性；點選成員即可開啟對話框。" data-en="View every member status and group, quickly understand team availability, and click a member to open a chat dialog.">查看所有成員狀態與所屬群組，快速掌握團隊可用性；點選成員即可開啟對話框。</p>
+        </div>
+        <div class="my-status-control">
+          <span data-zh="我的狀態" data-en="My Status">我的狀態</span>
+          <button id="presenceOnlineBtn" class="status-btn online" onclick="setMyPresence('online')" data-zh="線上" data-en="Online">線上</button>
+          <button id="presenceAwayBtn" class="status-btn away" onclick="setMyPresence('away')" data-zh="離開" data-en="Away">離開</button>
+          <button id="presenceOfflineBtn" class="status-btn offline" onclick="setMyPresence('offline')" data-zh="離線" data-en="Offline">離線</button>
+        </div>
+      </div>
+      <div class="member-status-dashboard" id="memberStatusDashboard"></div>
+      <div class="member-status-toolbar">
+        <div class="member-status-search">
+          <span>⌕</span>
+          <input id="memberStatusSearch" placeholder="搜尋成員姓名、工號或部門..." oninput="syncMemberSearch('memberStatus')" />
+        </div>
+        <div class="member-status-filters" id="memberStatusFilters"></div>
+        <div class="member-status-actions" id="memberStatusActions"></div>
+      </div>
+      <div class="members-hybrid-grid">
+        <div class="online-members-list" id="onlineMembersList"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="member-chat-modal" id="memberChatModal"></div>
 
 
   <main id="calendarPage" class="page calendar-page">
